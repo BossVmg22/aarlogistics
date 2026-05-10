@@ -700,33 +700,26 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select paygrade --</option>
               <optgroup label="── Enlisted ──────────────">
               <option value="PFC">PFC — Private First Class</option>
-              <option value="PV2">PV2 — Private 2nd Class</option>
               <option value="CPL">CPL — Corporal</option>
-              <option value="SPC">SPC — Specialist</option>
-              <option value="SGT">SGT — Sergeant</option>
-              <option value="SSG">SSG — Staff Sergeant</option>
-              <option value="SFC">SFC — Sergeant First Class</option>
-              <option value="MSG">MSG — Master Sergeant</option>
-              <option value="1SG">1SG — First Sergeant</option>
-              <option value="SGM">SGM — Sergeant Major</option>
-              <option value="CSM">CSM — Command Sergeant Major</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="SGT">SGT — Specialist</option>
+              <option value="SGT">SSGT — Sergeant</option>
+              <option value="TSGT">TSGT — Staff Sergeant</option>
               </optgroup>
-              <optgroup label="── Warrant Officers ──────">
-              <option value="WO1">WO1 — Warrant Officer 1</option>
-              <option value="WO2">WO2 — Chief Warrant Officer 2</option>
-              <option value="WO3">WO3 — Chief Warrant Officer 3</option>
-              <option value="WO4">WO4 — Chief Warrant Officer 4</option>
-              <option value="WO5">WO5 — Chief Warrant Officer 5</option>
+              <optgroup label="── Sergeant Major ──────">
+              <option value="MSGT">MSGT — Master Sergeant</option>
+              <option value="SMSGT">SMSGT — Senior Master Sergeant</option>
+              <option value="CMSGT">CMSGT — Chief Master Sergeant</option>
               </optgroup>
               <optgroup label="── Officers ──────────────">
               <option value="2LT">2LT — Second Lieutenant</option>
               <option value="1LT">1LT — First Lieutenant</option>
               <option value="CPT">CPT — Captain</option>
               <option value="MAJ">MAJ — Major</option>
-              <option value="LTC">LTC — Lieutenant Colonel</option>
+              <option value="LTCOL">LTCOL — Lieutenant Colonel</option>
               <option value="COL">COL — Colonel</option>
-              <option value="BG">BG — Brigadier General</option>
-              <option value="MG">MG — Major General</option>
+              <option value="BGEN">BGEN — Brigadier General</option>
+              <option value="MGEN">MGEN — Major General</option>
               </optgroup>
             </select>
           </div>
@@ -808,17 +801,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <label class="form-label">Event Type <span class="required">*</span></label>
             <select id="evType" class="form-select" required>
               <option value="">-- Select event type --</option>
-              <option value="inspection">Inspection → slot[0] / Col K</option>
-              <option value="training">Training / Recruitment → slot[1] / Col L</option>
-              <option value="deployment">Deployment → slot[2] / Col M</option>
+              <option value="inspection">Inspection</option>
+              <option value="training">Training / Recruitment</option>
+              <option value="deployment">Deployment</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">Role <span class="required">*</span></label>
             <select id="evRole" class="form-select" required>
               <option value="">-- Select role --</option>
-              <option value="hosted">Hosted — I organized / led this event</option>
-              <option value="attended">Attended — I participated in this event</option>
+              <option value="hosted">Hosted — led this event</option>
+              <option value="attended">Attended — participated in this event</option>
             </select>
           </div>
           <div class="form-group">
@@ -896,36 +889,29 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <label class="form-label">Paygrade</label>
               <select id="updPaygrade" class="form-select">
                 <option value="">-- No change --</option>
-                <optgroup label="── Enlisted ──────────────">
-                <option value="PFC">PFC — Private First Class</option>
-                <option value="PV2">PV2 — Private 2nd Class</option>
-                <option value="CPL">CPL — Corporal</option>
-                <option value="SPC">SPC — Specialist</option>
-                <option value="SGT">SGT — Sergeant</option>
-                <option value="SSG">SSG — Staff Sergeant</option>
-                <option value="SFC">SFC — Sergeant First Class</option>
-                <option value="MSG">MSG — Master Sergeant</option>
-                <option value="1SG">1SG — First Sergeant</option>
-                <option value="SGM">SGM — Sergeant Major</option>
-                <option value="CSM">CSM — Command Sergeant Major</option>
-                </optgroup>
-                <optgroup label="── Warrant Officers ──────">
-                <option value="WO1">WO1 — Warrant Officer 1</option>
-                <option value="WO2">WO2 — Chief Warrant Officer 2</option>
-                <option value="WO3">WO3 — Chief Warrant Officer 3</option>
-                <option value="WO4">WO4 — Chief Warrant Officer 4</option>
-                <option value="WO5">WO5 — Chief Warrant Officer 5</option>
-                </optgroup>
-                <optgroup label="── Officers ──────────────">
-                <option value="2LT">2LT — Second Lieutenant</option>
-                <option value="1LT">1LT — First Lieutenant</option>
-                <option value="CPT">CPT — Captain</option>
-                <option value="MAJ">MAJ — Major</option>
-                <option value="LTC">LTC — Lieutenant Colonel</option>
-                <option value="COL">COL — Colonel</option>
-                <option value="BG">BG — Brigadier General</option>
-                <option value="MG">MG — Major General</option>
-                </optgroup>
+              <optgroup label="── Enlisted ──────────────">
+              <option value="PFC">PFC — Private First Class</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="SGT">SGT — Specialist</option>
+              <option value="SGT">SSGT — Sergeant</option>
+              <option value="TSGT">TSGT — Staff Sergeant</option>
+              </optgroup>
+              <optgroup label="── Sergeant Major ──────">
+              <option value="MSGT">MSGT — Master Sergeant</option>
+              <option value="SMSGT">SMSGT — Senior Master Sergeant</option>
+              <option value="CMSGT">CMSGT — Chief Master Sergeant</option>
+              </optgroup>
+              <optgroup label="── Officers ──────────────">
+              <option value="2LT">2LT — Second Lieutenant</option>
+              <option value="1LT">1LT — First Lieutenant</option>
+              <option value="CPT">CPT — Captain</option>
+              <option value="MAJ">MAJ — Major</option>
+              <option value="LTCOL">LTCOL — Lieutenant Colonel</option>
+              <option value="COL">COL — Colonel</option>
+              <option value="BGEN">BGEN — Brigadier General</option>
+              <option value="MGEN">MGEN — Major General</option>
+              </optgroup>
               </select>
             </div>
             <div class="form-group">
