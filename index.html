@@ -211,10 +211,8 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dp-head-year{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--text-secondary);padding:5px 8px;border-radius:7px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
 .dp-head-year:hover{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
 .dp-head-year.dp-head-active{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
-/* Weekday row */
 .dp-weekrow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;}
 .dp-weekday{text-align:center;font-size:10px;font-weight:700;letter-spacing:0.5px;color:var(--text-muted);padding:3px 0;}
-/* Day grid */
 .dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
 .dp-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:12.5px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;font-family:'DM Sans',sans-serif;border:1px solid transparent;}
 .dp-day:hover{background:var(--bg-card);color:var(--text-primary);}
@@ -223,26 +221,22 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dp-day.dp-selected.dp-today{background:var(--olive-hover);}
 .dp-day.dp-other{color:var(--text-muted);opacity:0.35;}
 .dp-day.dp-other:hover{opacity:0.6;}
-/* Month picker grid */
 .dp-month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
 .dp-month-cell{padding:9px 4px;text-align:center;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;border:1px solid transparent;}
 .dp-month-cell:hover{background:var(--bg-card);color:var(--text-primary);}
 .dp-month-cell.dp-mcurrent{color:var(--gold);border-color:rgba(201,162,39,0.3);}
 .dp-month-cell.dp-mselected{background:var(--olive);color:#fff;}
-/* Year picker grid */
 .dp-year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
 .dp-year-cell{padding:8px 4px;text-align:center;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;border:1px solid transparent;}
 .dp-year-cell:hover{background:var(--bg-card);color:var(--text-primary);}
 .dp-year-cell.dp-ycurrent{color:var(--gold);border-color:rgba(201,162,39,0.3);}
 .dp-year-cell.dp-yselected{background:var(--olive);color:#fff;}
-/* Footer */
 .dp-footer{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
 .dp-footer-btn{flex:1;padding:8px;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;border:1px solid;}
 .dp-today-btn{background:var(--olive-dim);color:var(--olive);border-color:rgba(74,120,64,0.3);}
 .dp-today-btn:hover{background:var(--olive);color:#fff;}
 .dp-clear-btn{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
 .dp-clear-btn:hover{background:var(--danger);color:#fff;}
-/* Hidden native input */
 input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;z-index:-1;}
 
 /* Username rows */
@@ -389,7 +383,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <span class="topbar-ver">v3.2</span>
+        <span class="topbar-ver">v3.3</span>
         <span class="topbar-badge">AAR SYSTEM</span>
       </div>
     </div>
@@ -398,8 +392,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="dashboardPage" class="page-content active">
       <div class="welcome-banner">
         <div class="wb-badge"><div class="wb-badge-dot"></div><span class="wb-badge-text">Active</span></div>
-        <h2>Welcome to TIKTIK Battalion Command</h2>
-        <p>Manage battalion personnel, track event attendance and hosting, maintain quota status, and oversee all battalion operations from one central command system.</p>
+        <h2>Welcome to AAR Brigade Command</h2>
+        <p>Manage battalion personnel across TIKTIK and DAGUNDONG battalions. Track event attendance and hosting, maintain quota status, and oversee all battalion operations from one central command system.</p>
       </div>
       <div class="section-header"><h2>Quick Actions</h2><div class="section-divider"></div></div>
       <div class="dashboard-grid">
@@ -410,12 +404,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         </div>
         <div class="dashboard-card" onclick="navigateTo('addBatteryCommandPage')">
           <div class="card-top"><div class="card-icon-wrap">🔋</div><span class="card-arrow">↗</span></div>
-          <h3>Add Battery Command</h3><p>Assign Battery CO, XO, or SGM for Anino or Mata batteries.</p>
+          <h3>Add Battery Command</h3><p>Assign Battery CO, XO, or SGM to a battalion's battery command positions.</p>
           <span class="card-tag card-tag-ops">Command</span>
         </div>
         <div class="dashboard-card" onclick="navigateTo('addPersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">➕</div><span class="card-arrow">↗</span></div>
-          <h3>Add Personnel</h3><p>Enlist new members into Galaw, Tago, Kislap, Tingin, Turo, or Ugnay sections.</p>
+          <h3>Add Personnel</h3><p>Enlist new members into any battery section across all battalions.</p>
           <span class="card-tag card-tag-ops">Personnel</span>
         </div>
         <div class="dashboard-card" onclick="navigateTo('logEventPage')">
@@ -453,6 +447,14 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="addHCError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addHCErrorMsg"></span></div>
         <form id="addHCForm">
           <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="hcBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">High Command Position <span class="required">*</span></label>
             <select id="hcPosition" class="form-select" required>
               <option value="">-- Select position --</option>
@@ -478,12 +480,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               </optgroup>
               <optgroup label="── Sergeant Major ──────">
               <option value="Master Sergeant">MSGT — Master Sergeant</option>
-              <option value="Senior Master Sergeamt">SMSGT — Senior Master Sergeamt</option>
+              <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
               <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
               </optgroup>
               <optgroup label="── Officers ──────────────">
               <option value="Second Lieutenant">2LT — Second Lieutenant</option>
-              <option value="First Lieutenant">1LT — </option>
+              <option value="First Lieutenant">1LT — First Lieutenant</option>
               <option value="Captain">CPT — Captain</option>
               <option value="Major">MAJ — Major</option>
               <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
@@ -501,41 +503,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <label class="form-label">Timezone</label>
             <select id="hcTimezone" class="form-select">
               <option value="">-- Select timezone --</option>
-              <option value="GMT-12">GMT-12:00</option>
-              <option value="GMT-11">GMT-11:00</option>
-              <option value="GMT-10">GMT-10:00 · Hawaii</option>
-              <option value="GMT-9">GMT-9:00 · Alaska</option>
-              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
-              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
-              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
-              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
-              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
-              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
-              <option value="GMT-3">GMT-3:00 · Brazil</option>
-              <option value="GMT-2">GMT-2:00</option>
-              <option value="GMT-1">GMT-1:00 · Azores</option>
-              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
-              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
-              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
-              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
-              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
-              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
-              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
-              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
-              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
-              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
-              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
-              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
-              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
-              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
-              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
-              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
-              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
-              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
-              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
-              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
-              <option value="GMT+13">GMT+13:00 · Samoa</option>
-              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+              <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
             </select>
           </div>
           <div class="btn-group">
@@ -550,7 +518,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="addBatteryCommandPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">🔋</div>
-        <div class="page-title-text"><h1>Add <span>Battery Command</span></h1><p>Anino: Rows 28–30 | Mata: Rows 70–72</p></div>
+        <div class="page-title-text"><h1>Add <span>Battery Command</span></h1><p>Tiktik — Anino: Rows 28–30 | Mata: Rows 70–72 &nbsp;|&nbsp; Dagundong — Lintik: Rows 28–30 | Bulkan: Rows 70–72</p></div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>Battery Command Assignment</h2>
@@ -558,11 +526,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="addBCError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addBCErrorMsg"></span></div>
         <form id="addBCForm">
           <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="bcBrigadeSelect" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">Battery <span class="required">*</span></label>
             <select id="bcBattery" class="form-select" required>
-              <option value="">-- Select battery --</option>
-              <option value="Anino Battery Command">3rd "Anino" Reconnaissance Battery</option>
-              <option value="Mata Battery Command">4th "Mata" Forward Observation Battery</option>
+              <option value="">-- Select battalion first --</option>
             </select>
           </div>
           <div class="form-group">
@@ -591,12 +565,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               </optgroup>
               <optgroup label="── Sergeant Major ──────">
               <option value="Master Sergeant">MSGT — Master Sergeant</option>
-              <option value="Senior Master Sergeamt">SMSGT — Senior Master Sergeamt</option>
+              <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
               <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
               </optgroup>
               <optgroup label="── Officers ──────────────">
               <option value="Second Lieutenant">2LT — Second Lieutenant</option>
-              <option value="First Lieutenant">1LT — </option>
+              <option value="First Lieutenant">1LT — First Lieutenant</option>
               <option value="Captain">CPT — Captain</option>
               <option value="Major">MAJ — Major</option>
               <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
@@ -614,41 +588,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <label class="form-label">Timezone</label>
             <select id="bcTimezone" class="form-select">
               <option value="">-- Select timezone --</option>
-              <option value="GMT-12">GMT-12:00</option>
-              <option value="GMT-11">GMT-11:00</option>
-              <option value="GMT-10">GMT-10:00 · Hawaii</option>
-              <option value="GMT-9">GMT-9:00 · Alaska</option>
-              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
-              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
-              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
-              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
-              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
-              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
-              <option value="GMT-3">GMT-3:00 · Brazil</option>
-              <option value="GMT-2">GMT-2:00</option>
-              <option value="GMT-1">GMT-1:00 · Azores</option>
-              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
-              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
-              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
-              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
-              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
-              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
-              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
-              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
-              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
-              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
-              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
-              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
-              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
-              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
-              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
-              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
-              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
-              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
-              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
-              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
-              <option value="GMT+13">GMT+13:00 · Samoa</option>
-              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+              <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
             </select>
           </div>
           <div class="btn-group">
@@ -673,11 +613,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <form id="addPForm">
           <div class="form-section-title">Section Assignment</div>
           <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="apBrigadeSelect" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">Battery <span class="required">*</span></label>
             <select id="apBattery" class="form-select" required>
-              <option value="">-- Select battery --</option>
-              <option value="anino_battery">3rd "Anino" Reconnaissance Battery</option>
-              <option value="mata_battery">4th "Mata" Forward Observation Battery</option>
+              <option value="">-- Select battalion first --</option>
             </select>
           </div>
           <div class="form-group">
@@ -705,12 +651,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               </optgroup>
               <optgroup label="── Sergeant Major ──────">
               <option value="Master Sergeant">MSGT — Master Sergeant</option>
-              <option value="Senior Master Sergeamt">SMSGT — Senior Master Sergeamt</option>
+              <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
               <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
               </optgroup>
               <optgroup label="── Officers ──────────────">
               <option value="Second Lieutenant">2LT — Second Lieutenant</option>
-              <option value="First Lieutenant">1LT — </option>
+              <option value="First Lieutenant">1LT — First Lieutenant</option>
               <option value="Captain">CPT — Captain</option>
               <option value="Major">MAJ — Major</option>
               <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
@@ -737,41 +683,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <label class="form-label">Timezone</label>
             <select id="apTimezone" class="form-select">
               <option value="">-- Select timezone --</option>
-              <option value="GMT-12">GMT-12:00</option>
-              <option value="GMT-11">GMT-11:00</option>
-              <option value="GMT-10">GMT-10:00 · Hawaii</option>
-              <option value="GMT-9">GMT-9:00 · Alaska</option>
-              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
-              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
-              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
-              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
-              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
-              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
-              <option value="GMT-3">GMT-3:00 · Brazil</option>
-              <option value="GMT-2">GMT-2:00</option>
-              <option value="GMT-1">GMT-1:00 · Azores</option>
-              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
-              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
-              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
-              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
-              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
-              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
-              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
-              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
-              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
-              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
-              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
-              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
-              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
-              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
-              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
-              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
-              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
-              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
-              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
-              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
-              <option value="GMT+13">GMT+13:00 · Samoa</option>
-              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+              <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
             </select>
           </div>
           <div class="btn-group">
@@ -794,6 +706,14 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="logSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="logSuccessMsg"></span></div>
         <div id="logError" class="alert-box alert-danger hidden"><span>⚠</span><span id="logErrorMsg"></span></div>
         <form id="logEventForm">
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="evBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
           <div class="form-group">
             <label class="form-label">Event Type <span class="required">*</span></label>
             <select id="evType" class="form-select" required>
@@ -842,6 +762,14 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="strikeError" class="alert-box alert-danger hidden"><span>⚠</span><span id="strikeErrorMsg"></span></div>
         <form id="strikeForm">
           <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="strikeBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
+          <div class="form-group">
             <label class="form-label">Personnel Usernames <span class="required">*</span></label>
             <div class="form-helper" style="margin-bottom:10px;">Enter each username — section is auto-detected from the sheet.</div>
             <div id="strikeUsernamesContainer"></div>
@@ -870,9 +798,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="fetchError" class="alert-box alert-danger hidden"><span>⚠</span><span id="fetchErrorMsg"></span></div>
         <div class="form-section-title">Search</div>
         <div class="form-group">
+          <label class="form-label">Battalion <span class="required">*</span></label>
+          <select id="updateBrigade" class="form-select" required>
+            <option value="">-- Select battalion --</option>
+            <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+            <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label class="form-label">Username <span class="required">*</span></label>
           <input type="text" id="updateUsername" class="form-input" placeholder="Enter exact username" required />
-          <div class="form-helper">Searches the entire battalion sheet automatically — no section needed.</div>
+          <div class="form-helper">Searches the selected battalion sheet automatically — no section needed.</div>
         </div>
         <button type="button" class="btn btn-primary" id="fetchPersonnelBtn" onclick="fetchPersonnel()">Fetch Personnel Data</button>
 
@@ -886,28 +822,28 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <label class="form-label">Paygrade</label>
               <select id="updPaygrade" class="form-select">
                 <option value="">-- No change --</option>
-              <optgroup label="── Enlisted ──────────────">
-              <option value="Private First Class">PFC — Private First Class</option>
-              <option value="Corporal">CPL — Corporal</option>
-              <option value="Sergeant">SGT — Sergeant</option>
-              <option value="Staff Sergeant">SSGT — Staff Sergeant</option>
-              <option value="Technical Sergeant">TSGT — Technical Sergeant</option>
-              </optgroup>
-              <optgroup label="── Sergeant Major ──────">
-              <option value="Master Sergeant">MSGT — Master Sergeant</option>
-              <option value="Senior Master Sergeamt">SMSGT — Senior Master Sergeamt</option>
-              <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
-              </optgroup>
-              <optgroup label="── Officers ──────────────">
-              <option value="Second Lieutenant">2LT — Second Lieutenant</option>
-              <option value="First Lieutenant">1LT — </option>
-              <option value="Captain">CPT — Captain</option>
-              <option value="Major">MAJ — Major</option>
-              <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
-              <option value="Colonel">COL — Colonel</option>
-              <option value="Brigadier General">BGEN — Brigadier General</option>
-              <option value="Major General">MGEN — Major General</option>
-              </optgroup>
+                <optgroup label="── Enlisted ──────────────">
+                <option value="Private First Class">PFC — Private First Class</option>
+                <option value="Corporal">CPL — Corporal</option>
+                <option value="Sergeant">SGT — Sergeant</option>
+                <option value="Staff Sergeant">SSGT — Staff Sergeant</option>
+                <option value="Technical Sergeant">TSGT — Technical Sergeant</option>
+                </optgroup>
+                <optgroup label="── Sergeant Major ──────">
+                <option value="Master Sergeant">MSGT — Master Sergeant</option>
+                <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
+                <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
+                </optgroup>
+                <optgroup label="── Officers ──────────────">
+                <option value="Second Lieutenant">2LT — Second Lieutenant</option>
+                <option value="First Lieutenant">1LT — First Lieutenant</option>
+                <option value="Captain">CPT — Captain</option>
+                <option value="Major">MAJ — Major</option>
+                <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
+                <option value="Colonel">COL — Colonel</option>
+                <option value="Brigadier General">BGEN — Brigadier General</option>
+                <option value="Major General">MGEN — Major General</option>
+                </optgroup>
               </select>
             </div>
             <div class="form-group">
@@ -922,41 +858,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <label class="form-label">Timezone</label>
               <select id="updTimezone" class="form-select">
                 <option value="">-- No change --</option>
-                <option value="GMT-12">GMT-12:00</option>
-                <option value="GMT-11">GMT-11:00</option>
-                <option value="GMT-10">GMT-10:00 · Hawaii</option>
-                <option value="GMT-9">GMT-9:00 · Alaska</option>
-                <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
-                <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
-                <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
-                <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
-                <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
-                <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
-                <option value="GMT-3">GMT-3:00 · Brazil</option>
-                <option value="GMT-2">GMT-2:00</option>
-                <option value="GMT-1">GMT-1:00 · Azores</option>
-                <option value="GMT+0">GMT+0:00 · London / Dublin</option>
-                <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
-                <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
-                <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
-                <option value="GMT+3:30">GMT+3:30 · Tehran</option>
-                <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
-                <option value="GMT+4:30">GMT+4:30 · Kabul</option>
-                <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
-                <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
-                <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
-                <option value="GMT+6">GMT+6:00 · Bangladesh</option>
-                <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
-                <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
-                <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
-                <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
-                <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
-                <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
-                <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
-                <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
-                <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
-                <option value="GMT+13">GMT+13:00 · Samoa</option>
-                <option value="GMT+14">GMT+14:00 · Line Islands</option>
+                <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
               </select>
             </div>
             <div class="form-group">
@@ -988,6 +890,14 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="removeSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="removeSuccessMsg"></span></div>
         <div id="removeError" class="alert-box alert-danger hidden"><span>⚠</span><span id="removeErrorMsg"></span></div>
         <form id="removeForm">
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="removeBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            </select>
+          </div>
           <div class="form-group">
             <label class="form-label">Personnel Usernames <span class="required">*</span></label>
             <div class="form-helper" style="margin-bottom:10px;">Enter each username — section is auto-detected from the sheet.</div>
@@ -1039,27 +949,63 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 // ═══════════════════════════════════════════════════════════
 const API_URL = '/api/proxy';
 const LOGIN_PASSWORD = 'AARHC';
-const BRIGADE = 'tiktik_battalion';
 
+// ─────────────────────────────────────────────────────────
+// BATTALION + BATTERY + SECTION DATA
+// Structure: BATTERY_SECTIONS[brigadeKey].batteries[batteryKey]
+//   .label   — display name for the battery select
+//   .apiKey  — value sent as batterySection in addBatteryCommand
+//   .sections — { 'Section Config Key': 'Display Label' }
+// ─────────────────────────────────────────────────────────
 const BATTERY_SECTIONS = {
-  'anino_battery': {
-    sections: {
-      'Galaw Section':  '1st Target Acquisition "Galaw" Section',
-      'Tago Section':   '2nd Target Acquisition "Tago" Section',
-      'Kislap Section': '3rd Target Acquisition "Kislap" Section'
+  'tiktik_battalion': {
+    batteries: {
+      'anino': {
+        label:  '3rd "Anino" Reconnaissance Battery',
+        apiKey: 'Anino Battery Command',
+        sections: {
+          'Galaw Section':  '1st Target Acquisition "Galaw" Section',
+          'Tago Section':   '2nd Target Acquisition "Tago" Section',
+          'Kislap Section': '3rd Target Acquisition "Kislap" Section'
+        }
+      },
+      'mata': {
+        label:  '4th "Mata" Forward Observation Battery',
+        apiKey: 'Mata Battery Command',
+        sections: {
+          'Tingin Section': '4th Target Acquisition "Tingin" Section',
+          'Turo Section':   '5th Target Acquisition "Turo" Section',
+          'Ugnay Section':  '6th Target Acquisition "Ugnay" Section'
+        }
+      }
     }
   },
-  'mata_battery': {
-    sections: {
-      'Tingin Section': '4th Target Acquisition "Tingin" Section',
-      'Turo Section':   '5th Target Acquisition "Turo" Section',
-      'Ugnay Section':  '6th Target Acquisition "Ugnay" Section'
+  'dagundong_battalion': {
+    batteries: {
+      'lintik': {
+        label:  '1st Artillery "Lintik" Fire Battery',
+        apiKey: 'Lintik Battery Command',
+        sections: {
+          'Bigwas Section': '1st Artillery "Bigwas" Section',
+          'Dagit Section':  '2nd Artillery "Dagit" Section',
+          'Siklab Section': '3rd Artillery "Siklab" Section'
+        }
+      },
+      'bulkan': {
+        label:  '2nd Artillery "Bulkan" Rocket Battery',
+        apiKey: 'Bulkan Battery Command',
+        sections: {
+          'Putok Section': '4th Artillery "Putok" Section',
+          'Alon Section':  '5th Artillery "Alon" Section',
+          'Uling Section': '6th Artillery "Uling" Section'
+        }
+      }
     }
   }
 };
 
 // ═══════════════════════════════════════════════════════════
-// CUSTOM SELECT — rebuilt for reliability
+// CUSTOM SELECT
 // ═══════════════════════════════════════════════════════════
 const SelectManager = (() => {
   const SVG_ARROW = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
@@ -1082,7 +1028,7 @@ const SelectManager = (() => {
   function buildMenu(select, menu, text) {
     menu.innerHTML = '';
     Array.from(select.options).forEach((option, idx) => {
-      if (option.tagName === 'OPTGROUP') return; // handled below
+      if (option.tagName === 'OPTGROUP') return;
       const el = document.createElement('div');
       el.className = 'cs-option';
       if (!option.value || option.disabled) el.classList.add('cs-disabled');
@@ -1098,7 +1044,6 @@ const SelectManager = (() => {
           menu.querySelectorAll('.cs-option').forEach(o => o.classList.remove('cs-selected'));
           el.classList.add('cs-selected');
           select.dispatchEvent(new Event('change', { bubbles: true }));
-          // Directly remove open class — no delegation needed
           const wrapper = el.closest('.cs-wrapper');
           if (wrapper) wrapper.classList.remove('cs-open');
         });
@@ -1109,7 +1054,7 @@ const SelectManager = (() => {
   }
 
   function wrapSelect(select) {
-    if (select.closest('.cs-wrapper')) return; // already wrapped
+    if (select.closest('.cs-wrapper')) return;
 
     const wrapper = document.createElement('div');
     wrapper.className = 'cs-wrapper';
@@ -1118,14 +1063,11 @@ const SelectManager = (() => {
 
     const trigger = document.createElement('div');
     trigger.className = 'cs-trigger';
-
     const text = document.createElement('span');
     text.className = 'cs-text cs-placeholder';
-
     const arrow = document.createElement('span');
     arrow.className = 'cs-arrow';
     arrow.innerHTML = SVG_ARROW;
-
     trigger.appendChild(text);
     trigger.appendChild(arrow);
 
@@ -1145,7 +1087,6 @@ const SelectManager = (() => {
       if (!isOpen) wrapper.classList.add('cs-open');
     });
 
-    // Sync when native select changes programmatically
     select.addEventListener('change', () => {
       syncDisplay(select, text);
       menu.querySelectorAll('.cs-option').forEach(o => {
@@ -1154,21 +1095,16 @@ const SelectManager = (() => {
     });
   }
 
-  // Watch for new selects & option changes
   const observer = new MutationObserver(mutations => {
     mutations.forEach(m => {
       if (m.type !== 'childList') return;
-      // Options rebuilt inside a wrapped select (e.g. section dropdown)
       if (m.target.tagName === 'SELECT' && m.target.classList.contains('form-select')) {
         const wrapper = m.target.closest('.cs-wrapper');
         if (wrapper) {
-          buildMenu(m.target,
-            wrapper.querySelector('.cs-menu'),
-            wrapper.querySelector('.cs-text'));
+          buildMenu(m.target, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
         }
         return;
       }
-      // New selects added to DOM
       m.addedNodes.forEach(node => {
         if (node.nodeType !== 1) return;
         if (node.tagName === 'SELECT' && node.classList.contains('form-select')) {
@@ -1181,11 +1117,9 @@ const SelectManager = (() => {
   });
   observer.observe(document.body, { childList: true, subtree: true });
 
-  // Close on outside click
   document.addEventListener('click', closeAll);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
 
-  // Sync after form reset
   document.addEventListener('reset', e => {
     setTimeout(() => {
       e.target.querySelectorAll('select.form-select').forEach(select => {
@@ -1204,6 +1138,12 @@ const SelectManager = (() => {
       if (!select) return;
       select.value = val;
       select.dispatchEvent(new Event('change'));
+    },
+    rebuildById(id) {
+      const select = document.getElementById(id);
+      if (!select) return;
+      const wrapper = select.closest('.cs-wrapper');
+      if (wrapper) buildMenu(select, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
     }
   };
 })();
@@ -1216,7 +1156,6 @@ const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct
 const WEEKDAYS     = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 const CAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
 
-// Global registry keyed by input ID
 const _datePickerRegistry = {};
 
 function closeDatePickers() {
@@ -1227,26 +1166,22 @@ class CustomDatePicker {
   constructor(nativeInput) {
     this.input   = nativeInput;
     this.inputId = nativeInput.id;
-    this.value   = null; // YYYY-MM-DD
-    this.view    = 'calendar'; // 'calendar' | 'month' | 'year'
-
+    this.value   = null;
+    this.view    = 'calendar';
     const today = new Date();
     this.viewYear  = today.getFullYear();
     this.viewMonth = today.getMonth();
-    this.yearPageStart = today.getFullYear() - 7; // show 16 years
-
+    this.yearPageStart = today.getFullYear() - 7;
     this._build();
     if (this.inputId) _datePickerRegistry[this.inputId] = this;
   }
 
   _build() {
-    // Wrap
     this.container = document.createElement('div');
     this.container.className = 'dp-container';
     this.input.parentNode.insertBefore(this.container, this.input);
     this.container.appendChild(this.input);
 
-    // Trigger
     this.trigger = document.createElement('div');
     this.trigger.className = 'dp-trigger';
     this.display = document.createElement('span');
@@ -1259,7 +1194,6 @@ class CustomDatePicker {
     this.trigger.appendChild(icon);
     this.container.insertBefore(this.trigger, this.input);
 
-    // Popup
     this.popup = document.createElement('div');
     this.popup.className = 'dp-popup';
     this.popup.innerHTML = `
@@ -1277,7 +1211,6 @@ class CustomDatePicker {
         <button type="button" class="dp-footer-btn dp-clear-btn">Clear</button>
       </div>`;
     this.container.appendChild(this.popup);
-
     this._bindEvents();
     this._render();
   }
@@ -1287,60 +1220,39 @@ class CustomDatePicker {
       e.stopPropagation();
       const isOpen = this.container.classList.contains('dp-open');
       closeDatePickers();
-      SelectManager && document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
+      document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
       if (!isOpen) { this.view = 'calendar'; this._render(); this.container.classList.add('dp-open'); }
     });
-
     this.popup.querySelector('.dp-prev-btn').addEventListener('click', (e) => {
       e.stopPropagation();
-      if (this.view === 'calendar') {
-        this.viewMonth--; if (this.viewMonth < 0) { this.viewMonth = 11; this.viewYear--; }
-      } else if (this.view === 'year') {
-        this.yearPageStart -= 16;
-      }
+      if (this.view === 'calendar') { this.viewMonth--; if (this.viewMonth < 0) { this.viewMonth = 11; this.viewYear--; } }
+      else if (this.view === 'year') { this.yearPageStart -= 16; }
       this._render();
     });
-
     this.popup.querySelector('.dp-next-btn').addEventListener('click', (e) => {
       e.stopPropagation();
-      if (this.view === 'calendar') {
-        this.viewMonth++; if (this.viewMonth > 11) { this.viewMonth = 0; this.viewYear++; }
-      } else if (this.view === 'year') {
-        this.yearPageStart += 16;
-      }
+      if (this.view === 'calendar') { this.viewMonth++; if (this.viewMonth > 11) { this.viewMonth = 0; this.viewYear++; } }
+      else if (this.view === 'year') { this.yearPageStart += 16; }
       this._render();
     });
-
     this.popup.querySelector('.dp-head-month').addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.view = this.view === 'month' ? 'calendar' : 'month';
-      this._render();
+      e.stopPropagation(); this.view = this.view === 'month' ? 'calendar' : 'month'; this._render();
     });
-
     this.popup.querySelector('.dp-head-year').addEventListener('click', (e) => {
-      e.stopPropagation();
-      this.view = this.view === 'year' ? 'calendar' : 'year';
-      this._render();
+      e.stopPropagation(); this.view = this.view === 'year' ? 'calendar' : 'year'; this._render();
     });
-
     this.popup.querySelector('.dp-today-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       const t = new Date();
       this.viewYear = t.getFullYear(); this.viewMonth = t.getMonth();
-      const ds = this._toDateStr(t.getFullYear(), t.getMonth(), t.getDate());
-      this._select(ds);
+      this._select(this._toDateStr(t.getFullYear(), t.getMonth(), t.getDate()));
     });
-
     this.popup.querySelector('.dp-clear-btn').addEventListener('click', (e) => {
       e.stopPropagation();
-      this.value = null;
-      this.input.value = '';
-      this.display.textContent = 'Select a date';
-      this.display.className = 'dp-display dp-empty';
-      this._render();
-      this.container.classList.remove('dp-open');
+      this.value = null; this.input.value = '';
+      this.display.textContent = 'Select a date'; this.display.className = 'dp-display dp-empty';
+      this._render(); this.container.classList.remove('dp-open');
     });
-
     this.popup.addEventListener('click', e => e.stopPropagation());
   }
 
@@ -1348,31 +1260,23 @@ class CustomDatePicker {
     const mLabel = this.popup.querySelector('.dp-head-month');
     const yLabel = this.popup.querySelector('.dp-head-year');
     const body   = this.popup.querySelector('.dp-body');
-
     mLabel.textContent = MONTHS_LONG[this.viewMonth];
     yLabel.textContent = this.viewYear;
     mLabel.className = 'dp-head-month' + (this.view === 'month' ? ' dp-head-active' : '');
     yLabel.className = 'dp-head-year'  + (this.view === 'year'  ? ' dp-head-active' : '');
-
     if (this.view === 'calendar') this._renderCalendar(body);
     else if (this.view === 'month') this._renderMonthPicker(body);
     else this._renderYearPicker(body);
   }
 
   _renderCalendar(body) {
-    const today    = new Date();
+    const today = new Date();
     const todayStr = this._toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
     const firstDay = new Date(this.viewYear, this.viewMonth, 1).getDay();
     const daysInM  = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
     const prevDays = new Date(this.viewYear, this.viewMonth, 0).getDate();
-
     let html = `<div class="dp-weekrow">${WEEKDAYS.map(d => `<div class="dp-weekday">${d}</div>`).join('')}</div><div class="dp-grid">`;
-
-    // Prev month
-    for (let i = firstDay - 1; i >= 0; i--) {
-      html += `<div class="dp-day dp-other">${prevDays - i}</div>`;
-    }
-    // Current month
+    for (let i = firstDay - 1; i >= 0; i--) html += `<div class="dp-day dp-other">${prevDays - i}</div>`;
     for (let d = 1; d <= daysInM; d++) {
       const ds = this._toDateStr(this.viewYear, this.viewMonth, d);
       let cls = 'dp-day';
@@ -1380,15 +1284,11 @@ class CustomDatePicker {
       if (ds === this.value) cls += ' dp-selected';
       html += `<div class="${cls}" data-date="${ds}">${d}</div>`;
     }
-    // Next month fill
     const total = firstDay + daysInM;
     const fill  = total % 7 === 0 ? 0 : 7 - (total % 7);
-    for (let d = 1; d <= fill; d++) {
-      html += `<div class="dp-day dp-other">${d}</div>`;
-    }
+    for (let d = 1; d <= fill; d++) html += `<div class="dp-day dp-other">${d}</div>`;
     html += '</div>';
     body.innerHTML = html;
-
     body.querySelectorAll('.dp-day[data-date]').forEach(el => {
       el.addEventListener('click', (e) => { e.stopPropagation(); this._select(el.dataset.date); });
     });
@@ -1408,10 +1308,7 @@ class CustomDatePicker {
     body.innerHTML = html;
     body.querySelectorAll('.dp-month-cell').forEach(el => {
       el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.viewMonth = parseInt(el.dataset.m);
-        this.view = 'calendar';
-        this._render();
+        e.stopPropagation(); this.viewMonth = parseInt(el.dataset.m); this.view = 'calendar'; this._render();
       });
     });
   }
@@ -1429,23 +1326,18 @@ class CustomDatePicker {
     body.innerHTML = html;
     body.querySelectorAll('.dp-year-cell').forEach(el => {
       el.addEventListener('click', (e) => {
-        e.stopPropagation();
-        this.viewYear = parseInt(el.dataset.y);
-        this.view = 'calendar';
-        this._render();
+        e.stopPropagation(); this.viewYear = parseInt(el.dataset.y); this.view = 'calendar'; this._render();
       });
     });
   }
 
   _select(dateStr) {
-    this.value       = dateStr;
-    this.input.value = dateStr;
-    const [y, m, d]  = dateStr.split('-');
+    this.value = dateStr; this.input.value = dateStr;
+    const [y, m, d] = dateStr.split('-');
     this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
     this.display.className = 'dp-display dp-filled';
     this.container.classList.remove('dp-open');
-    this.view = 'calendar';
-    this._render();
+    this.view = 'calendar'; this._render();
     this.input.dispatchEvent(new Event('change', { bubbles: true }));
   }
 
@@ -1453,20 +1345,15 @@ class CustomDatePicker {
     return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
   }
 
-  // Call this to programmatically set a date (e.g. from fetchPersonnel)
   setValue(dateStr) {
     if (!dateStr) {
-      this.value = null;
-      this.input.value = '';
-      this.display.textContent = 'Select a date';
-      this.display.className = 'dp-display dp-empty';
+      this.value = null; this.input.value = '';
+      this.display.textContent = 'Select a date'; this.display.className = 'dp-display dp-empty';
       return;
     }
-    this.value = dateStr;
-    this.input.value = dateStr;
+    this.value = dateStr; this.input.value = dateStr;
     const [y, m, d] = dateStr.split('-');
-    this.viewYear  = parseInt(y);
-    this.viewMonth = parseInt(m) - 1;
+    this.viewYear = parseInt(y); this.viewMonth = parseInt(m) - 1;
     this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
     this.display.className = 'dp-display dp-filled';
     this._render();
@@ -1475,12 +1362,8 @@ class CustomDatePicker {
 
 function initDatePickers() {
   document.querySelectorAll('input.dp-native-input').forEach(input => {
-    if (!input.dataset.dpInit) {
-      input.dataset.dpInit = '1';
-      new CustomDatePicker(input);
-    }
+    if (!input.dataset.dpInit) { input.dataset.dpInit = '1'; new CustomDatePicker(input); }
   });
-  // Close on outside click
   document.addEventListener('click', closeDatePickers);
 }
 
@@ -1646,16 +1529,17 @@ function logout() {
 // ═══════════════════════════════════════════════════════════
 document.getElementById('addHCForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const brigade  = document.getElementById('hcBrigade').value;
   const position = document.getElementById('hcPosition').value;
   const username = document.getElementById('hcUsername').value.trim();
   const paygrade = document.getElementById('hcPaygrade').value;
   const doe      = document.getElementById('hcDoe').value;
   const timezone = document.getElementById('hcTimezone').value;
-  if (!position || !username || !paygrade || !doe) {
-    showAlert('addHCSuccess','addHCError','error','Please fill all required fields (including date).'); return;
+  if (!brigade || !position || !username || !paygrade || !doe) {
+    showAlert('addHCSuccess','addHCError','error','Please fill all required fields (including battalion and date).'); return;
   }
   setBtn('hcSubmitBtn', true);
-  callAPI('addHighCommand', { brigade: BRIGADE, position, username, paygrade, doe, timezone },
+  callAPI('addHighCommand', { brigade, position, username, paygrade, doe, timezone },
     r => {
       setBtn('hcSubmitBtn', false, 'Add to High Command');
       if (r && r.status === 'success') { showAlert('addHCSuccess','addHCError','success', r.message); resetHCForm(); }
@@ -1672,21 +1556,38 @@ function resetHCForm() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD BATTERY COMMAND
+// ADD BATTERY COMMAND — brigade cascade → battery options
 // ═══════════════════════════════════════════════════════════
+document.getElementById('bcBrigadeSelect').addEventListener('change', function() {
+  const brigadeData = BATTERY_SECTIONS[this.value];
+  const batterySelect = document.getElementById('bcBattery');
+  if (!brigadeData) {
+    batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+  } else {
+    let html = '<option value="">-- Select battery --</option>';
+    for (const key in brigadeData.batteries) {
+      const bat = brigadeData.batteries[key];
+      html += `<option value="${bat.apiKey}">${bat.label}</option>`;
+    }
+    batterySelect.innerHTML = html;
+  }
+  SelectManager.rebuildById('bcBattery');
+});
+
 document.getElementById('addBCForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const brigade        = document.getElementById('bcBrigadeSelect').value;
   const batterySection = document.getElementById('bcBattery').value;
   const position       = document.getElementById('bcPosition').value;
   const username       = document.getElementById('bcUsername').value.trim();
   const paygrade       = document.getElementById('bcPaygrade').value;
   const doe            = document.getElementById('bcDoe').value;
   const timezone       = document.getElementById('bcTimezone').value;
-  if (!batterySection || !position || !username || !paygrade || !doe) {
-    showAlert('addBCSuccess','addBCError','error','Please fill all required fields (including date).'); return;
+  if (!brigade || !batterySection || !position || !username || !paygrade || !doe) {
+    showAlert('addBCSuccess','addBCError','error','Please fill all required fields (including battalion and date).'); return;
   }
   setBtn('bcSubmitBtn', true);
-  callAPI('addBatteryCommand', { brigade: BRIGADE, batterySection, position, username, paygrade, doe, timezone },
+  callAPI('addBatteryCommand', { brigade, batterySection, position, username, paygrade, doe, timezone },
     r => {
       setBtn('bcSubmitBtn', false, 'Add to Battery Command');
       if (r && r.status === 'success') { showAlert('addBCSuccess','addBCError','success', r.message); resetBCForm(); }
@@ -1698,38 +1599,62 @@ document.getElementById('addBCForm').addEventListener('submit', function(e) {
 
 function resetBCForm() {
   document.getElementById('addBCForm').reset();
+  document.getElementById('bcBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
+  SelectManager.rebuildById('bcBattery');
   ['addBCSuccess','addBCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['bcDoe']) _datePickerRegistry['bcDoe'].setValue(null);
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD PERSONNEL — Battery → Section cascade
+// ADD PERSONNEL — brigade → battery → section cascade
 // ═══════════════════════════════════════════════════════════
-document.getElementById('apBattery').addEventListener('change', function() {
-  const battery = BATTERY_SECTIONS[this.value];
+document.getElementById('apBrigadeSelect').addEventListener('change', function() {
+  const brigadeData = BATTERY_SECTIONS[this.value];
+  const batterySelect = document.getElementById('apBattery');
   const sectionSelect = document.getElementById('apSection');
-  if (!battery) {
-    sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
-    return;
+  sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+  SelectManager.rebuildById('apSection');
+  if (!brigadeData) {
+    batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+  } else {
+    let html = '<option value="">-- Select battery --</option>';
+    for (const key in brigadeData.batteries) {
+      html += `<option value="${key}">${brigadeData.batteries[key].label}</option>`;
+    }
+    batterySelect.innerHTML = html;
   }
-  let html = '<option value="">-- Select section --</option>';
-  for (const key in battery.sections) html += `<option value="${key}">${battery.sections[key]}</option>`;
-  sectionSelect.innerHTML = html;
+  SelectManager.rebuildById('apBattery');
+});
+
+document.getElementById('apBattery').addEventListener('change', function() {
+  const brigadeVal  = document.getElementById('apBrigadeSelect').value;
+  const brigadeData = BATTERY_SECTIONS[brigadeVal];
+  const sectionSelect = document.getElementById('apSection');
+  if (!brigadeData || !brigadeData.batteries[this.value]) {
+    sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+  } else {
+    const sections = brigadeData.batteries[this.value].sections;
+    let html = '<option value="">-- Select section --</option>';
+    for (const key in sections) html += `<option value="${key}">${sections[key]}</option>`;
+    sectionSelect.innerHTML = html;
+  }
+  SelectManager.rebuildById('apSection');
 });
 
 document.getElementById('addPForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const brigade  = document.getElementById('apBrigadeSelect').value;
   const section  = document.getElementById('apSection').value;
   const username = document.getElementById('apUsername').value.trim();
   const paygrade = document.getElementById('apPaygrade').value;
   const position = document.getElementById('apPosition').value;
   const doe      = document.getElementById('apDoe').value;
   const timezone = document.getElementById('apTimezone').value;
-  if (!section || !username || !paygrade || !position || !doe) {
-    showAlert('addPSuccess','addPError','error','Please fill all required fields (including date).'); return;
+  if (!brigade || !section || !username || !paygrade || !position || !doe) {
+    showAlert('addPSuccess','addPError','error','Please fill all required fields (including battalion and date).'); return;
   }
   setBtn('apSubmitBtn', true);
-  callAPI('addPersonnel', { brigade: BRIGADE, section, username, paygrade, position, doe, timezone },
+  callAPI('addPersonnel', { brigade, section, username, paygrade, position, doe, timezone },
     r => {
       setBtn('apSubmitBtn', false, 'Add Personnel');
       if (r && r.status === 'success') { showAlert('addPSuccess','addPError','success', r.message); resetAddPersonnel(); }
@@ -1741,7 +1666,10 @@ document.getElementById('addPForm').addEventListener('submit', function(e) {
 
 function resetAddPersonnel() {
   document.getElementById('addPForm').reset();
+  document.getElementById('apBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
   document.getElementById('apSection').innerHTML = '<option value="">-- Select battery first --</option>';
+  SelectManager.rebuildById('apBattery');
+  SelectManager.rebuildById('apSection');
   ['addPSuccess','addPError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['apDoe']) _datePickerRegistry['apDoe'].setValue(null);
 }
@@ -1751,14 +1679,15 @@ function resetAddPersonnel() {
 // ═══════════════════════════════════════════════════════════
 document.getElementById('logEventForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const brigade   = document.getElementById('evBrigade').value;
   const eventType = document.getElementById('evType').value;
   const role      = document.getElementById('evRole').value;
   const reason    = document.getElementById('evReason').value.trim();
   const pd        = collectUsernames('logUsernamesContainer');
-  if (!eventType || !role || !reason) { showAlert('logSuccess','logError','error','Please fill all required fields.'); return; }
+  if (!brigade || !eventType || !role || !reason) { showAlert('logSuccess','logError','error','Please fill all required fields (including battalion).'); return; }
   if (!pd.length) { showAlert('logSuccess','logError','error','At least one username is required.'); return; }
   setBtn('logSubmitBtn', true);
-  callAPI('logEvent', { brigade: BRIGADE, eventType, role, personnelData: pd, reason },
+  callAPI('logEvent', { brigade, eventType, role, personnelData: pd, reason },
     r => {
       setBtn('logSubmitBtn', false, 'Log Event');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
@@ -1781,22 +1710,24 @@ function resetLogEvent() {
 // ═══════════════════════════════════════════════════════════
 document.getElementById('strikeForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const reason = document.getElementById('strikeReason').value.trim();
-  const pd     = collectUsernames('strikeUsernamesContainer');
-  if (!reason)    { showAlert('strikeSuccess','strikeError','error','Please provide a reason.'); return; }
+  const brigade = document.getElementById('strikeBrigade').value;
+  const reason  = document.getElementById('strikeReason').value.trim();
+  const pd      = collectUsernames('strikeUsernamesContainer');
+  if (!brigade) { showAlert('strikeSuccess','strikeError','error','Please select a battalion.'); return; }
+  if (!reason)  { showAlert('strikeSuccess','strikeError','error','Please provide a reason.'); return; }
   if (!pd.length) { showAlert('strikeSuccess','strikeError','error','At least one username is required.'); return; }
   const pt = pd.length === 1 ? `"${pd[0].username}"` : `${pd.length} personnel`;
-  window._strikePayload = { pd, reason };
+  window._strikePayload = { brigade, pd, reason };
   document.getElementById('strikeModalText').textContent = `You are about to issue a strike to ${pt}. 1 strike = SEMI-ACTIVE, 2+ = INACTIVE. This cannot be undone.`;
   openModal('strikeModal');
 });
 
 function confirmStrike() {
   closeModal('strikeModal');
-  const { pd, reason } = window._strikePayload || {};
+  const { brigade, pd, reason } = window._strikePayload || {};
   if (!pd) return;
   setBtn('strikeSubmitBtn', true);
-  callAPI('issueStrike', { brigade: BRIGADE, personnelData: pd, reason },
+  callAPI('issueStrike', { brigade, personnelData: pd, reason },
     r => {
       setBtn('strikeSubmitBtn', false, 'Issue Strike');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
@@ -1818,21 +1749,23 @@ function resetStrike() {
 // UPDATE PERSONNEL
 // ═══════════════════════════════════════════════════════════
 function fetchPersonnel() {
+  const brigade  = document.getElementById('updateBrigade').value;
   const username = document.getElementById('updateUsername').value.trim();
+  if (!brigade) {
+    document.getElementById('fetchErrorMsg').textContent = 'Please select a battalion first.';
+    document.getElementById('fetchError').classList.remove('hidden'); return;
+  }
   if (!username) {
     document.getElementById('fetchErrorMsg').textContent = 'Please enter a username.';
-    document.getElementById('fetchError').classList.remove('hidden');
-    return;
+    document.getElementById('fetchError').classList.remove('hidden'); return;
   }
   setBtn('fetchPersonnelBtn', true);
-  callAPI('getPersonnelInfo', { brigade: BRIGADE, username },
+  callAPI('getPersonnelInfo', { brigade, username },
     r => {
       setBtn('fetchPersonnelBtn', false, 'Fetch Personnel Data');
       if (r && r.status === 'success' && r.data) {
         const d = r.data;
         document.getElementById('fetchError').classList.add('hidden');
-
-        // Info grid
         const quotaClass = d.quotaStatus === 'COMPLETE' ? 'quota-complete' : 'quota-incomplete';
         document.getElementById('personnelInfoDisplay').innerHTML = `
           <div class="info-cell"><div class="info-cell-label">Username</div><div class="info-cell-value">${d.username}</div></div>
@@ -1849,18 +1782,11 @@ function fetchPersonnel() {
           <div class="info-cell"><div class="info-cell-label">Enlistment Date</div><div class="info-cell-value">${d.doe||'—'}</div></div>
           <div class="info-cell"><div class="info-cell-label">Timezone</div><div class="info-cell-value">${d.timezone||'—'}</div></div>
           <div class="info-cell"><div class="info-cell-label">Row</div><div class="info-cell-value">${d.row}</div></div>`;
-
-        // Populate edit fields
         SelectManager.setVal('updPaygrade', d.paygrade || '');
         document.getElementById('updPosition').value = d.position || '';
         SelectManager.setVal('updTimezone', d.timezone || '');
         SelectManager.setVal('updStatus', d.status || 'ACTIVE');
-
-        // Set date picker
-        if (_datePickerRegistry['updDoe']) {
-          _datePickerRegistry['updDoe'].setValue(d.doe || null);
-        }
-
+        if (_datePickerRegistry['updDoe']) _datePickerRegistry['updDoe'].setValue(d.doe || null);
         document.getElementById('updateFormContainer').style.display = 'block';
       } else {
         document.getElementById('fetchErrorMsg').textContent = r?.message || 'Personnel not found.';
@@ -1878,11 +1804,12 @@ function fetchPersonnel() {
 
 document.getElementById('updateForm').addEventListener('submit', function(e) {
   e.preventDefault();
+  const brigade  = document.getElementById('updateBrigade').value;
   const username = document.getElementById('updateUsername').value.trim();
-  if (!username) { showAlert('updateSuccess','updateError','error','Username is missing. Fetch personnel first.'); return; }
+  if (!brigade || !username) { showAlert('updateSuccess','updateError','error','Battalion and username are required. Fetch personnel first.'); return; }
   setBtn('updateSubmitBtn', true);
   callAPI('updatePersonnelInfo', {
-    brigade:  BRIGADE,
+    brigade,
     username,
     paygrade: document.getElementById('updPaygrade').value,
     position: document.getElementById('updPosition').value.trim(),
@@ -1912,22 +1839,24 @@ function resetUpdateForm() {
 // ═══════════════════════════════════════════════════════════
 document.getElementById('removeForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const reason = document.getElementById('removeReason').value.trim();
-  const pd     = collectUsernames('removeUsernamesContainer');
-  if (!reason)    { showAlert('removeSuccess','removeError','error','Please provide a reason.'); return; }
+  const brigade = document.getElementById('removeBrigade').value;
+  const reason  = document.getElementById('removeReason').value.trim();
+  const pd      = collectUsernames('removeUsernamesContainer');
+  if (!brigade) { showAlert('removeSuccess','removeError','error','Please select a battalion.'); return; }
+  if (!reason)  { showAlert('removeSuccess','removeError','error','Please provide a reason.'); return; }
   if (!pd.length) { showAlert('removeSuccess','removeError','error','At least one username is required.'); return; }
   const pt = pd.length === 1 ? `"${pd[0].username}"` : `${pd.length} personnel`;
-  window._removePayload = { pd, reason };
+  window._removePayload = { brigade, pd, reason };
   document.getElementById('removeModalText').textContent = `You are about to permanently remove ${pt}. Their row will be cleared and status set to INACTIVE.`;
   openModal('removeModal');
 });
 
 function confirmRemove() {
   closeModal('removeModal');
-  const { pd, reason } = window._removePayload || {};
+  const { brigade, pd, reason } = window._removePayload || {};
   if (!pd) return;
   setBtn('removeSubmitBtn', true);
-  callAPI('removePersonnel', { brigade: BRIGADE, personnelData: pd, reason },
+  callAPI('removePersonnel', { brigade, personnelData: pd, reason },
     r => {
       setBtn('removeSubmitBtn', false, 'Remove Personnel');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
