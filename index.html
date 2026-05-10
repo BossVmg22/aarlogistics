@@ -167,32 +167,85 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .form-input::placeholder{color:var(--text-muted);}
 .form-helper{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.5;}
 
-/* Custom select dropbar */
-.custom-select-wrapper{position:relative;width:100%;}
-.custom-select-wrapper select{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;pointer-events:none;z-index:-1;}
-.custom-select-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.3s var(--ease);user-select:none;}
-.custom-select-wrapper:hover .custom-select-trigger{border-color:var(--border-hover);background:var(--bg-card);}
-.custom-select-wrapper.open .custom-select-trigger{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);}
-.custom-select-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.custom-select-text.placeholder{color:var(--text-muted);}
-.custom-select-arrow{transition:transform 0.4s var(--ease);font-size:12px;color:var(--text-muted);display:inline-flex;align-items:center;}
-.custom-select-wrapper.open .custom-select-arrow{transform:rotate(180deg);color:var(--gold);}
-.custom-select-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:1000;max-height:240px;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-12px) scale(0.98);transition:all 0.3s var(--ease);padding:8px;}
-.custom-select-wrapper.open .custom-select-menu{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
-.custom-select-option{padding:10px 14px;border-radius:var(--radius);color:var(--text-secondary);font-size:13.5px;cursor:pointer;transition:all 0.2s ease;display:flex;align-items:center;justify-content:space-between;}
-.custom-select-option:hover{background:var(--bg-card-hover);color:var(--text-primary);transform:translateX(4px);}
-.custom-select-option.selected{background:var(--olive-dim);color:var(--gold);font-weight:600;}
-.custom-select-option.disabled{color:var(--text-muted);cursor:not-allowed;transform:none;background:none;}
+/* ═══ CUSTOM SELECT ═══ */
+.cs-wrapper{position:relative;width:100%;}
+.cs-wrapper select{position:absolute;opacity:0;pointer-events:none;z-index:-1;width:1px;height:1px;}
+.cs-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.3s var(--ease);user-select:none;min-height:46px;}
+.cs-wrapper:hover .cs-trigger{border-color:var(--border-hover);background:var(--bg-card);}
+.cs-wrapper.cs-open .cs-trigger{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);}
+.cs-text{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;}
+.cs-text.cs-placeholder{color:var(--text-muted);}
+.cs-arrow{transition:transform 0.35s var(--ease);color:var(--text-muted);flex-shrink:0;margin-left:10px;line-height:1;display:flex;align-items:center;}
+.cs-wrapper.cs-open .cs-arrow{transform:rotate(180deg);color:var(--gold);}
+.cs-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;max-height:260px;overflow-y:auto;padding:6px;
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);
+  transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
+.cs-wrapper.cs-open .cs-menu{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.cs-option{padding:9px 12px;border-radius:8px;color:var(--text-secondary);font-size:13.5px;cursor:pointer;transition:background 0.15s,color 0.15s,transform 0.15s;display:flex;align-items:center;justify-content:space-between;}
+.cs-option:hover{background:var(--bg-card-hover);color:var(--text-primary);transform:translateX(3px);}
+.cs-option.cs-selected{background:var(--olive-dim);color:var(--gold);font-weight:600;}
+.cs-option.cs-disabled{color:var(--text-muted);cursor:default;transform:none !important;}
+.cs-option.cs-disabled:hover{background:none;}
 
-/* Custom date */
-.custom-date-wrapper{position:relative;width:100%;display:flex;align-items:center;}
-.custom-date-wrapper input[type="date"]{width:100%;padding:12px 40px 12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:'DM Sans',sans-serif;outline:none;transition:all 0.3s var(--ease);cursor:pointer;}
-.custom-date-wrapper input[type="date"]:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);}
-.custom-date-wrapper .date-icon{position:absolute;right:14px;pointer-events:none;color:var(--text-muted);transition:all 0.3s var(--ease);display:flex;align-items:center;}
-.custom-date-wrapper input[type="date"]:focus~.date-icon,.custom-date-wrapper:hover .date-icon{color:var(--gold);}
-::-webkit-calendar-picker-indicator{position:absolute;right:0;top:0;width:40px;height:100%;opacity:0;cursor:pointer;}
+/* ═══ CUSTOM DATE PICKER ═══ */
+.dp-container{position:relative;width:100%;}
+.dp-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all 0.3s var(--ease);user-select:none;min-height:46px;}
+.dp-container:hover .dp-trigger{border-color:var(--border-hover);background:var(--bg-card);}
+.dp-container.dp-open .dp-trigger{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);}
+.dp-display{font-size:14px;font-family:'DM Sans',sans-serif;flex:1;}
+.dp-display.dp-empty{color:var(--text-muted);}
+.dp-display.dp-filled{color:var(--text-primary);}
+.dp-cal-icon{color:var(--text-muted);transition:color 0.3s;flex-shrink:0;margin-left:10px;display:flex;align-items:center;}
+.dp-container.dp-open .dp-cal-icon{color:var(--gold);}
+.dp-popup{position:absolute;top:calc(100% + 6px);left:0;width:296px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;padding:16px;
+  opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);
+  transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
+.dp-container.dp-open .dp-popup{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
+.dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px;}
+.dp-nav-btn{width:32px;height:32px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;font-family:inherit;}
+.dp-nav-btn:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+.dp-head-center{flex:1;display:flex;gap:6px;justify-content:center;}
+.dp-head-month{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--text-primary);letter-spacing:0.5px;padding:5px 10px;border-radius:7px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+.dp-head-month:hover{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
+.dp-head-month.dp-head-active{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
+.dp-head-year{font-family:'Rajdhani',sans-serif;font-size:14px;font-weight:700;color:var(--text-secondary);padding:5px 8px;border-radius:7px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;}
+.dp-head-year:hover{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
+.dp-head-year.dp-head-active{background:var(--gold-dim);border-color:var(--border-accent);color:var(--gold);}
+/* Weekday row */
+.dp-weekrow{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:6px;}
+.dp-weekday{text-align:center;font-size:10px;font-weight:700;letter-spacing:0.5px;color:var(--text-muted);padding:3px 0;}
+/* Day grid */
+.dp-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.dp-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:7px;font-size:12.5px;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;font-family:'DM Sans',sans-serif;border:1px solid transparent;}
+.dp-day:hover{background:var(--bg-card);color:var(--text-primary);}
+.dp-day.dp-today{color:var(--gold);font-weight:700;border-color:rgba(201,162,39,0.3);}
+.dp-day.dp-selected{background:var(--olive);color:#fff;font-weight:600;border-color:transparent;}
+.dp-day.dp-selected.dp-today{background:var(--olive-hover);}
+.dp-day.dp-other{color:var(--text-muted);opacity:0.35;}
+.dp-day.dp-other:hover{opacity:0.6;}
+/* Month picker grid */
+.dp-month-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.dp-month-cell{padding:9px 4px;text-align:center;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;border:1px solid transparent;}
+.dp-month-cell:hover{background:var(--bg-card);color:var(--text-primary);}
+.dp-month-cell.dp-mcurrent{color:var(--gold);border-color:rgba(201,162,39,0.3);}
+.dp-month-cell.dp-mselected{background:var(--olive);color:#fff;}
+/* Year picker grid */
+.dp-year-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;}
+.dp-year-cell{padding:8px 4px;text-align:center;border-radius:8px;font-size:12.5px;font-weight:600;cursor:pointer;color:var(--text-secondary);transition:all 0.15s;border:1px solid transparent;}
+.dp-year-cell:hover{background:var(--bg-card);color:var(--text-primary);}
+.dp-year-cell.dp-ycurrent{color:var(--gold);border-color:rgba(201,162,39,0.3);}
+.dp-year-cell.dp-yselected{background:var(--olive);color:#fff;}
+/* Footer */
+.dp-footer{display:flex;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.dp-footer-btn{flex:1;padding:8px;border-radius:var(--radius);font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:'DM Sans',sans-serif;border:1px solid;}
+.dp-today-btn{background:var(--olive-dim);color:var(--olive);border-color:rgba(74,120,64,0.3);}
+.dp-today-btn:hover{background:var(--olive);color:#fff;}
+.dp-clear-btn{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
+.dp-clear-btn:hover{background:var(--danger);color:#fff;}
+/* Hidden native input */
+input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;z-index:-1;}
 
-/* Username rows — simplified (no section select) */
+/* Username rows */
 .username-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;animation:rowEntrance 0.4s var(--ease) both;}
 @keyframes rowEntrance{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .username-row input{flex:1;}
@@ -214,12 +267,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .btn-small{padding:8px 12px;font-size:12px;min-width:36px;}
 .btn-add{background:var(--olive);color:#fff;}
 .btn-add:hover:not(:disabled){background:var(--olive-hover);}
-.btn-duplicate{background:var(--bg-card);color:var(--text-secondary);border:1px solid var(--border);}
-.btn-duplicate:hover:not(:disabled){background:var(--bg-surface);color:var(--text-primary);}
 .btn-remove{background:var(--danger-bg);color:#d47070;border:1px solid var(--danger-border);}
 .btn-remove:hover:not(:disabled){background:var(--danger);color:#fff;}
 .btn-group{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
-
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
 
@@ -252,8 +302,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .quota-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid;}
 .quota-complete{background:var(--success-bg);color:var(--success);border-color:var(--success-border);}
 .quota-incomplete{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
-
-/* Info grid for personnel display */
 .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-top:20px;}
 .info-cell{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;}
 .info-cell-label{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;}
@@ -269,6 +317,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
   .form-container{padding:24px;}
   .page-content{padding:24px 16px;}
   .btn-group{flex-direction:column;}
+  .dp-popup{width:calc(100vw - 48px);left:0;}
 }
 </style>
 </head>
@@ -340,7 +389,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <span class="topbar-ver">v3.1</span>
+        <span class="topbar-ver">v3.2</span>
         <span class="topbar-badge">AAR SYSTEM</span>
       </div>
     </div>
@@ -418,19 +467,88 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
           <div class="form-group">
             <label class="form-label">Paygrade <span class="required">*</span></label>
-            <input type="text" id="hcPaygrade" class="form-input" placeholder="e.g., O6, E9" required />
+            <select id="hcPaygrade" class="form-select" required>
+              <option value="">-- Select paygrade --</option>
+              <optgroup label="── Enlisted ──────────────">
+              <option value="PFC">PFC — Private First Class</option>
+              <option value="PV2">PV2 — Private 2nd Class</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="SPC">SPC — Specialist</option>
+              <option value="SGT">SGT — Sergeant</option>
+              <option value="SSG">SSG — Staff Sergeant</option>
+              <option value="SFC">SFC — Sergeant First Class</option>
+              <option value="MSG">MSG — Master Sergeant</option>
+              <option value="1SG">1SG — First Sergeant</option>
+              <option value="SGM">SGM — Sergeant Major</option>
+              <option value="CSM">CSM — Command Sergeant Major</option>
+              </optgroup>
+              <optgroup label="── Warrant Officers ──────">
+              <option value="WO1">WO1 — Warrant Officer 1</option>
+              <option value="WO2">WO2 — Chief Warrant Officer 2</option>
+              <option value="WO3">WO3 — Chief Warrant Officer 3</option>
+              <option value="WO4">WO4 — Chief Warrant Officer 4</option>
+              <option value="WO5">WO5 — Chief Warrant Officer 5</option>
+              </optgroup>
+              <optgroup label="── Officers ──────────────">
+              <option value="2LT">2LT — Second Lieutenant</option>
+              <option value="1LT">1LT — First Lieutenant</option>
+              <option value="CPT">CPT — Captain</option>
+              <option value="MAJ">MAJ — Major</option>
+              <option value="LTC">LTC — Lieutenant Colonel</option>
+              <option value="COL">COL — Colonel</option>
+              <option value="BG">BG — Brigadier General</option>
+              <option value="MG">MG — Major General</option>
+              </optgroup>
+            </select>
           </div>
           <div class="form-group">
             <label class="form-label">Enlistment Date <span class="required">*</span></label>
-            <input type="date" id="hcDoe" class="form-input" required />
+            <input type="text" id="hcDoe" class="dp-native-input" readonly />
           </div>
           <div class="form-group">
             <label class="form-label">Timezone</label>
-            <input type="text" id="hcTimezone" class="form-input" placeholder="e.g., GMT+8, EST" />
+            <select id="hcTimezone" class="form-select">
+              <option value="">-- Select timezone --</option>
+              <option value="GMT-12">GMT-12:00</option>
+              <option value="GMT-11">GMT-11:00</option>
+              <option value="GMT-10">GMT-10:00 · Hawaii</option>
+              <option value="GMT-9">GMT-9:00 · Alaska</option>
+              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
+              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
+              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
+              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
+              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
+              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
+              <option value="GMT-3">GMT-3:00 · Brazil</option>
+              <option value="GMT-2">GMT-2:00</option>
+              <option value="GMT-1">GMT-1:00 · Azores</option>
+              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
+              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
+              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
+              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
+              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
+              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
+              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
+              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
+              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
+              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
+              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
+              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
+              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
+              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
+              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
+              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
+              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
+              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
+              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
+              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
+              <option value="GMT+13">GMT+13:00 · Samoa</option>
+              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+            </select>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-primary" id="hcSubmitBtn">Add to High Command</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm('addHCForm',['addHCSuccess','addHCError'])">Clear Form</button>
+            <button type="button" class="btn btn-secondary" onclick="resetHCForm()">Clear Form</button>
           </div>
         </form>
       </div>
@@ -440,7 +558,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
     <div id="addBatteryCommandPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">🔋</div>
-        <div class="page-title-text"><h1>Add <span>Battery Command</span></h1><p>Anino: Rows 28–30 | Mata: Rows 68–70</p></div>
+        <div class="page-title-text"><h1>Add <span>Battery Command</span></h1><p>Anino: Rows 28–30 | Mata: Rows 70–72</p></div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>Battery Command Assignment</h2>
@@ -452,16 +570,16 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
             <select id="bcBattery" class="form-select" required>
               <option value="">-- Select battery --</option>
               <option value="Anino Battery Command">3rd "Anino" Reconnaissance Battery (Rows 28–30)</option>
-              <option value="Mata Battery Command">4th "Mata" Forward Observation Battery (Rows 68–70)</option>
+              <option value="Mata Battery Command">4th "Mata" Forward Observation Battery (Rows 70–72)</option>
             </select>
           </div>
           <div class="form-group">
             <label class="form-label">Battery Command Position <span class="required">*</span></label>
             <select id="bcPosition" class="form-select" required>
               <option value="">-- Select position --</option>
-              <option value="Battery Commanding Officer">Battery Commanding Officer (BCO) → rowStart</option>
-              <option value="Battery Executive Officer">Battery Executive Officer (BXO) → rowStart+1</option>
-              <option value="Battery Sergeant Major">Battery Sergeant Major (BSM) → rowStart+2</option>
+              <option value="Battery Commanding Officer">Battery Commanding Officer (BCO)</option>
+              <option value="Battery Executive Officer">Battery Executive Officer (BXO)</option>
+              <option value="Battery Sergeant Major">Battery Sergeant Major (BSM)</option>
             </select>
           </div>
           <div class="form-group">
@@ -470,19 +588,88 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
           <div class="form-group">
             <label class="form-label">Paygrade <span class="required">*</span></label>
-            <input type="text" id="bcPaygrade" class="form-input" placeholder="e.g., O4, E8" required />
+            <select id="bcPaygrade" class="form-select" required>
+              <option value="">-- Select paygrade --</option>
+              <optgroup label="── Enlisted ──────────────">
+              <option value="PFC">PFC — Private First Class</option>
+              <option value="PV2">PV2 — Private 2nd Class</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="SPC">SPC — Specialist</option>
+              <option value="SGT">SGT — Sergeant</option>
+              <option value="SSG">SSG — Staff Sergeant</option>
+              <option value="SFC">SFC — Sergeant First Class</option>
+              <option value="MSG">MSG — Master Sergeant</option>
+              <option value="1SG">1SG — First Sergeant</option>
+              <option value="SGM">SGM — Sergeant Major</option>
+              <option value="CSM">CSM — Command Sergeant Major</option>
+              </optgroup>
+              <optgroup label="── Warrant Officers ──────">
+              <option value="WO1">WO1 — Warrant Officer 1</option>
+              <option value="WO2">WO2 — Chief Warrant Officer 2</option>
+              <option value="WO3">WO3 — Chief Warrant Officer 3</option>
+              <option value="WO4">WO4 — Chief Warrant Officer 4</option>
+              <option value="WO5">WO5 — Chief Warrant Officer 5</option>
+              </optgroup>
+              <optgroup label="── Officers ──────────────">
+              <option value="2LT">2LT — Second Lieutenant</option>
+              <option value="1LT">1LT — First Lieutenant</option>
+              <option value="CPT">CPT — Captain</option>
+              <option value="MAJ">MAJ — Major</option>
+              <option value="LTC">LTC — Lieutenant Colonel</option>
+              <option value="COL">COL — Colonel</option>
+              <option value="BG">BG — Brigadier General</option>
+              <option value="MG">MG — Major General</option>
+              </optgroup>
+            </select>
           </div>
           <div class="form-group">
             <label class="form-label">Enlistment Date <span class="required">*</span></label>
-            <input type="date" id="bcDoe" class="form-input" required />
+            <input type="text" id="bcDoe" class="dp-native-input" readonly />
           </div>
           <div class="form-group">
             <label class="form-label">Timezone</label>
-            <input type="text" id="bcTimezone" class="form-input" placeholder="e.g., GMT+8, EST" />
+            <select id="bcTimezone" class="form-select">
+              <option value="">-- Select timezone --</option>
+              <option value="GMT-12">GMT-12:00</option>
+              <option value="GMT-11">GMT-11:00</option>
+              <option value="GMT-10">GMT-10:00 · Hawaii</option>
+              <option value="GMT-9">GMT-9:00 · Alaska</option>
+              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
+              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
+              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
+              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
+              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
+              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
+              <option value="GMT-3">GMT-3:00 · Brazil</option>
+              <option value="GMT-2">GMT-2:00</option>
+              <option value="GMT-1">GMT-1:00 · Azores</option>
+              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
+              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
+              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
+              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
+              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
+              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
+              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
+              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
+              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
+              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
+              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
+              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
+              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
+              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
+              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
+              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
+              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
+              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
+              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
+              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
+              <option value="GMT+13">GMT+13:00 · Samoa</option>
+              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+            </select>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-primary" id="bcSubmitBtn">Add to Battery Command</button>
-            <button type="button" class="btn btn-secondary" onclick="resetForm('addBCForm',['addBCSuccess','addBCError'])">Clear Form</button>
+            <button type="button" class="btn btn-secondary" onclick="resetBCForm()">Clear Form</button>
           </div>
         </form>
       </div>
@@ -523,7 +710,39 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
           <div class="form-group">
             <label class="form-label">Paygrade <span class="required">*</span></label>
-            <input type="text" id="apPaygrade" class="form-input" placeholder="e.g., E2, E3" required />
+            <select id="apPaygrade" class="form-select" required>
+              <option value="">-- Select paygrade --</option>
+              <optgroup label="── Enlisted ──────────────">
+              <option value="PFC">PFC — Private First Class</option>
+              <option value="PV2">PV2 — Private 2nd Class</option>
+              <option value="CPL">CPL — Corporal</option>
+              <option value="SPC">SPC — Specialist</option>
+              <option value="SGT">SGT — Sergeant</option>
+              <option value="SSG">SSG — Staff Sergeant</option>
+              <option value="SFC">SFC — Sergeant First Class</option>
+              <option value="MSG">MSG — Master Sergeant</option>
+              <option value="1SG">1SG — First Sergeant</option>
+              <option value="SGM">SGM — Sergeant Major</option>
+              <option value="CSM">CSM — Command Sergeant Major</option>
+              </optgroup>
+              <optgroup label="── Warrant Officers ──────">
+              <option value="WO1">WO1 — Warrant Officer 1</option>
+              <option value="WO2">WO2 — Chief Warrant Officer 2</option>
+              <option value="WO3">WO3 — Chief Warrant Officer 3</option>
+              <option value="WO4">WO4 — Chief Warrant Officer 4</option>
+              <option value="WO5">WO5 — Chief Warrant Officer 5</option>
+              </optgroup>
+              <optgroup label="── Officers ──────────────">
+              <option value="2LT">2LT — Second Lieutenant</option>
+              <option value="1LT">1LT — First Lieutenant</option>
+              <option value="CPT">CPT — Captain</option>
+              <option value="MAJ">MAJ — Major</option>
+              <option value="LTC">LTC — Lieutenant Colonel</option>
+              <option value="COL">COL — Colonel</option>
+              <option value="BG">BG — Brigadier General</option>
+              <option value="MG">MG — Major General</option>
+              </optgroup>
+            </select>
           </div>
           <div class="form-group">
             <label class="form-label">Section Position <span class="required">*</span></label>
@@ -536,11 +755,48 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
           </div>
           <div class="form-group">
             <label class="form-label">Enlistment Date <span class="required">*</span></label>
-            <input type="date" id="apDoe" class="form-input" required />
+            <input type="text" id="apDoe" class="dp-native-input" readonly />
           </div>
           <div class="form-group">
             <label class="form-label">Timezone</label>
-            <input type="text" id="apTimezone" class="form-input" placeholder="e.g., GMT+8, PST" />
+            <select id="apTimezone" class="form-select">
+              <option value="">-- Select timezone --</option>
+              <option value="GMT-12">GMT-12:00</option>
+              <option value="GMT-11">GMT-11:00</option>
+              <option value="GMT-10">GMT-10:00 · Hawaii</option>
+              <option value="GMT-9">GMT-9:00 · Alaska</option>
+              <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
+              <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
+              <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
+              <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
+              <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
+              <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
+              <option value="GMT-3">GMT-3:00 · Brazil</option>
+              <option value="GMT-2">GMT-2:00</option>
+              <option value="GMT-1">GMT-1:00 · Azores</option>
+              <option value="GMT+0">GMT+0:00 · London / Dublin</option>
+              <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
+              <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
+              <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
+              <option value="GMT+3:30">GMT+3:30 · Tehran</option>
+              <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
+              <option value="GMT+4:30">GMT+4:30 · Kabul</option>
+              <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
+              <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
+              <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
+              <option value="GMT+6">GMT+6:00 · Bangladesh</option>
+              <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
+              <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
+              <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
+              <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
+              <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
+              <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
+              <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
+              <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
+              <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
+              <option value="GMT+13">GMT+13:00 · Samoa</option>
+              <option value="GMT+14">GMT+14:00 · Line Islands</option>
+            </select>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-primary" id="apSubmitBtn">Add Personnel</button>
@@ -645,29 +901,95 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
         <button type="button" class="btn btn-primary" id="fetchPersonnelBtn" onclick="fetchPersonnel()">Fetch Personnel Data</button>
 
         <div id="updateFormContainer" style="display:none;margin-top:28px;">
-          <!-- Personnel info display -->
           <div id="personnelInfoDisplay" class="info-grid"></div>
-
           <div id="updateSuccess" class="alert-box alert-success hidden" style="margin-top:20px;"><span>✓</span><span id="updateSuccessMsg"></span></div>
           <div id="updateError" class="alert-box alert-danger hidden" style="margin-top:20px;"><span>⚠</span><span id="updateErrorMsg"></span></div>
-
           <form id="updateForm">
             <div class="form-section-title">Edit Fields</div>
             <div class="form-group">
               <label class="form-label">Paygrade</label>
-              <input type="text" id="updPaygrade" class="form-input" />
+              <select id="updPaygrade" class="form-select">
+                <option value="">-- No change --</option>
+                <optgroup label="── Enlisted ──────────────">
+                <option value="PFC">PFC — Private First Class</option>
+                <option value="PV2">PV2 — Private 2nd Class</option>
+                <option value="CPL">CPL — Corporal</option>
+                <option value="SPC">SPC — Specialist</option>
+                <option value="SGT">SGT — Sergeant</option>
+                <option value="SSG">SSG — Staff Sergeant</option>
+                <option value="SFC">SFC — Sergeant First Class</option>
+                <option value="MSG">MSG — Master Sergeant</option>
+                <option value="1SG">1SG — First Sergeant</option>
+                <option value="SGM">SGM — Sergeant Major</option>
+                <option value="CSM">CSM — Command Sergeant Major</option>
+                </optgroup>
+                <optgroup label="── Warrant Officers ──────">
+                <option value="WO1">WO1 — Warrant Officer 1</option>
+                <option value="WO2">WO2 — Chief Warrant Officer 2</option>
+                <option value="WO3">WO3 — Chief Warrant Officer 3</option>
+                <option value="WO4">WO4 — Chief Warrant Officer 4</option>
+                <option value="WO5">WO5 — Chief Warrant Officer 5</option>
+                </optgroup>
+                <optgroup label="── Officers ──────────────">
+                <option value="2LT">2LT — Second Lieutenant</option>
+                <option value="1LT">1LT — First Lieutenant</option>
+                <option value="CPT">CPT — Captain</option>
+                <option value="MAJ">MAJ — Major</option>
+                <option value="LTC">LTC — Lieutenant Colonel</option>
+                <option value="COL">COL — Colonel</option>
+                <option value="BG">BG — Brigadier General</option>
+                <option value="MG">MG — Major General</option>
+                </optgroup>
+              </select>
             </div>
             <div class="form-group">
               <label class="form-label">Position</label>
-              <input type="text" id="updPosition" class="form-input" />
+              <input type="text" id="updPosition" class="form-input" placeholder="Leave blank to keep current" />
             </div>
             <div class="form-group">
               <label class="form-label">Enlistment Date</label>
-              <input type="date" id="updDoe" class="form-input" />
+              <input type="text" id="updDoe" class="dp-native-input" readonly />
             </div>
             <div class="form-group">
               <label class="form-label">Timezone</label>
-              <input type="text" id="updTimezone" class="form-input" />
+              <select id="updTimezone" class="form-select">
+                <option value="">-- No change --</option>
+                <option value="GMT-12">GMT-12:00</option>
+                <option value="GMT-11">GMT-11:00</option>
+                <option value="GMT-10">GMT-10:00 · Hawaii</option>
+                <option value="GMT-9">GMT-9:00 · Alaska</option>
+                <option value="GMT-8">GMT-8:00 · US Pacific (PST)</option>
+                <option value="GMT-7">GMT-7:00 · US Mountain (MST)</option>
+                <option value="GMT-6">GMT-6:00 · US Central (CST)</option>
+                <option value="GMT-5">GMT-5:00 · US Eastern (EST)</option>
+                <option value="GMT-4">GMT-4:00 · Atlantic (AST)</option>
+                <option value="GMT-3:30">GMT-3:30 · Newfoundland</option>
+                <option value="GMT-3">GMT-3:00 · Brazil</option>
+                <option value="GMT-2">GMT-2:00</option>
+                <option value="GMT-1">GMT-1:00 · Azores</option>
+                <option value="GMT+0">GMT+0:00 · London / Dublin</option>
+                <option value="GMT+1">GMT+1:00 · Central Europe (CET)</option>
+                <option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option>
+                <option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option>
+                <option value="GMT+3:30">GMT+3:30 · Tehran</option>
+                <option value="GMT+4">GMT+4:00 · Gulf / Dubai</option>
+                <option value="GMT+4:30">GMT+4:30 · Kabul</option>
+                <option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option>
+                <option value="GMT+5:30">GMT+5:30 · India (IST)</option>
+                <option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option>
+                <option value="GMT+6">GMT+6:00 · Bangladesh</option>
+                <option value="GMT+6:30">GMT+6:30 · Myanmar</option>
+                <option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option>
+                <option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option>
+                <option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option>
+                <option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option>
+                <option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option>
+                <option value="GMT+10:30">GMT+10:30 · Lord Howe</option>
+                <option value="GMT+11">GMT+11:00 · Solomon Islands</option>
+                <option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option>
+                <option value="GMT+13">GMT+13:00 · Samoa</option>
+                <option value="GMT+14">GMT+14:00 · Line Islands</option>
+              </select>
             </div>
             <div class="form-group">
               <label class="form-label">Status</label>
@@ -744,14 +1066,15 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 </div>
 
 <script>
-// ═══════════ CONFIG ═══════════
+// ═══════════════════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════════════════
 const API_URL = '/api/proxy';
 const LOGIN_PASSWORD = 'AARHC';
 const BRIGADE = 'tiktik_battalion';
 
 const BATTERY_SECTIONS = {
   'anino_battery': {
-    label: '3rd "Anino" Reconnaissance Battery',
     sections: {
       'Galaw Section':  '1st Target Acquisition "Galaw" Section',
       'Tago Section':   '2nd Target Acquisition "Tago" Section',
@@ -759,7 +1082,6 @@ const BATTERY_SECTIONS = {
     }
   },
   'mata_battery': {
-    label: '4th "Mata" Forward Observation Battery',
     sections: {
       'Tingin Section': '4th Target Acquisition "Tingin" Section',
       'Turo Section':   '5th Target Acquisition "Turo" Section',
@@ -768,127 +1090,445 @@ const BATTERY_SECTIONS = {
   }
 };
 
-// ═══════════ CUSTOM SELECT MANAGER ═══════════
-class CustomSelectManager {
-  constructor() { this.init(); }
-  init() {
-    document.querySelectorAll('.form-select').forEach(s => this.wrapSelect(s));
-    const observer = new MutationObserver(mutations => {
-      mutations.forEach(m => {
-        if (m.type === 'childList') {
-          if (m.target.classList && m.target.classList.contains('form-select')) this.updateOptions(m.target);
-          m.addedNodes.forEach(node => {
-            if (node.nodeType === 1) {
-              if (node.classList && node.classList.contains('form-select')) this.wrapSelect(node);
-              else node.querySelectorAll && node.querySelectorAll('.form-select').forEach(s => this.wrapSelect(s));
-            }
-          });
+// ═══════════════════════════════════════════════════════════
+// CUSTOM SELECT — rebuilt for reliability
+// ═══════════════════════════════════════════════════════════
+const SelectManager = (() => {
+  const SVG_ARROW = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
+
+  function closeAll() {
+    document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
+  }
+
+  function syncDisplay(select, text) {
+    const opt = select.options[select.selectedIndex];
+    if (opt && opt.value) {
+      text.textContent = opt.text;
+      text.className = 'cs-text';
+    } else {
+      text.textContent = opt ? opt.text : '';
+      text.className = 'cs-text cs-placeholder';
+    }
+  }
+
+  function buildMenu(select, menu, text) {
+    menu.innerHTML = '';
+    Array.from(select.options).forEach((option, idx) => {
+      if (option.tagName === 'OPTGROUP') return; // handled below
+      const el = document.createElement('div');
+      el.className = 'cs-option';
+      if (!option.value || option.disabled) el.classList.add('cs-disabled');
+      if (option.value && option.selected) el.classList.add('cs-selected');
+      el.dataset.value = option.value;
+      el.dataset.idx = idx;
+      el.textContent = option.text;
+      if (option.value && !option.disabled) {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          select.selectedIndex = idx;
+          syncDisplay(select, text);
+          menu.querySelectorAll('.cs-option').forEach(o => o.classList.remove('cs-selected'));
+          el.classList.add('cs-selected');
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+          // Directly remove open class — no delegation needed
+          const wrapper = el.closest('.cs-wrapper');
+          if (wrapper) wrapper.classList.remove('cs-open');
+        });
+      }
+      menu.appendChild(el);
+    });
+    syncDisplay(select, text);
+  }
+
+  function wrapSelect(select) {
+    if (select.closest('.cs-wrapper')) return; // already wrapped
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'cs-wrapper';
+    select.parentNode.insertBefore(wrapper, select);
+    wrapper.appendChild(select);
+
+    const trigger = document.createElement('div');
+    trigger.className = 'cs-trigger';
+
+    const text = document.createElement('span');
+    text.className = 'cs-text cs-placeholder';
+
+    const arrow = document.createElement('span');
+    arrow.className = 'cs-arrow';
+    arrow.innerHTML = SVG_ARROW;
+
+    trigger.appendChild(text);
+    trigger.appendChild(arrow);
+
+    const menu = document.createElement('div');
+    menu.className = 'cs-menu';
+
+    wrapper.appendChild(trigger);
+    wrapper.appendChild(menu);
+
+    buildMenu(select, menu, text);
+
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = wrapper.classList.contains('cs-open');
+      closeAll();
+      closeDatePickers();
+      if (!isOpen) wrapper.classList.add('cs-open');
+    });
+
+    // Sync when native select changes programmatically
+    select.addEventListener('change', () => {
+      syncDisplay(select, text);
+      menu.querySelectorAll('.cs-option').forEach(o => {
+        o.classList.toggle('cs-selected', o.dataset.value === select.value && select.value !== '');
+      });
+    });
+  }
+
+  // Watch for new selects & option changes
+  const observer = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      if (m.type !== 'childList') return;
+      // Options rebuilt inside a wrapped select (e.g. section dropdown)
+      if (m.target.tagName === 'SELECT' && m.target.classList.contains('form-select')) {
+        const wrapper = m.target.closest('.cs-wrapper');
+        if (wrapper) {
+          buildMenu(m.target,
+            wrapper.querySelector('.cs-menu'),
+            wrapper.querySelector('.cs-text'));
+        }
+        return;
+      }
+      // New selects added to DOM
+      m.addedNodes.forEach(node => {
+        if (node.nodeType !== 1) return;
+        if (node.tagName === 'SELECT' && node.classList.contains('form-select')) {
+          wrapSelect(node);
+        } else if (node.querySelectorAll) {
+          node.querySelectorAll('select.form-select').forEach(wrapSelect);
         }
       });
     });
-    observer.observe(document.body, { childList: true, subtree: true });
-    document.addEventListener('click', e => {
-      if (!e.target.closest('.custom-select-wrapper'))
-        document.querySelectorAll('.custom-select-wrapper.open').forEach(w => w.classList.remove('open'));
-    });
-    document.addEventListener('reset', e => {
-      setTimeout(() => {
-        e.target.querySelectorAll('.form-select').forEach(select => {
-          const wrapper = select.closest('.custom-select-wrapper');
-          if (wrapper) {
-            const text = wrapper.querySelector('.custom-select-text');
-            const menu = wrapper.querySelector('.custom-select-menu');
-            const sel = select.options[select.selectedIndex];
-            text.textContent = sel ? sel.text : '';
-            text.className = 'custom-select-text' + (!select.value ? ' placeholder' : '');
-            menu.querySelectorAll('.custom-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === select.value));
-          }
-        });
-      }, 0);
-    });
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Close on outside click
+  document.addEventListener('click', closeAll);
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
+
+  // Sync after form reset
+  document.addEventListener('reset', e => {
+    setTimeout(() => {
+      e.target.querySelectorAll('select.form-select').forEach(select => {
+        const wrapper = select.closest('.cs-wrapper');
+        if (wrapper) {
+          buildMenu(select, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
+        }
+      });
+    }, 20);
+  });
+
+  return {
+    init() { document.querySelectorAll('select.form-select').forEach(wrapSelect); },
+    setVal(id, val) {
+      const select = document.getElementById(id);
+      if (!select) return;
+      select.value = val;
+      select.dispatchEvent(new Event('change'));
+    }
+  };
+})();
+
+// ═══════════════════════════════════════════════════════════
+// CUSTOM DATE PICKER
+// ═══════════════════════════════════════════════════════════
+const MONTHS_LONG  = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+const WEEKDAYS     = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+const CAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
+
+// Global registry keyed by input ID
+const _datePickerRegistry = {};
+
+function closeDatePickers() {
+  document.querySelectorAll('.dp-container.dp-open').forEach(c => c.classList.remove('dp-open'));
+}
+
+class CustomDatePicker {
+  constructor(nativeInput) {
+    this.input   = nativeInput;
+    this.inputId = nativeInput.id;
+    this.value   = null; // YYYY-MM-DD
+    this.view    = 'calendar'; // 'calendar' | 'month' | 'year'
+
+    const today = new Date();
+    this.viewYear  = today.getFullYear();
+    this.viewMonth = today.getMonth();
+    this.yearPageStart = today.getFullYear() - 7; // show 16 years
+
+    this._build();
+    if (this.inputId) _datePickerRegistry[this.inputId] = this;
   }
-  wrapSelect(select) {
-    if (select.closest('.custom-select-wrapper')) return;
-    const wrapper = document.createElement('div');
-    wrapper.className = 'custom-select-wrapper';
-    select.parentNode.insertBefore(wrapper, select);
-    wrapper.appendChild(select);
-    const trigger = document.createElement('div');
-    trigger.className = 'custom-select-trigger';
-    const text = document.createElement('span');
-    text.className = 'custom-select-text';
-    const arrow = document.createElement('span');
-    arrow.className = 'custom-select-arrow';
-    arrow.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
-    trigger.appendChild(text); trigger.appendChild(arrow);
-    const menu = document.createElement('div');
-    menu.className = 'custom-select-menu';
-    wrapper.appendChild(trigger); wrapper.appendChild(menu);
-    this.populateMenu(select, menu, text);
-    trigger.addEventListener('click', e => {
+
+  _build() {
+    // Wrap
+    this.container = document.createElement('div');
+    this.container.className = 'dp-container';
+    this.input.parentNode.insertBefore(this.container, this.input);
+    this.container.appendChild(this.input);
+
+    // Trigger
+    this.trigger = document.createElement('div');
+    this.trigger.className = 'dp-trigger';
+    this.display = document.createElement('span');
+    this.display.className = 'dp-display dp-empty';
+    this.display.textContent = 'Select a date';
+    const icon = document.createElement('span');
+    icon.className = 'dp-cal-icon';
+    icon.innerHTML = CAL_ICON_SVG;
+    this.trigger.appendChild(this.display);
+    this.trigger.appendChild(icon);
+    this.container.insertBefore(this.trigger, this.input);
+
+    // Popup
+    this.popup = document.createElement('div');
+    this.popup.className = 'dp-popup';
+    this.popup.innerHTML = `
+      <div class="dp-head">
+        <button type="button" class="dp-nav-btn dp-prev-btn">&#8249;</button>
+        <div class="dp-head-center">
+          <span class="dp-head-month"></span>
+          <span class="dp-head-year"></span>
+        </div>
+        <button type="button" class="dp-nav-btn dp-next-btn">&#8250;</button>
+      </div>
+      <div class="dp-body"></div>
+      <div class="dp-footer">
+        <button type="button" class="dp-footer-btn dp-today-btn">Today</button>
+        <button type="button" class="dp-footer-btn dp-clear-btn">Clear</button>
+      </div>`;
+    this.container.appendChild(this.popup);
+
+    this._bindEvents();
+    this._render();
+  }
+
+  _bindEvents() {
+    this.trigger.addEventListener('click', (e) => {
       e.stopPropagation();
-      const isOpen = wrapper.classList.contains('open');
-      document.querySelectorAll('.custom-select-wrapper.open').forEach(w => w.classList.remove('open'));
-      if (!isOpen) wrapper.classList.add('open');
+      const isOpen = this.container.classList.contains('dp-open');
+      closeDatePickers();
+      SelectManager && document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
+      if (!isOpen) { this.view = 'calendar'; this._render(); this.container.classList.add('dp-open'); }
     });
-    select.addEventListener('change', () => {
-      const sel = select.options[select.selectedIndex];
-      text.textContent = sel ? sel.text : '';
-      text.className = 'custom-select-text' + (!select.value ? ' placeholder' : '');
-      menu.querySelectorAll('.custom-select-option').forEach(o => o.classList.toggle('selected', o.dataset.value === select.value));
-    });
-  }
-  updateOptions(select) {
-    const wrapper = select.closest('.custom-select-wrapper');
-    if (!wrapper) return;
-    this.populateMenu(select, wrapper.querySelector('.custom-select-menu'), wrapper.querySelector('.custom-select-text'));
-  }
-  populateMenu(select, menu, text) {
-    menu.innerHTML = '';
-    const sel = select.options[select.selectedIndex];
-    text.textContent = sel ? sel.text : '';
-    text.className = 'custom-select-text' + (!select.value ? ' placeholder' : '');
-    Array.from(select.options).forEach((option, index) => {
-      const optEl = document.createElement('div');
-      optEl.className = 'custom-select-option' + (option.selected ? ' selected' : '') + (option.disabled ? ' disabled' : '');
-      optEl.dataset.value = option.value;
-      optEl.textContent = option.text;
-      if (!option.disabled) {
-        optEl.addEventListener('click', e => {
-          e.stopPropagation();
-          select.selectedIndex = index;
-          text.textContent = option.text;
-          text.className = 'custom-select-text' + (!option.value ? ' placeholder' : '');
-          menu.querySelectorAll('.custom-select-option').forEach(o => o.classList.remove('selected'));
-          optEl.classList.add('selected');
-          select.dispatchEvent(new Event('change', { bubbles: true }));
-          wrapper.classList.remove('open');
-        });
+
+    this.popup.querySelector('.dp-prev-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (this.view === 'calendar') {
+        this.viewMonth--; if (this.viewMonth < 0) { this.viewMonth = 11; this.viewYear--; }
+      } else if (this.view === 'year') {
+        this.yearPageStart -= 16;
       }
-      menu.appendChild(optEl);
+      this._render();
     });
+
+    this.popup.querySelector('.dp-next-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (this.view === 'calendar') {
+        this.viewMonth++; if (this.viewMonth > 11) { this.viewMonth = 0; this.viewYear++; }
+      } else if (this.view === 'year') {
+        this.yearPageStart += 16;
+      }
+      this._render();
+    });
+
+    this.popup.querySelector('.dp-head-month').addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.view = this.view === 'month' ? 'calendar' : 'month';
+      this._render();
+    });
+
+    this.popup.querySelector('.dp-head-year').addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.view = this.view === 'year' ? 'calendar' : 'year';
+      this._render();
+    });
+
+    this.popup.querySelector('.dp-today-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const t = new Date();
+      this.viewYear = t.getFullYear(); this.viewMonth = t.getMonth();
+      const ds = this._toDateStr(t.getFullYear(), t.getMonth(), t.getDate());
+      this._select(ds);
+    });
+
+    this.popup.querySelector('.dp-clear-btn').addEventListener('click', (e) => {
+      e.stopPropagation();
+      this.value = null;
+      this.input.value = '';
+      this.display.textContent = 'Select a date';
+      this.display.className = 'dp-display dp-empty';
+      this._render();
+      this.container.classList.remove('dp-open');
+    });
+
+    this.popup.addEventListener('click', e => e.stopPropagation());
+  }
+
+  _render() {
+    const mLabel = this.popup.querySelector('.dp-head-month');
+    const yLabel = this.popup.querySelector('.dp-head-year');
+    const body   = this.popup.querySelector('.dp-body');
+
+    mLabel.textContent = MONTHS_LONG[this.viewMonth];
+    yLabel.textContent = this.viewYear;
+    mLabel.className = 'dp-head-month' + (this.view === 'month' ? ' dp-head-active' : '');
+    yLabel.className = 'dp-head-year'  + (this.view === 'year'  ? ' dp-head-active' : '');
+
+    if (this.view === 'calendar') this._renderCalendar(body);
+    else if (this.view === 'month') this._renderMonthPicker(body);
+    else this._renderYearPicker(body);
+  }
+
+  _renderCalendar(body) {
+    const today    = new Date();
+    const todayStr = this._toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+    const firstDay = new Date(this.viewYear, this.viewMonth, 1).getDay();
+    const daysInM  = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
+    const prevDays = new Date(this.viewYear, this.viewMonth, 0).getDate();
+
+    let html = `<div class="dp-weekrow">${WEEKDAYS.map(d => `<div class="dp-weekday">${d}</div>`).join('')}</div><div class="dp-grid">`;
+
+    // Prev month
+    for (let i = firstDay - 1; i >= 0; i--) {
+      html += `<div class="dp-day dp-other">${prevDays - i}</div>`;
+    }
+    // Current month
+    for (let d = 1; d <= daysInM; d++) {
+      const ds = this._toDateStr(this.viewYear, this.viewMonth, d);
+      let cls = 'dp-day';
+      if (ds === todayStr) cls += ' dp-today';
+      if (ds === this.value) cls += ' dp-selected';
+      html += `<div class="${cls}" data-date="${ds}">${d}</div>`;
+    }
+    // Next month fill
+    const total = firstDay + daysInM;
+    const fill  = total % 7 === 0 ? 0 : 7 - (total % 7);
+    for (let d = 1; d <= fill; d++) {
+      html += `<div class="dp-day dp-other">${d}</div>`;
+    }
+    html += '</div>';
+    body.innerHTML = html;
+
+    body.querySelectorAll('.dp-day[data-date]').forEach(el => {
+      el.addEventListener('click', (e) => { e.stopPropagation(); this._select(el.dataset.date); });
+    });
+  }
+
+  _renderMonthPicker(body) {
+    const today = new Date();
+    let html = '<div class="dp-month-grid">';
+    MONTHS_SHORT.forEach((m, i) => {
+      let cls = 'dp-month-cell';
+      if (i === today.getMonth() && this.viewYear === today.getFullYear()) cls += ' dp-mcurrent';
+      const selDate = this.value ? new Date(this.value + 'T00:00:00') : null;
+      if (selDate && i === selDate.getMonth() && this.viewYear === selDate.getFullYear()) cls += ' dp-mselected';
+      html += `<div class="${cls}" data-m="${i}">${m}</div>`;
+    });
+    html += '</div>';
+    body.innerHTML = html;
+    body.querySelectorAll('.dp-month-cell').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.viewMonth = parseInt(el.dataset.m);
+        this.view = 'calendar';
+        this._render();
+      });
+    });
+  }
+
+  _renderYearPicker(body) {
+    const today = new Date();
+    let html = '<div class="dp-year-grid">';
+    for (let y = this.yearPageStart; y < this.yearPageStart + 16; y++) {
+      let cls = 'dp-year-cell';
+      if (y === today.getFullYear()) cls += ' dp-ycurrent';
+      if (y === this.viewYear) cls += ' dp-yselected';
+      html += `<div class="${cls}" data-y="${y}">${y}</div>`;
+    }
+    html += '</div>';
+    body.innerHTML = html;
+    body.querySelectorAll('.dp-year-cell').forEach(el => {
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.viewYear = parseInt(el.dataset.y);
+        this.view = 'calendar';
+        this._render();
+      });
+    });
+  }
+
+  _select(dateStr) {
+    this.value       = dateStr;
+    this.input.value = dateStr;
+    const [y, m, d]  = dateStr.split('-');
+    this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
+    this.display.className = 'dp-display dp-filled';
+    this.container.classList.remove('dp-open');
+    this.view = 'calendar';
+    this._render();
+    this.input.dispatchEvent(new Event('change', { bubbles: true }));
+  }
+
+  _toDateStr(y, m, d) {
+    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  // Call this to programmatically set a date (e.g. from fetchPersonnel)
+  setValue(dateStr) {
+    if (!dateStr) {
+      this.value = null;
+      this.input.value = '';
+      this.display.textContent = 'Select a date';
+      this.display.className = 'dp-display dp-empty';
+      return;
+    }
+    this.value = dateStr;
+    this.input.value = dateStr;
+    const [y, m, d] = dateStr.split('-');
+    this.viewYear  = parseInt(y);
+    this.viewMonth = parseInt(m) - 1;
+    this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
+    this.display.className = 'dp-display dp-filled';
+    this._render();
   }
 }
 
 function initDatePickers() {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
-  document.querySelectorAll('input[type="date"]').forEach(input => {
-    if (input.closest('.custom-date-wrapper')) return;
-    const w = document.createElement('div'); w.className = 'custom-date-wrapper';
-    input.parentNode.insertBefore(w, input); w.appendChild(input);
-    const icon = document.createElement('span'); icon.className = 'date-icon'; icon.innerHTML = svg;
-    w.appendChild(icon);
+  document.querySelectorAll('input.dp-native-input').forEach(input => {
+    if (!input.dataset.dpInit) {
+      input.dataset.dpInit = '1';
+      new CustomDatePicker(input);
+    }
   });
+  // Close on outside click
+  document.addEventListener('click', closeDatePickers);
 }
 
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', () => {
-  new CustomSelectManager();
+  SelectManager.init();
   initDatePickers();
   initUsernameContainers();
 });
 
-// ═══════════ USERNAME ROW HELPERS (simplified — no section select) ═══════════
-function makeUsernameRow(removeFn) {
+// ═══════════════════════════════════════════════════════════
+// USERNAME ROW HELPERS
+// ═══════════════════════════════════════════════════════════
+function makeUsernameRow() {
   const row = document.createElement('div');
   row.className = 'username-row';
   row.innerHTML = `
@@ -907,15 +1547,19 @@ function removeUsernameRow(btn) {
   const row = btn.closest('.username-row');
   const container = row.parentElement;
   if (container.querySelectorAll('.username-row').length > 1) {
-    row.style.transition = 'all 0.3s ease'; row.style.opacity = '0'; row.style.transform = 'translateX(-20px)';
+    row.style.transition = 'all 0.3s ease';
+    row.style.opacity = '0';
+    row.style.transform = 'translateX(-20px)';
     setTimeout(() => row.remove(), 300);
   }
 }
 
 function collectUsernames(containerId) {
-  const inputs = document.getElementById(containerId).querySelectorAll('.username-input');
   const names = [];
-  inputs.forEach(i => { const v = i.value.trim(); if (v) names.push({ username: v }); });
+  document.getElementById(containerId).querySelectorAll('.username-input').forEach(i => {
+    const v = i.value.trim();
+    if (v) names.push({ username: v });
+  });
   return names;
 }
 
@@ -930,19 +1574,26 @@ function addLogUsernameRow()    { addUsernameRowTo('logUsernamesContainer'); }
 function addStrikeUsernameRow() { addUsernameRowTo('strikeUsernamesContainer'); }
 function addRemoveUsernameRow() { addUsernameRowTo('removeUsernamesContainer'); }
 
-// ═══════════ API ═══════════
+// ═══════════════════════════════════════════════════════════
+// API CALL
+// ═══════════════════════════════════════════════════════════
 function callAPI(action, payload, onSuccess, onError) {
   fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ action, ...payload })
-  }).then(r => r.json()).then(d => onSuccess && onSuccess(d)).catch(err => onError && onError(err));
+  })
+    .then(r => r.json())
+    .then(d => onSuccess && onSuccess(d))
+    .catch(err => onError && onError(err));
 }
 
-// ═══════════ UI HELPERS ═══════════
+// ═══════════════════════════════════════════════════════════
+// UI HELPERS
+// ═══════════════════════════════════════════════════════════
 function showAlert(successId, errorId, type, message) {
-  const sEl = document.getElementById(successId);
-  const eEl = document.getElementById(errorId);
+  const sEl = successId ? document.getElementById(successId) : null;
+  const eEl = errorId   ? document.getElementById(errorId)   : null;
   if (type === 'success') {
     if (sEl) { sEl.querySelector('span:last-child').textContent = message; sEl.classList.remove('hidden'); }
     if (eEl) eEl.classList.add('hidden');
@@ -960,34 +1611,21 @@ function setBtn(id, loading, originalText) {
   btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : originalText;
 }
 
-function showToast(message, type = 'success') {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = 'toast toast-' + type;
-  const icons = { success: '✓', error: '⚠', warning: 'ℹ' };
-  toast.innerHTML = `<span class="toast-icon">${icons[type]||'✓'}</span><span class="toast-message">${message}</span><button class="toast-close" onclick="this.parentElement.remove()">✕</button>`;
-  container.appendChild(toast);
-  setTimeout(() => { toast.classList.add('toast-out'); setTimeout(() => toast.remove(), 400); }, 4000);
-}
-
-function resetForm(formId, alertIds) {
-  document.getElementById(formId).reset();
-  alertIds.forEach(id => document.getElementById(id) && document.getElementById(id).classList.add('hidden'));
-}
-
-function openModal(id) { document.getElementById(id).classList.add('active'); }
+function openModal(id)  { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-// ═══════════ NAVIGATION ═══════════
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
 const PAGE_META = {
-  dashboardPage:       { icon:'🏠', title:'Dashboard' },
-  addHighCommandPage:  { icon:'⭐', title:'Add High Command' },
+  dashboardPage:        { icon:'🏠', title:'Dashboard' },
+  addHighCommandPage:   { icon:'⭐', title:'Add High Command' },
   addBatteryCommandPage:{ icon:'🔋', title:'Add Battery Command' },
-  addPersonnelPage:    { icon:'➕', title:'Add Personnel' },
-  logEventPage:        { icon:'📋', title:'Log Event' },
-  strikePage:          { icon:'⚡', title:'Issue Strike' },
-  updatePersonnelPage: { icon:'✏️', title:'Update Personnel' },
-  removePersonnelPage: { icon:'🗑️', title:'Remove Personnel' }
+  addPersonnelPage:     { icon:'➕', title:'Add Personnel' },
+  logEventPage:         { icon:'📋', title:'Log Event' },
+  strikePage:           { icon:'⚡', title:'Issue Strike' },
+  updatePersonnelPage:  { icon:'✏️', title:'Update Personnel' },
+  removePersonnelPage:  { icon:'🗑️', title:'Remove Personnel' }
 };
 
 function navigateTo(pageId) {
@@ -996,7 +1634,7 @@ function navigateTo(pageId) {
   document.getElementById(pageId).classList.add('active');
   document.querySelector(`.nav-item[data-page="${pageId}"]`)?.classList.add('active');
   const meta = PAGE_META[pageId] || {};
-  document.getElementById('topbarIcon').textContent = meta.icon || '🏠';
+  document.getElementById('topbarIcon').textContent  = meta.icon  || '🏠';
   document.getElementById('topbarTitle').textContent = meta.title || '';
   closeSidebar();
 }
@@ -1004,12 +1642,17 @@ function navigateTo(pageId) {
 function openSidebar()  { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
 function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
-// ═══════════ LOGIN ═══════════
+// ═══════════════════════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════════════════════
 document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
   if (document.getElementById('loginPassword').value === LOGIN_PASSWORD) {
     document.getElementById('loginPage').classList.add('hidden-out');
-    setTimeout(() => { document.getElementById('loginPage').style.display='none'; document.getElementById('appShell').style.display='block'; }, 500);
+    setTimeout(() => {
+      document.getElementById('loginPage').style.display = 'none';
+      document.getElementById('appShell').style.display  = 'block';
+    }, 500);
   } else {
     const err = document.getElementById('loginError');
     err.classList.add('visible');
@@ -1023,63 +1666,84 @@ function togglePasswordVisibility() {
 }
 
 function logout() {
-  document.getElementById('appShell').style.display = 'none';
+  document.getElementById('appShell').style.display  = 'none';
   document.getElementById('loginPage').style.display = 'flex';
   document.getElementById('loginPage').classList.remove('hidden-out');
   document.getElementById('loginPassword').value = '';
   navigateTo('dashboardPage');
 }
 
-// ═══════════ ADD HIGH COMMAND ═══════════
+// ═══════════════════════════════════════════════════════════
+// ADD HIGH COMMAND
+// ═══════════════════════════════════════════════════════════
 document.getElementById('addHCForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const position = document.getElementById('hcPosition').value;
   const username = document.getElementById('hcUsername').value.trim();
-  const paygrade = document.getElementById('hcPaygrade').value.trim();
+  const paygrade = document.getElementById('hcPaygrade').value;
   const doe      = document.getElementById('hcDoe').value;
-  const timezone = document.getElementById('hcTimezone').value.trim();
+  const timezone = document.getElementById('hcTimezone').value;
   if (!position || !username || !paygrade || !doe) {
-    showAlert('addHCSuccess','addHCError','error','Please fill all required fields.'); return;
+    showAlert('addHCSuccess','addHCError','error','Please fill all required fields (including date).'); return;
   }
   setBtn('hcSubmitBtn', true);
   callAPI('addHighCommand', { brigade: BRIGADE, position, username, paygrade, doe, timezone },
     r => {
       setBtn('hcSubmitBtn', false, 'Add to High Command');
-      if (r && r.status === 'success') { showAlert('addHCSuccess','addHCError','success', r.message); resetForm('addHCForm',['addHCSuccess','addHCError']); }
+      if (r && r.status === 'success') { showAlert('addHCSuccess','addHCError','success', r.message); resetHCForm(); }
       else showAlert('addHCSuccess','addHCError','error', r?.message || 'Failed.');
     },
     () => { setBtn('hcSubmitBtn', false, 'Add to High Command'); showAlert('addHCSuccess','addHCError','error','Request failed. Check connection.'); }
   );
 });
 
-// ═══════════ ADD BATTERY COMMAND ═══════════
+function resetHCForm() {
+  document.getElementById('addHCForm').reset();
+  ['addHCSuccess','addHCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  if (_datePickerRegistry['hcDoe']) _datePickerRegistry['hcDoe'].setValue(null);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ADD BATTERY COMMAND
+// ═══════════════════════════════════════════════════════════
 document.getElementById('addBCForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const batterySection = document.getElementById('bcBattery').value;
   const position       = document.getElementById('bcPosition').value;
   const username       = document.getElementById('bcUsername').value.trim();
-  const paygrade       = document.getElementById('bcPaygrade').value.trim();
+  const paygrade       = document.getElementById('bcPaygrade').value;
   const doe            = document.getElementById('bcDoe').value;
-  const timezone       = document.getElementById('bcTimezone').value.trim();
+  const timezone       = document.getElementById('bcTimezone').value;
   if (!batterySection || !position || !username || !paygrade || !doe) {
-    showAlert('addBCSuccess','addBCError','error','Please fill all required fields.'); return;
+    showAlert('addBCSuccess','addBCError','error','Please fill all required fields (including date).'); return;
   }
   setBtn('bcSubmitBtn', true);
   callAPI('addBatteryCommand', { brigade: BRIGADE, batterySection, position, username, paygrade, doe, timezone },
     r => {
       setBtn('bcSubmitBtn', false, 'Add to Battery Command');
-      if (r && r.status === 'success') { showAlert('addBCSuccess','addBCError','success', r.message); resetForm('addBCForm',['addBCSuccess','addBCError']); }
+      if (r && r.status === 'success') { showAlert('addBCSuccess','addBCError','success', r.message); resetBCForm(); }
       else showAlert('addBCSuccess','addBCError','error', r?.message || 'Failed.');
     },
     () => { setBtn('bcSubmitBtn', false, 'Add to Battery Command'); showAlert('addBCSuccess','addBCError','error','Request failed.'); }
   );
 });
 
-// ═══════════ ADD PERSONNEL ═══════════
+function resetBCForm() {
+  document.getElementById('addBCForm').reset();
+  ['addBCSuccess','addBCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  if (_datePickerRegistry['bcDoe']) _datePickerRegistry['bcDoe'].setValue(null);
+}
+
+// ═══════════════════════════════════════════════════════════
+// ADD PERSONNEL — Battery → Section cascade
+// ═══════════════════════════════════════════════════════════
 document.getElementById('apBattery').addEventListener('change', function() {
   const battery = BATTERY_SECTIONS[this.value];
   const sectionSelect = document.getElementById('apSection');
-  if (!battery) { sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>'; return; }
+  if (!battery) {
+    sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+    return;
+  }
   let html = '<option value="">-- Select section --</option>';
   for (const key in battery.sections) html += `<option value="${key}">${battery.sections[key]}</option>`;
   sectionSelect.innerHTML = html;
@@ -1089,12 +1753,12 @@ document.getElementById('addPForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const section  = document.getElementById('apSection').value;
   const username = document.getElementById('apUsername').value.trim();
-  const paygrade = document.getElementById('apPaygrade').value.trim();
+  const paygrade = document.getElementById('apPaygrade').value;
   const position = document.getElementById('apPosition').value;
   const doe      = document.getElementById('apDoe').value;
-  const timezone = document.getElementById('apTimezone').value.trim();
+  const timezone = document.getElementById('apTimezone').value;
   if (!section || !username || !paygrade || !position || !doe) {
-    showAlert('addPSuccess','addPError','error','Please fill all required fields.'); return;
+    showAlert('addPSuccess','addPError','error','Please fill all required fields (including date).'); return;
   }
   setBtn('apSubmitBtn', true);
   callAPI('addPersonnel', { brigade: BRIGADE, section, username, paygrade, position, doe, timezone },
@@ -1111,9 +1775,12 @@ function resetAddPersonnel() {
   document.getElementById('addPForm').reset();
   document.getElementById('apSection').innerHTML = '<option value="">-- Select battery first --</option>';
   ['addPSuccess','addPError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+  if (_datePickerRegistry['apDoe']) _datePickerRegistry['apDoe'].setValue(null);
 }
 
-// ═══════════ LOG EVENT ═══════════
+// ═══════════════════════════════════════════════════════════
+// LOG EVENT
+// ═══════════════════════════════════════════════════════════
 document.getElementById('logEventForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const eventType = document.getElementById('evType').value;
@@ -1141,13 +1808,15 @@ function resetLogEvent() {
   ['logSuccess','logError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
 
-// ═══════════ ISSUE STRIKE ═══════════
+// ═══════════════════════════════════════════════════════════
+// ISSUE STRIKE
+// ═══════════════════════════════════════════════════════════
 document.getElementById('strikeForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const reason = document.getElementById('strikeReason').value.trim();
   const pd     = collectUsernames('strikeUsernamesContainer');
-  if (!reason)     { showAlert('strikeSuccess','strikeError','error','Please provide a reason.'); return; }
-  if (!pd.length)  { showAlert('strikeSuccess','strikeError','error','At least one username is required.'); return; }
+  if (!reason)    { showAlert('strikeSuccess','strikeError','error','Please provide a reason.'); return; }
+  if (!pd.length) { showAlert('strikeSuccess','strikeError','error','At least one username is required.'); return; }
   const pt = pd.length === 1 ? `"${pd[0].username}"` : `${pd.length} personnel`;
   window._strikePayload = { pd, reason };
   document.getElementById('strikeModalText').textContent = `You are about to issue a strike to ${pt}. 1 strike = SEMI-ACTIVE, 2+ = INACTIVE. This cannot be undone.`;
@@ -1177,21 +1846,27 @@ function resetStrike() {
   ['strikeSuccess','strikeError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
 
-// ═══════════ UPDATE PERSONNEL ═══════════
-// Only requires username — GAS auto-detects section from the whole sheet
+// ═══════════════════════════════════════════════════════════
+// UPDATE PERSONNEL
+// ═══════════════════════════════════════════════════════════
 function fetchPersonnel() {
   const username = document.getElementById('updateUsername').value.trim();
-  if (!username) { showAlert(null,'fetchError','error','Please enter a username.'); document.getElementById('fetchError').classList.remove('hidden'); return; }
+  if (!username) {
+    document.getElementById('fetchErrorMsg').textContent = 'Please enter a username.';
+    document.getElementById('fetchError').classList.remove('hidden');
+    return;
+  }
   setBtn('fetchPersonnelBtn', true);
   callAPI('getPersonnelInfo', { brigade: BRIGADE, username },
     r => {
       setBtn('fetchPersonnelBtn', false, 'Fetch Personnel Data');
       if (r && r.status === 'success' && r.data) {
         const d = r.data;
-        // Show info grid
-        const grid = document.getElementById('personnelInfoDisplay');
+        document.getElementById('fetchError').classList.add('hidden');
+
+        // Info grid
         const quotaClass = d.quotaStatus === 'COMPLETE' ? 'quota-complete' : 'quota-incomplete';
-        grid.innerHTML = `
+        document.getElementById('personnelInfoDisplay').innerHTML = `
           <div class="info-cell"><div class="info-cell-label">Username</div><div class="info-cell-value">${d.username}</div></div>
           <div class="info-cell"><div class="info-cell-label">Paygrade</div><div class="info-cell-value">${d.paygrade||'—'}</div></div>
           <div class="info-cell"><div class="info-cell-label">Position</div><div class="info-cell-value">${d.position||'—'}</div></div>
@@ -1205,24 +1880,31 @@ function fetchPersonnel() {
           <div class="info-cell"><div class="info-cell-label">Strikes</div><div class="info-cell-value">${d.strike}</div></div>
           <div class="info-cell"><div class="info-cell-label">Enlistment Date</div><div class="info-cell-value">${d.doe||'—'}</div></div>
           <div class="info-cell"><div class="info-cell-label">Timezone</div><div class="info-cell-value">${d.timezone||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Row</div><div class="info-cell-value">${d.row}</div></div>
-        `;
+          <div class="info-cell"><div class="info-cell-label">Row</div><div class="info-cell-value">${d.row}</div></div>`;
+
         // Populate edit fields
-        document.getElementById('updPaygrade').value  = d.paygrade  || '';
-        document.getElementById('updPosition').value  = d.position  || '';
-        document.getElementById('updDoe').value       = d.doe       || '';
-        document.getElementById('updTimezone').value  = d.timezone  || '';
-        document.getElementById('updStatus').value    = d.status    || 'ACTIVE';
-        document.getElementById('updStatus').dispatchEvent(new Event('change'));
+        SelectManager.setVal('updPaygrade', d.paygrade || '');
+        document.getElementById('updPosition').value = d.position || '';
+        SelectManager.setVal('updTimezone', d.timezone || '');
+        SelectManager.setVal('updStatus', d.status || 'ACTIVE');
+
+        // Set date picker
+        if (_datePickerRegistry['updDoe']) {
+          _datePickerRegistry['updDoe'].setValue(d.doe || null);
+        }
+
         document.getElementById('updateFormContainer').style.display = 'block';
-        document.getElementById('fetchError').classList.add('hidden');
       } else {
-        document.getElementById('fetchError').querySelector('span:last-child').textContent = r?.message || 'Personnel not found.';
+        document.getElementById('fetchErrorMsg').textContent = r?.message || 'Personnel not found.';
         document.getElementById('fetchError').classList.remove('hidden');
         document.getElementById('updateFormContainer').style.display = 'none';
       }
     },
-    () => { setBtn('fetchPersonnelBtn', false, 'Fetch Personnel Data'); document.getElementById('fetchError').querySelector('span:last-child').textContent = 'Request failed.'; document.getElementById('fetchError').classList.remove('hidden'); }
+    () => {
+      setBtn('fetchPersonnelBtn', false, 'Fetch Personnel Data');
+      document.getElementById('fetchErrorMsg').textContent = 'Request failed.';
+      document.getElementById('fetchError').classList.remove('hidden');
+    }
   );
 }
 
@@ -1234,10 +1916,10 @@ document.getElementById('updateForm').addEventListener('submit', function(e) {
   callAPI('updatePersonnelInfo', {
     brigade:  BRIGADE,
     username,
-    paygrade: document.getElementById('updPaygrade').value.trim(),
+    paygrade: document.getElementById('updPaygrade').value,
     position: document.getElementById('updPosition').value.trim(),
     doe:      document.getElementById('updDoe').value,
-    timezone: document.getElementById('updTimezone').value.trim(),
+    timezone: document.getElementById('updTimezone').value,
     status:   document.getElementById('updStatus').value
   },
     r => {
@@ -1253,10 +1935,13 @@ function resetUpdateForm() {
   document.getElementById('updateUsername').value = '';
   document.getElementById('updateFormContainer').style.display = 'none';
   document.getElementById('personnelInfoDisplay').innerHTML = '';
+  if (_datePickerRegistry['updDoe']) _datePickerRegistry['updDoe'].setValue(null);
   ['fetchError','updateSuccess','updateError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
 
-// ═══════════ REMOVE PERSONNEL ═══════════
+// ═══════════════════════════════════════════════════════════
+// REMOVE PERSONNEL
+// ═══════════════════════════════════════════════════════════
 document.getElementById('removeForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const reason = document.getElementById('removeReason').value.trim();
@@ -1292,9 +1977,17 @@ function resetRemoveForm() {
   ['removeSuccess','removeError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
 
-// ═══════════ ESCAPE KEY ═══════════
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal('strikeModal'); closeModal('removeModal'); closeSidebar(); }
+  if (e.key === 'Escape') {
+    closeModal('strikeModal');
+    closeModal('removeModal');
+    closeSidebar();
+    closeDatePickers();
+    document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
+  }
 });
 </script>
 </body>
