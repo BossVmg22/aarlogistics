@@ -12,7 +12,14 @@ export async function onRequest(context) {
   }
 
   const body = await context.request.text();
-  const response = await fetch(GAS_URL, { method: 'POST', body: body });
+
+  const response = await fetch(GAS_URL, {
+    method: 'POST',
+    body: body,
+    redirect: 'follow',                        // ← critical
+    headers: { 'Content-Type': 'application/json' }  // ← helps GAS parse
+  });
+
   const data = await response.text();
 
   return new Response(data, {
