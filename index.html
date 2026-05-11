@@ -628,7 +628,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>New Personnel Enlistment</h2>
-        <div class="alert-box alert-warning"><span>ℹ</span><span>New members are added with default values: Hosted <strong>0/0/0</strong> · Attended <strong>0/0/0</strong> · Quota <strong>INCOMPLETE</strong> · Status <strong>ACTIVE</strong></span></div>
+        <div class="alert-box alert-warning"><span>ℹ</span><span>New members are added with default values: Hosted <strong>0/0/0/0</strong> · Attended <strong>0/0/0/0</strong> · Quota <strong>INCOMPLETE</strong> · Status <strong>ACTIVE</strong></span></div>
         <div id="addPSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="addPSuccessMsg"></span></div>
         <div id="addPError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addPErrorMsg"></span></div>
         <form id="addPForm" novalidate>
@@ -727,7 +727,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>Event Log Record</h2>
-        <div class="alert-box alert-warning"><span>ℹ</span><span><strong>How it works:</strong> Each log increments the correct slot in Hosted/Attended (x/y/z) and adds 1 to the event-type total (K, L, or M). Quota auto-updates to <strong>COMPLETE</strong> when hosted total ≥ 3 and attended total ≥ 3.</span></div>
+        <div class="alert-box alert-warning"><span>ℹ</span><span><strong>How it works:</strong> Each log increments the correct slot in Hosted/Attended (Insp/Train/Recruit/Deploy) and adds 1 to the event-type total. Quota auto-updates to <strong>COMPLETE</strong> when hosted total ≥ 3 and attended total ≥ 3.</span></div>
         <div id="logSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="logSuccessMsg"></span></div>
         <div id="logError" class="alert-box alert-danger hidden"><span>⚠</span><span id="logErrorMsg"></span></div>
         <form id="logEventForm">
@@ -746,7 +746,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <select id="evType" class="form-select" required>
               <option value="">-- Select event type --</option>
               <option value="inspection">Inspection</option>
-              <option value="training">Training / Recruitment</option>
+              <option value="training">Training</option>
+              <option value="recruitment">Recruitment</option>
               <option value="deployment">Deployment</option>
             </select>
           </div>
@@ -1061,7 +1062,7 @@ const BATTERY_SECTIONS = {
     batteries: {
       'Department of Academics and Discipline': {
         label:     'Department of Academics and Discipline',
-        positions: ['Academic Faculty Staff', 'Disciplinary Faculty Staff']
+        positions: ['Academic Confidant', 'Academic Staff', 'Disciplinary Staff', 'Guidance Staff']
       },
       'Department of Admission and Logistics': {
         label:     'Department of Admission and Logistics',
@@ -2006,6 +2007,7 @@ function fetchPersonnel() {
           <div class="info-cell"><div class="info-cell-label">Attended</div><div class="info-cell-value">${d.attended}</div></div>
           <div class="info-cell"><div class="info-cell-label">Inspection</div><div class="info-cell-value">${d.inspection}</div></div>
           <div class="info-cell"><div class="info-cell-label">Training</div><div class="info-cell-value">${d.training}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Recruitment</div><div class="info-cell-value">${d.recruitment||0}</div></div>
           <div class="info-cell"><div class="info-cell-label">Deployment</div><div class="info-cell-value">${d.deployment}</div></div>
           <div class="info-cell"><div class="info-cell-label">Quota</div><div class="info-cell-value"><span class="quota-badge ${quotaClass}">${d.quotaStatus}</span></div></div>
           <div class="info-cell"><div class="info-cell-label">Strikes</div><div class="info-cell-value">${d.strike}</div></div>
