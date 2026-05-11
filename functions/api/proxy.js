@@ -12,20 +12,29 @@ export async function onRequest(context) {
   }
 
   const body = await context.request.text();
+  const parsed = JSON.parse(body);
 
+  // Handle Discord webhook — route through Cloudflare instead of GAS
+  if (parsed.action === 'sendLog') {
+    await fetch(parsed.webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(parsed.payload)
+    });
+    return new Response(JSON.stringify({ status: 'ok' }), {
+      headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
+    });
+  }
+
+  // Everything else → forward to GAS
   const response = await fetch(GAS_URL, {
     method: 'POST',
     body: body,
-    redirect: 'follow',                        // ← critical
-    headers: { 'Content-Type': 'application/json' }  // ← helps GAS parse
+    redirect: 'follow',
+    headers: { 'Content-Type': 'application/json' }
   });
-
   const data = await response.text();
-
   return new Response(data, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
+    headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
   });
 }
