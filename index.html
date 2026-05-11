@@ -383,7 +383,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <span class="topbar-ver">v3.3</span>
+        <span class="topbar-ver">v3.4</span>
         <span class="topbar-badge">AAR SYSTEM</span>
       </div>
     </div>
@@ -393,13 +393,13 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
       <div class="welcome-banner">
         <div class="wb-badge"><div class="wb-badge-dot"></div><span class="wb-badge-text">Active</span></div>
         <h2>Welcome to AAR Brigade Command</h2>
-        <p>Manage battalion personnel across TIKTIK and DAGUNDONG battalions. Track event attendance and hosting, maintain quota status, and oversee all battalion operations from one central command system.</p>
+        <p>Manage battalion personnel across TIKTIK, DAGUNDONG, and SALIMBAY battalions, plus the AA - Academy. Track event attendance and hosting, maintain quota status, and oversee all battalion operations from one central command system.</p>
       </div>
       <div class="section-header"><h2>Quick Actions</h2><div class="section-divider"></div></div>
       <div class="dashboard-grid">
         <div class="dashboard-card" onclick="navigateTo('addHighCommandPage')">
           <div class="card-top"><div class="card-icon-wrap">⭐</div><span class="card-arrow">↗</span></div>
-          <h3>Add High Command</h3><p>Assign Battalion CO, XO, or Sergeant Major to their fixed command positions.</p>
+          <h3>Add High Command</h3><p>Assign Battalion CO, XO, Sergeant Major — or Academy Commandant, Directors, and ASIM.</p>
           <span class="card-tag card-tag-ops">Command</span>
         </div>
         <div class="dashboard-card" onclick="navigateTo('addBatteryCommandPage')">
@@ -409,7 +409,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         </div>
         <div class="dashboard-card" onclick="navigateTo('addPersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">➕</div><span class="card-arrow">↗</span></div>
-          <h3>Add Personnel</h3><p>Enlist new members into any battery section across all battalions.</p>
+          <h3>Add Personnel</h3><p>Enlist new members into any battery section or academy department.</p>
           <span class="card-tag card-tag-ops">Personnel</span>
         </div>
         <div class="dashboard-card" onclick="navigateTo('logEventPage')">
@@ -439,7 +439,10 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="addHighCommandPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">⭐</div>
-        <div class="page-title-text"><h1>Add <span>High Command</span></h1><p>Assign BCO → Row 21 | BXO → Row 22 | BSM → Row 23</p></div>
+        <div class="page-title-text">
+          <h1>Add <span>High Command</span></h1>
+          <p id="hcPageSubtitle">Select a battalion to see available positions</p>
+        </div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>High Command Assignment</h2>
@@ -452,15 +455,14 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">High Command Position <span class="required">*</span></label>
+            <label class="form-label"><span id="hcPositionLabel">Position</span> <span class="required">*</span></label>
             <select id="hcPosition" class="form-select" required>
-              <option value="">-- Select position --</option>
-              <option value="Battalion Commanding Officer">Battalion Commanding Officer (BCO)</option>
-              <option value="Battalion Executive Officer">Battalion Executive Officer (BXO)</option>
-              <option value="Battalion Sergeant Major">Battalion Sergeant Major (BSM)</option>
+              <option value="">-- Select battalion first --</option>
             </select>
           </div>
           <div class="form-group">
@@ -518,12 +520,22 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="addBatteryCommandPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">🔋</div>
-        <div class="page-title-text"><h1>Add <span>Battery Command</span></h1><p>Tiktik — Anino: Rows 28–30 | Mata: Rows 70–72 &nbsp;|&nbsp; Dagundong — Lintik: Rows 28–30 | Bulkan: Rows 70–72</p></div>
+        <div class="page-title-text">
+          <h1>Add <span>Battery Command</span></h1>
+          <p>Assign Battery CO, XO, or SGM to a battalion's battery command position</p>
+        </div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>Battery Command Assignment</h2>
         <div id="addBCSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="addBCSuccessMsg"></span></div>
         <div id="addBCError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addBCErrorMsg"></span></div>
+
+        <!-- Academy notice — shown only when AA - Academy is selected -->
+        <div id="bcAcademyNotice" class="alert-box alert-warning" style="display:none;">
+          <span>ℹ</span>
+          <span>The <strong>AA - Academy</strong> does not have Battery Command positions. Use <strong>Add High Command</strong> for Academy Administration (Commandant, Directors, ASIM), or <strong>Add Personnel</strong> for department faculty staff.</span>
+        </div>
+
         <form id="addBCForm">
           <div class="form-group">
             <label class="form-label">Battalion <span class="required">*</span></label>
@@ -531,70 +543,76 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Battery <span class="required">*</span></label>
-            <select id="bcBattery" class="form-select" required>
-              <option value="">-- Select battalion first --</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Battery Command Position <span class="required">*</span></label>
-            <select id="bcPosition" class="form-select" required>
-              <option value="">-- Select position --</option>
-              <option value="Battery Commanding Officer">Battery Commanding Officer (BCO)</option>
-              <option value="Battery Executive Officer">Battery Executive Officer (BXO)</option>
-              <option value="Battery Sergeant Major">Battery Sergeant Major (BSM)</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Username <span class="required">*</span></label>
-            <input type="text" id="bcUsername" class="form-input" placeholder="e.g., BatteryLeader" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Paygrade <span class="required">*</span></label>
-            <select id="bcPaygrade" class="form-select" required>
-              <option value="">-- Select paygrade --</option>
-              <optgroup label="── Enlisted ──────────────">
-              <option value="Private First Class">PFC — Private First Class</option>
-              <option value="Corporal">CPL — Corporal</option>
-              <option value="Sergeant">SGT — Sergeant</option>
-              <option value="Staff Sergeant">SSGT — Staff Sergeant</option>
-              <option value="Technical Sergeant">TSGT — Technical Sergeant</option>
-              </optgroup>
-              <optgroup label="── Sergeant Major ──────">
-              <option value="Master Sergeant">MSGT — Master Sergeant</option>
-              <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
-              <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
-              </optgroup>
-              <optgroup label="── Officers ──────────────">
-              <option value="Second Lieutenant">2LT — Second Lieutenant</option>
-              <option value="First Lieutenant">1LT — First Lieutenant</option>
-              <option value="Captain">CPT — Captain</option>
-              <option value="Major">MAJ — Major</option>
-              <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
-              <option value="Colonel">COL — Colonel</option>
-              <option value="Brigadier General">BGEN — Brigadier General</option>
-              <option value="Major General">MGEN — Major General</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Enlistment Date <span class="required">*</span></label>
-            <input type="text" id="bcDoe" class="dp-native-input" readonly />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Timezone</label>
-            <select id="bcTimezone" class="form-select">
-              <option value="">-- Select timezone --</option>
-              <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
-            </select>
-          </div>
-          <div class="btn-group">
-            <button type="submit" class="btn btn-primary" id="bcSubmitBtn">Add to Battery Command</button>
-            <button type="button" class="btn btn-secondary" onclick="resetBCForm()">Clear Form</button>
-          </div>
+
+          <!-- These fields are hidden when Academy is selected -->
+          <div id="bcFormFields">
+            <div class="form-group">
+              <label class="form-label">Battery <span class="required">*</span></label>
+              <select id="bcBattery" class="form-select" required>
+                <option value="">-- Select battalion first --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Battery Command Position <span class="required">*</span></label>
+              <select id="bcPosition" class="form-select" required>
+                <option value="">-- Select position --</option>
+                <option value="Battery Commanding Officer">Battery Commanding Officer (BCO)</option>
+                <option value="Battery Executive Officer">Battery Executive Officer (BXO)</option>
+                <option value="Battery Sergeant Major">Battery Sergeant Major (BSM)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Username <span class="required">*</span></label>
+              <input type="text" id="bcUsername" class="form-input" placeholder="e.g., BatteryLeader" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Paygrade <span class="required">*</span></label>
+              <select id="bcPaygrade" class="form-select" required>
+                <option value="">-- Select paygrade --</option>
+                <optgroup label="── Enlisted ──────────────">
+                <option value="Private First Class">PFC — Private First Class</option>
+                <option value="Corporal">CPL — Corporal</option>
+                <option value="Sergeant">SGT — Sergeant</option>
+                <option value="Staff Sergeant">SSGT — Staff Sergeant</option>
+                <option value="Technical Sergeant">TSGT — Technical Sergeant</option>
+                </optgroup>
+                <optgroup label="── Sergeant Major ──────">
+                <option value="Master Sergeant">MSGT — Master Sergeant</option>
+                <option value="Senior Master Sergeant">SMSGT — Senior Master Sergeant</option>
+                <option value="Chief Master Sergeant">CMSGT — Chief Master Sergeant</option>
+                </optgroup>
+                <optgroup label="── Officers ──────────────">
+                <option value="Second Lieutenant">2LT — Second Lieutenant</option>
+                <option value="First Lieutenant">1LT — First Lieutenant</option>
+                <option value="Captain">CPT — Captain</option>
+                <option value="Major">MAJ — Major</option>
+                <option value="Lieutenant Colonel">LTCOL — Lieutenant Colonel</option>
+                <option value="Colonel">COL — Colonel</option>
+                <option value="Brigadier General">BGEN — Brigadier General</option>
+                <option value="Major General">MGEN — Major General</option>
+                </optgroup>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Enlistment Date <span class="required">*</span></label>
+              <input type="text" id="bcDoe" class="dp-native-input" readonly />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Timezone</label>
+              <select id="bcTimezone" class="form-select">
+                <option value="">-- Select timezone --</option>
+                <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
+              </select>
+            </div>
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary" id="bcSubmitBtn">Add to Battery Command</button>
+              <button type="button" class="btn btn-secondary" onclick="resetBCForm()">Clear Form</button>
+            </div>
+          </div><!-- /bcFormFields -->
         </form>
       </div>
     </div>
@@ -603,7 +621,10 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="addPersonnelPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">➕</div>
-        <div class="page-title-text"><h1>Add <span>Personnel</span></h1><p>Enlist new member into a section</p></div>
+        <div class="page-title-text">
+          <h1>Add <span>Personnel</span></h1>
+          <p id="apPageSubtitle">Enlist new member into a section or department</p>
+        </div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>New Personnel Enlistment</h2>
@@ -611,27 +632,34 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div id="addPSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="addPSuccessMsg"></span></div>
         <div id="addPError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addPErrorMsg"></span></div>
         <form id="addPForm">
-          <div class="form-section-title">Section Assignment</div>
+          <div class="form-section-title">Assignment</div>
           <div class="form-group">
             <label class="form-label">Battalion <span class="required">*</span></label>
             <select id="apBrigadeSelect" class="form-select" required>
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Battery <span class="required">*</span></label>
+
+          <!-- Battery / Department row — label changes dynamically -->
+          <div class="form-group" id="apBatteryGroup">
+            <label class="form-label"><span id="apBatteryLabel">Battery</span> <span class="required">*</span></label>
             <select id="apBattery" class="form-select" required>
               <option value="">-- Select battalion first --</option>
             </select>
           </div>
-          <div class="form-group">
+
+          <!-- Section row — hidden for Academy (dept IS the section) -->
+          <div class="form-group" id="apSectionGroup">
             <label class="form-label">Section <span class="required">*</span></label>
             <select id="apSection" class="form-select" required>
               <option value="">-- Select battery first --</option>
             </select>
           </div>
+
           <div class="form-section-title">Personnel Details</div>
           <div class="form-group">
             <label class="form-label">Username <span class="required">*</span></label>
@@ -667,12 +695,9 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Section Position <span class="required">*</span></label>
+            <label class="form-label"><span id="apPositionLabel">Section Position</span> <span class="required">*</span></label>
             <select id="apPosition" class="form-select" required>
-              <option value="">-- Select position --</option>
-              <option value="Section Chief">Section Chief</option>
-              <option value="Section Sergeant">Section Sergeant</option>
-              <option value="Section Personnel">Section Personnel</option>
+              <option value="">-- Select battalion first --</option>
             </select>
           </div>
           <div class="form-group">
@@ -712,6 +737,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
           <div class="form-group">
@@ -767,6 +794,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
           <div class="form-group">
@@ -803,6 +832,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <option value="">-- Select battalion --</option>
             <option value="tiktik_battalion">"TIKTIK" Battalion</option>
             <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+            <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+            <option value="aa_academy">AA - Academy</option>
           </select>
         </div>
         <div class="form-group">
@@ -896,6 +927,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="">-- Select battalion --</option>
               <option value="tiktik_battalion">"TIKTIK" Battalion</option>
               <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
           <div class="form-group">
@@ -950,13 +983,11 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 const API_URL = '/api/proxy';
 const LOGIN_PASSWORD = 'AARHC';
 
-// ─────────────────────────────────────────────────────────
+// ─────────────────────────────────────────────────────────────────────────────
 // BATTALION + BATTERY + SECTION DATA
-// Structure: BATTERY_SECTIONS[brigadeKey].batteries[batteryKey]
-//   .label   — display name for the battery select
-//   .apiKey  — value sent as batterySection in addBatteryCommand
-//   .sections — { 'Section Config Key': 'Display Label' }
-// ─────────────────────────────────────────────────────────
+// For aa_academy: isAcademy=true, battery keys ARE the section names sent to API,
+// and each dept has its own position list.
+// ─────────────────────────────────────────────────────────────────────────────
 const BATTERY_SECTIONS = {
   'tiktik_battalion': {
     batteries: {
@@ -1001,7 +1032,60 @@ const BATTERY_SECTIONS = {
         }
       }
     }
+  },
+  'salimbay_battalion': {
+    batteries: {
+      'kidlat': {
+        label:  '5th Ground-Based Air Defense "Kidlat" Air Defense Battery',
+        apiKey: 'Kidlat Battery Command',
+        sections: {
+          'Sibat Section': '1st Ground-Based Air Defense "Sibat" Section',
+          'Silip Section': '2nd Ground-Based Air Defense "Silip" Section',
+          'Iwas Section':  '3rd Ground-Based Air Defense "Iwas" Section'
+        }
+      },
+      'bantay_langit': {
+        label:  '6th Ground-Based Air Defense "Bantay-Langit" Air Defense Battery',
+        apiKey: 'Bantay-Langit Battery Command',
+        sections: {
+          'Kuta Section':   '4th Ground-Based Air Defense "Kuta" Section',
+          'Harang Section': '5th Ground-Based Air Defense "Harang" Section',
+          'Tanod Section':  '6th Ground-Based Air Defense "Tanod" Section'
+        }
+      }
+    }
+  },
+  // Academy — battery key IS the section name sent to the API
+  'aa_academy': {
+    isAcademy: true,
+    batteries: {
+      'Department of Academics and Discipline': {
+        label:     'Department of Academics and Discipline',
+        positions: ['Academic Faculty Staff', 'Disciplinary Faculty Staff']
+      },
+      'Department of Admission and Logistics': {
+        label:     'Department of Admission and Logistics',
+        positions: ['Admission Faculty Staff', 'Logistics Faculty Staff']
+      }
+    }
   }
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// HIGH COMMAND POSITION MAPS
+// ─────────────────────────────────────────────────────────────────────────────
+const HC_POSITIONS = {
+  military: [
+    { value: 'Battalion Commanding Officer', label: 'Battalion Commanding Officer (BCO)' },
+    { value: 'Battalion Executive Officer',  label: 'Battalion Executive Officer (BXO)'  },
+    { value: 'Battalion Sergeant Major',     label: 'Battalion Sergeant Major (BSM)'     }
+  ],
+  academy: [
+    { value: 'Academy Commandant',                  label: 'Academy Commandant'                  },
+    { value: 'Director - Academics and Discipline', label: 'Director - Academics and Discipline' },
+    { value: 'Director - Admission and Logistics',  label: 'Director - Admission and Logistics'  },
+    { value: 'ASIM',                                label: 'ASIM'                                }
+  ]
 };
 
 // ═══════════════════════════════════════════════════════════
@@ -1055,7 +1139,6 @@ const SelectManager = (() => {
 
   function wrapSelect(select) {
     if (select.closest('.cs-wrapper')) return;
-
     const wrapper = document.createElement('div');
     wrapper.className = 'cs-wrapper';
     select.parentNode.insertBefore(wrapper, select);
@@ -1525,8 +1608,34 @@ function logout() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD HIGH COMMAND
+// ADD HIGH COMMAND — dynamic position dropdown
 // ═══════════════════════════════════════════════════════════
+document.getElementById('hcBrigade').addEventListener('change', function() {
+  const isAcademy = this.value === 'aa_academy';
+  const positions  = this.value ? (isAcademy ? HC_POSITIONS.academy : HC_POSITIONS.military) : [];
+  const posSelect  = document.getElementById('hcPosition');
+  const posLabel   = document.getElementById('hcPositionLabel');
+  const subtitle   = document.getElementById('hcPageSubtitle');
+
+  let html = positions.length
+    ? '<option value="">-- Select position --</option>'
+    : '<option value="">-- Select battalion first --</option>';
+  positions.forEach(p => { html += `<option value="${p.value}">${p.label}</option>`; });
+  posSelect.innerHTML = html;
+  SelectManager.rebuildById('hcPosition');
+
+  if (isAcademy) {
+    posLabel.textContent = 'Academy Position';
+    subtitle.textContent = 'Commandant → Row 21 | Director (Acad) → Row 22 | Director (Adm) → Row 23 | ASIM → Row 24';
+  } else if (this.value) {
+    posLabel.textContent = 'High Command Position';
+    subtitle.textContent = 'BCO → Row 21 | BXO → Row 22 | BSM → Row 23';
+  } else {
+    posLabel.textContent = 'Position';
+    subtitle.textContent = 'Select a battalion to see available positions';
+  }
+});
+
 document.getElementById('addHCForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade  = document.getElementById('hcBrigade').value;
@@ -1551,32 +1660,53 @@ document.getElementById('addHCForm').addEventListener('submit', function(e) {
 
 function resetHCForm() {
   document.getElementById('addHCForm').reset();
+  // Reset dynamic position dropdown
+  const posSelect = document.getElementById('hcPosition');
+  posSelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+  SelectManager.rebuildById('hcPosition');
+  SelectManager.rebuildById('hcBrigade');
+  document.getElementById('hcPositionLabel').textContent = 'Position';
+  document.getElementById('hcPageSubtitle').textContent = 'Select a battalion to see available positions';
   ['addHCSuccess','addHCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['hcDoe']) _datePickerRegistry['hcDoe'].setValue(null);
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD BATTERY COMMAND — brigade cascade → battery options
+// ADD BATTERY COMMAND — brigade cascade, academy notice
 // ═══════════════════════════════════════════════════════════
 document.getElementById('bcBrigadeSelect').addEventListener('change', function() {
+  const isAcademy   = this.value === 'aa_academy';
   const brigadeData = BATTERY_SECTIONS[this.value];
+  const notice      = document.getElementById('bcAcademyNotice');
+  const fields      = document.getElementById('bcFormFields');
   const batterySelect = document.getElementById('bcBattery');
-  if (!brigadeData) {
-    batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+
+  if (isAcademy) {
+    notice.style.display = 'flex';
+    fields.style.display = 'none';
   } else {
-    let html = '<option value="">-- Select battery --</option>';
-    for (const key in brigadeData.batteries) {
-      const bat = brigadeData.batteries[key];
-      html += `<option value="${bat.apiKey}">${bat.label}</option>`;
+    notice.style.display = 'none';
+    fields.style.display = 'block';
+    if (!brigadeData) {
+      batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+    } else {
+      let html = '<option value="">-- Select battery --</option>';
+      for (const key in brigadeData.batteries) {
+        const bat = brigadeData.batteries[key];
+        html += `<option value="${bat.apiKey}">${bat.label}</option>`;
+      }
+      batterySelect.innerHTML = html;
     }
-    batterySelect.innerHTML = html;
+    SelectManager.rebuildById('bcBattery');
   }
-  SelectManager.rebuildById('bcBattery');
 });
 
 document.getElementById('addBCForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const brigade        = document.getElementById('bcBrigadeSelect').value;
+  const brigade = document.getElementById('bcBrigadeSelect').value;
+  if (brigade === 'aa_academy') {
+    showAlert('addBCSuccess','addBCError','error','Academy does not use Battery Command. Use Add High Command instead.'); return;
+  }
   const batterySection = document.getElementById('bcBattery').value;
   const position       = document.getElementById('bcPosition').value;
   const username       = document.getElementById('bcUsername').value.trim();
@@ -1599,24 +1729,76 @@ document.getElementById('addBCForm').addEventListener('submit', function(e) {
 
 function resetBCForm() {
   document.getElementById('addBCForm').reset();
+  document.getElementById('bcAcademyNotice').style.display = 'none';
+  document.getElementById('bcFormFields').style.display    = 'block';
   document.getElementById('bcBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
   SelectManager.rebuildById('bcBattery');
+  SelectManager.rebuildById('bcBrigadeSelect');
   ['addBCSuccess','addBCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['bcDoe']) _datePickerRegistry['bcDoe'].setValue(null);
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD PERSONNEL — brigade → battery → section cascade
+// ADD PERSONNEL — brigade → battery/dept → section/position cascade
 // ═══════════════════════════════════════════════════════════
+
+// Helper: set military position options
+function _setMilitaryPositions() {
+  const posSelect = document.getElementById('apPosition');
+  posSelect.innerHTML = `
+    <option value="">-- Select position --</option>
+    <option value="Section Chief">Section Chief</option>
+    <option value="Section Sergeant">Section Sergeant</option>
+    <option value="Section Personnel">Section Personnel</option>`;
+  document.getElementById('apPositionLabel').textContent = 'Section Position';
+  SelectManager.rebuildById('apPosition');
+}
+
+// Helper: clear position and wait for dept selection
+function _clearPositions(placeholder) {
+  const posSelect = document.getElementById('apPosition');
+  posSelect.innerHTML = `<option value="">${placeholder || '-- Select department first --'}</option>`;
+  SelectManager.rebuildById('apPosition');
+}
+
 document.getElementById('apBrigadeSelect').addEventListener('change', function() {
   const brigadeData = BATTERY_SECTIONS[this.value];
+  const isAcademy   = brigadeData && brigadeData.isAcademy;
   const batterySelect = document.getElementById('apBattery');
-  const sectionSelect = document.getElementById('apSection');
-  sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+  const sectionGroup  = document.getElementById('apSectionGroup');
+  const batteryLabel  = document.getElementById('apBatteryLabel');
+
+  // Reset section dropdown
+  document.getElementById('apSection').innerHTML = '<option value="">-- Select battery first --</option>';
   SelectManager.rebuildById('apSection');
+
   if (!brigadeData) {
     batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
+    batteryLabel.textContent = 'Battery';
+    sectionGroup.style.display = 'block';
+    _clearPositions('-- Select battalion first --');
+    SelectManager.rebuildById('apBattery');
+    return;
+  }
+
+  if (isAcademy) {
+    // Academy mode: battery = department, no separate section row
+    batteryLabel.textContent = 'Department';
+    sectionGroup.style.display = 'none';
+    document.getElementById('apPositionLabel').textContent = 'Faculty Position';
+    _clearPositions('-- Select department first --');
+
+    let html = '<option value="">-- Select department --</option>';
+    for (const deptKey in brigadeData.batteries) {
+      html += `<option value="${deptKey}">${brigadeData.batteries[deptKey].label}</option>`;
+    }
+    batterySelect.innerHTML = html;
   } else {
+    // Military mode
+    batteryLabel.textContent = 'Battery';
+    sectionGroup.style.display = 'block';
+    _setMilitaryPositions();
+
     let html = '<option value="">-- Select battery --</option>';
     for (const key in brigadeData.batteries) {
       html += `<option value="${key}">${brigadeData.batteries[key].label}</option>`;
@@ -1629,27 +1811,54 @@ document.getElementById('apBrigadeSelect').addEventListener('change', function()
 document.getElementById('apBattery').addEventListener('change', function() {
   const brigadeVal  = document.getElementById('apBrigadeSelect').value;
   const brigadeData = BATTERY_SECTIONS[brigadeVal];
+  const isAcademy   = brigadeData && brigadeData.isAcademy;
   const sectionSelect = document.getElementById('apSection');
-  if (!brigadeData || !brigadeData.batteries[this.value]) {
-    sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+
+  if (isAcademy) {
+    // Dept selected — populate department-specific positions
+    const deptKey  = this.value;
+    const deptData = brigadeData.batteries[deptKey];
+    if (deptData && deptData.positions) {
+      let html = '<option value="">-- Select position --</option>';
+      deptData.positions.forEach(p => { html += `<option value="${p}">${p}</option>`; });
+      document.getElementById('apPosition').innerHTML = html;
+      document.getElementById('apPositionLabel').textContent = 'Faculty Position';
+      SelectManager.rebuildById('apPosition');
+    } else {
+      _clearPositions('-- Select department first --');
+    }
+    // Section is not shown for academy — value will be the deptKey
   } else {
-    const sections = brigadeData.batteries[this.value].sections;
-    let html = '<option value="">-- Select section --</option>';
-    for (const key in sections) html += `<option value="${key}">${sections[key]}</option>`;
-    sectionSelect.innerHTML = html;
+    // Military: populate sections
+    if (!brigadeData || !brigadeData.batteries[this.value]) {
+      sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
+    } else {
+      const sections = brigadeData.batteries[this.value].sections;
+      let html = '<option value="">-- Select section --</option>';
+      for (const key in sections) html += `<option value="${key}">${sections[key]}</option>`;
+      sectionSelect.innerHTML = html;
+    }
+    SelectManager.rebuildById('apSection');
   }
-  SelectManager.rebuildById('apSection');
 });
 
 document.getElementById('addPForm').addEventListener('submit', function(e) {
   e.preventDefault();
-  const brigade  = document.getElementById('apBrigadeSelect').value;
-  const section  = document.getElementById('apSection').value;
+  const brigade     = document.getElementById('apBrigadeSelect').value;
+  const brigadeData = BATTERY_SECTIONS[brigade];
+  const isAcademy   = brigadeData && brigadeData.isAcademy;
+
+  // Determine section: for academy, section = selected department key; for military, use apSection
+  const section = isAcademy
+    ? document.getElementById('apBattery').value
+    : document.getElementById('apSection').value;
+
   const username = document.getElementById('apUsername').value.trim();
   const paygrade = document.getElementById('apPaygrade').value;
   const position = document.getElementById('apPosition').value;
   const doe      = document.getElementById('apDoe').value;
   const timezone = document.getElementById('apTimezone').value;
+
   if (!brigade || !section || !username || !paygrade || !position || !doe) {
     showAlert('addPSuccess','addPError','error','Please fill all required fields (including battalion and date).'); return;
   }
@@ -1666,10 +1875,15 @@ document.getElementById('addPForm').addEventListener('submit', function(e) {
 
 function resetAddPersonnel() {
   document.getElementById('addPForm').reset();
-  document.getElementById('apBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
-  document.getElementById('apSection').innerHTML = '<option value="">-- Select battery first --</option>';
+  document.getElementById('apBattery').innerHTML  = '<option value="">-- Select battalion first --</option>';
+  document.getElementById('apSection').innerHTML  = '<option value="">-- Select battery first --</option>';
+  document.getElementById('apBatteryLabel').textContent  = 'Battery';
+  document.getElementById('apPositionLabel').textContent = 'Section Position';
+  document.getElementById('apSectionGroup').style.display = 'block';
+  _clearPositions('-- Select battalion first --');
   SelectManager.rebuildById('apBattery');
   SelectManager.rebuildById('apSection');
+  SelectManager.rebuildById('apBrigadeSelect');
   ['addPSuccess','addPError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['apDoe']) _datePickerRegistry['apDoe'].setValue(null);
 }
@@ -1830,6 +2044,7 @@ function resetUpdateForm() {
   document.getElementById('updateUsername').value = '';
   document.getElementById('updateFormContainer').style.display = 'none';
   document.getElementById('personnelInfoDisplay').innerHTML = '';
+  SelectManager.rebuildById('updateBrigade');
   if (_datePickerRegistry['updDoe']) _datePickerRegistry['updDoe'].setValue(null);
   ['fetchError','updateSuccess','updateError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
