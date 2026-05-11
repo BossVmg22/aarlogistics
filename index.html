@@ -1776,6 +1776,10 @@ document.getElementById('apBrigadeSelect').addEventListener('change', function()
     batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
     batteryLabel.textContent = 'Battery';
     sectionGroup.style.display = 'block';
+    // Ensure `apSection` is enabled when the section row is visible
+    const apSectionSelect = document.getElementById('apSection');
+    apSectionSelect.disabled = false;
+    apSectionSelect.required = true;
     _clearPositions('-- Select battalion first --');
     SelectManager.rebuildById('apBattery');
     return;
@@ -1785,6 +1789,10 @@ document.getElementById('apBrigadeSelect').addEventListener('change', function()
     // Academy mode: battery = department, no separate section row
     batteryLabel.textContent = 'Department';
     sectionGroup.style.display = 'none';
+    // Disable the hidden `apSection` so browser constraint validation won't block submission
+    const apSectionSelect = document.getElementById('apSection');
+    apSectionSelect.disabled = true;
+    apSectionSelect.required = false;
     document.getElementById('apPositionLabel').textContent = 'Faculty Position';
     _clearPositions('-- Select department first --');
 
@@ -1797,6 +1805,10 @@ document.getElementById('apBrigadeSelect').addEventListener('change', function()
     // Military mode
     batteryLabel.textContent = 'Battery';
     sectionGroup.style.display = 'block';
+    // Ensure `apSection` is enabled for military mode
+    const apSectionSelect = document.getElementById('apSection');
+    apSectionSelect.disabled = false;
+    apSectionSelect.required = true;
     _setMilitaryPositions();
 
     let html = '<option value="">-- Select battery --</option>';
@@ -1880,6 +1892,10 @@ function resetAddPersonnel() {
   document.getElementById('apBatteryLabel').textContent  = 'Battery';
   document.getElementById('apPositionLabel').textContent = 'Section Position';
   document.getElementById('apSectionGroup').style.display = 'block';
+  // Re-enable `apSection` for next use (avoid hidden required control blocking form validation)
+  const apSectionSelect = document.getElementById('apSection');
+  apSectionSelect.disabled = false;
+  apSectionSelect.required = true;
   _clearPositions('-- Select battalion first --');
   SelectManager.rebuildById('apBattery');
   SelectManager.rebuildById('apSection');
