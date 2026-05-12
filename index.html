@@ -28,8 +28,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg-base);color:var(--text
 body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(74,120,64,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(74,120,64,0.025) 1px,transparent 1px);background-size:32px 32px;pointer-events:none;z-index:0;}
 ::-webkit-scrollbar{width:6px;height:6px;}::-webkit-scrollbar-track{background:var(--bg-base);}
 ::-webkit-scrollbar-thumb{background:rgba(74,120,64,0.35);border-radius:3px;}::-webkit-scrollbar-thumb:hover{background:rgba(74,120,64,0.6);}
-
-/* ═══ LOGIN ═══ */
 #loginPage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:1000;background:var(--bg-base);transition:opacity 0.5s var(--ease),transform 0.5s var(--ease);}
 #loginPage.hidden-out{opacity:0;transform:scale(0.96);pointer-events:none;}
 .login-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
@@ -56,8 +54,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .login-btn{position:relative;overflow:hidden;width:100%;padding:15px;background:linear-gradient(135deg,var(--olive) 0%,var(--olive-hover) 100%);border:none;border-radius:var(--radius);color:#fff;font-size:13px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:all 0.3s var(--ease);box-shadow:0 2px 12px rgba(74,120,64,0.28);margin-top:24px;}
 .login-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 20px rgba(74,120,64,0.42);}
 .login-btn:disabled{opacity:0.6;cursor:not-allowed;}
-
-/* ═══ SIDEBAR & HEADER ═══ */
 #appShell{display:none;min-height:100vh;}
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:999;opacity:0;transition:opacity 0.3s;}
 .sidebar-overlay.active{display:block;opacity:1;}
@@ -100,8 +96,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .topbar-right{display:flex;align-items:center;gap:14px;}
 .topbar-ver{font-size:10px;font-family:'Share Tech Mono',monospace;color:var(--text-muted);letter-spacing:1px;}
 .topbar-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;background:var(--gold-dim);color:var(--gold);padding:5px 10px;border-radius:5px;border:1px solid rgba(201,162,39,0.2);}
-
-/* ═══ PAGE CONTENT ═══ */
 .page-content{display:none;padding:32px 28px;max-width:1400px;animation:pageIn 0.6s var(--ease) both;}
 .page-content.active{display:block;}
 @keyframes pageIn{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
@@ -120,8 +114,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .section-header{display:flex;align-items:center;gap:18px;margin-bottom:24px;}
 .section-header h2{font-family:'Rajdhani',sans-serif;font-size:22px;font-weight:700;color:var(--text-primary);letter-spacing:1px;}
 .section-divider{flex:1;height:1px;background:linear-gradient(90deg,var(--border),transparent);}
-
-/* Dashboard cards */
 .dashboard-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;}
 @keyframes cardEntrance{from{opacity:0;transform:translateY(30px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
 .dashboard-card{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:24px;cursor:pointer;transition:all 0.3s var(--ease);position:relative;overflow:hidden;animation:cardEntrance 0.7s var(--ease) both;}
@@ -139,13 +131,9 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .card-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:5px;border:1px solid;}
 .card-tag-ops{background:var(--olive-dim);color:var(--olive);border-color:rgba(74,120,64,0.3);}
 .card-tag-danger{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
-
-/* Form containers */
 .form-container{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:36px;max-width:720px;box-shadow:0 4px 24px rgba(0,0,0,0.2);}
 .form-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--text-primary);letter-spacing:1px;margin-bottom:24px;display:flex;align-items:center;gap:10px;}
 .form-title-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px rgba(201,162,39,0.2);}
-
-/* Alerts */
 @keyframes alertEntrance{0%{opacity:0;transform:scale(0.92) translateY(-10px);}100%{opacity:1;transform:scale(1) translateY(0);}}
 .alert-box{padding:14px 18px;border-radius:var(--radius);margin-bottom:24px;display:flex;align-items:center;gap:12px;font-size:13px;line-height:1.6;border:1px solid;animation:alertEntrance 0.5s var(--ease) both;}
 .alert-box.hidden{display:none;}
@@ -155,7 +143,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .alert-danger span:first-child{color:#d47070;font-size:16px;}
 .alert-warning{background:var(--warning-bg);border-color:var(--warning-border);color:var(--text-primary);}
 .alert-warning span:first-child{color:var(--warning-text);font-size:16px;}
-
 .form-section-title{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin:28px 0 16px;padding-top:20px;border-top:1px solid var(--border);}
 .form-section-title:first-child{margin-top:0;padding-top:0;border-top:none;}
 .form-group{margin-bottom:22px;}
@@ -166,8 +153,6 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow);transform:translateY(-1px);}
 .form-input::placeholder{color:var(--text-muted);}
 .form-helper{font-size:11px;color:var(--text-muted);margin-top:6px;line-height:1.5;}
-
-/* ═══ CUSTOM SELECT ═══ */
 .cs-wrapper{position:relative;width:100%;}
 .cs-wrapper select{position:absolute;opacity:0;pointer-events:none;z-index:-1;width:1px;height:1px;}
 .cs-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text-primary);font-size:14px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.3s var(--ease);user-select:none;min-height:46px;}
@@ -177,17 +162,13 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .cs-text.cs-placeholder{color:var(--text-muted);}
 .cs-arrow{transition:transform 0.35s var(--ease);color:var(--text-muted);flex-shrink:0;margin-left:10px;line-height:1;display:flex;align-items:center;}
 .cs-wrapper.cs-open .cs-arrow{transform:rotate(180deg);color:var(--gold);}
-.cs-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;max-height:260px;overflow-y:auto;padding:6px;
-  opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);
-  transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
+.cs-menu{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;max-height:260px;overflow-y:auto;padding:6px;opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
 .cs-wrapper.cs-open .cs-menu{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
 .cs-option{padding:9px 12px;border-radius:8px;color:var(--text-secondary);font-size:13.5px;cursor:pointer;transition:background 0.15s,color 0.15s,transform 0.15s;display:flex;align-items:center;justify-content:space-between;}
 .cs-option:hover{background:var(--bg-card-hover);color:var(--text-primary);transform:translateX(3px);}
 .cs-option.cs-selected{background:var(--olive-dim);color:var(--gold);font-weight:600;}
 .cs-option.cs-disabled{color:var(--text-muted);cursor:default;transform:none !important;}
 .cs-option.cs-disabled:hover{background:none;}
-
-/* ═══ CUSTOM DATE PICKER ═══ */
 .dp-container{position:relative;width:100%;}
 .dp-trigger{display:flex;align-items:center;justify-content:space-between;width:100%;padding:12px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all 0.3s var(--ease);user-select:none;min-height:46px;}
 .dp-container:hover .dp-trigger{border-color:var(--border-hover);background:var(--bg-card);}
@@ -197,9 +178,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dp-display.dp-filled{color:var(--text-primary);}
 .dp-cal-icon{color:var(--text-muted);transition:color 0.3s;flex-shrink:0;margin-left:10px;display:flex;align-items:center;}
 .dp-container.dp-open .dp-cal-icon{color:var(--gold);}
-.dp-popup{position:absolute;top:calc(100% + 6px);left:0;width:296px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;padding:16px;
-  opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);
-  transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
+.dp-popup{position:absolute;top:calc(100% + 6px);left:0;width:296px;background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);z-index:9999;padding:16px;opacity:0;visibility:hidden;transform:translateY(-8px) scale(0.98);transition:opacity 0.25s var(--ease),visibility 0.25s var(--ease),transform 0.25s var(--ease);}
 .dp-container.dp-open .dp-popup{opacity:1;visibility:visible;transform:translateY(0) scale(1);}
 .dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;gap:8px;}
 .dp-nav-btn{width:32px;height:32px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-secondary);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;flex-shrink:0;font-family:inherit;}
@@ -238,14 +217,10 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .dp-clear-btn{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
 .dp-clear-btn:hover{background:var(--danger);color:#fff;}
 input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;height:1px;z-index:-1;}
-
-/* Username rows */
 .username-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;animation:rowEntrance 0.4s var(--ease) both;}
 @keyframes rowEntrance{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 .username-row input{flex:1;}
 .username-row-actions{display:flex;gap:6px;flex-shrink:0;}
-
-/* Buttons */
 .btn{position:relative;overflow:hidden;padding:12px 24px;border:none;border-radius:var(--radius);font-size:13px;font-weight:600;letter-spacing:0.5px;cursor:pointer;transition:all 0.3s var(--ease);font-family:'DM Sans',sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;}
 .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(rgba(255,255,255,0.15),transparent);opacity:0;transition:opacity 0.3s;}
 .btn:hover:not(:disabled)::after{opacity:1;}
@@ -266,8 +241,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 .btn-group{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-
-/* Modal */
 .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s;}
 .modal.active{display:flex;opacity:1;}
 .modal-content{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;max-width:480px;width:100%;box-shadow:var(--shadow-lg);animation:modalIn 0.5s var(--ease) both;}
@@ -277,8 +250,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 .modal-title{font-family:'Rajdhani',sans-serif;font-size:20px;font-weight:700;color:var(--text-primary);letter-spacing:1px;}
 .modal-text{font-size:14px;color:var(--text-secondary);line-height:1.7;margin-bottom:28px;}
 .modal-actions{display:flex;gap:12px;}
-
-/* Toast */
 #toast-container{position:fixed;top:20px;right:20px;z-index:3000;display:flex;flex-direction:column;gap:12px;max-width:400px;}
 .toast{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px 20px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:14px;animation:toastIn 0.5s var(--ease) both;}
 @keyframes toastIn{from{opacity:0;transform:translateX(100%);}to{opacity:1;transform:translateX(0);}}
@@ -291,8 +262,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 .toast-success .toast-icon{color:var(--success);}
 .toast-error .toast-icon{color:#d47070;}
 .toast-warning .toast-icon{color:var(--warning-text);}
-
-/* Quota badge */
 .quota-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid;}
 .quota-complete{background:var(--success-bg);color:var(--success);border-color:var(--success-border);}
 .quota-incomplete{background:var(--danger-bg);color:#d47070;border-color:var(--danger-border);}
@@ -300,7 +269,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 .info-cell{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;}
 .info-cell-label{font-size:9.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px;}
 .info-cell-value{font-size:14px;color:var(--text-primary);font-weight:500;}
-
 @media(max-width:768px){
   .sidebar{transform:translateX(-100%);}
   .sidebar.active{transform:translateX(0);}
@@ -383,7 +351,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <span class="topbar-ver">v3.4</span>
+        <span class="topbar-ver">v3.5</span>
         <span class="topbar-badge">AAR SYSTEM</span>
       </div>
     </div>
@@ -414,7 +382,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         </div>
         <div class="dashboard-card" onclick="navigateTo('logEventPage')">
           <div class="card-top"><div class="card-icon-wrap">📋</div><span class="card-arrow">↗</span></div>
-          <h3>Log Event</h3><p>Record inspection, training, or deployment events for hosted and attended roles.</p>
+          <h3>Log Event</h3><p>Record inspection, training, recruitment, or deployment events.</p>
           <span class="card-tag card-tag-ops">Activity</span>
         </div>
         <div class="dashboard-card" onclick="navigateTo('updatePersonnelPage')">
@@ -508,6 +476,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
             </select>
           </div>
+          <!-- ★ OFFICER FIELD -->
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="hcOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-primary" id="hcSubmitBtn">Add to High Command</button>
             <button type="button" class="btn btn-secondary" onclick="resetHCForm()">Clear Form</button>
@@ -529,13 +503,10 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <h2 class="form-title"><span class="form-title-dot"></span>Battery Command Assignment</h2>
         <div id="addBCSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="addBCSuccessMsg"></span></div>
         <div id="addBCError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addBCErrorMsg"></span></div>
-
-        <!-- Academy notice — shown only when AA - Academy is selected -->
         <div id="bcAcademyNotice" class="alert-box alert-warning" style="display:none;">
           <span>ℹ</span>
-          <span>The <strong>AA - Academy</strong> does not have Battery Command positions. Use <strong>Add High Command</strong> for Academy Administration (Commandant, Directors, ASIM), or <strong>Add Personnel</strong> for department faculty staff.</span>
+          <span>The <strong>AA - Academy</strong> does not have Battery Command positions. Use <strong>Add High Command</strong> for Academy Administration, or <strong>Add Personnel</strong> for department faculty staff.</span>
         </div>
-
         <form id="addBCForm">
           <div class="form-group">
             <label class="form-label">Battalion <span class="required">*</span></label>
@@ -547,8 +518,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
-
-          <!-- These fields are hidden when Academy is selected -->
           <div id="bcFormFields">
             <div class="form-group">
               <label class="form-label">Battery <span class="required">*</span></label>
@@ -608,11 +577,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
                 <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
               </select>
             </div>
+            <!-- ★ OFFICER FIELD -->
+            <div class="form-group">
+              <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+              <input type="text" id="bcOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+              <div class="form-helper">This will be logged in the Discord audit log.</div>
+            </div>
             <div class="btn-group">
               <button type="submit" class="btn btn-primary" id="bcSubmitBtn">Add to Battery Command</button>
               <button type="button" class="btn btn-secondary" onclick="resetBCForm()">Clear Form</button>
             </div>
-          </div><!-- /bcFormFields -->
+          </div>
         </form>
       </div>
     </div>
@@ -643,23 +618,18 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="aa_academy">AA - Academy</option>
             </select>
           </div>
-
-          <!-- Battery / Department row — label changes dynamically -->
           <div class="form-group" id="apBatteryGroup">
             <label class="form-label"><span id="apBatteryLabel">Battery</span> <span class="required">*</span></label>
             <select id="apBattery" class="form-select" required>
               <option value="">-- Select battalion first --</option>
             </select>
           </div>
-
-          <!-- Section row — hidden for Academy (dept IS the section) -->
           <div class="form-group" id="apSectionGroup">
             <label class="form-label">Section <span class="required">*</span></label>
             <select id="apSection" class="form-select" required>
               <option value="">-- Select battery first --</option>
             </select>
           </div>
-
           <div class="form-section-title">Personnel Details</div>
           <div class="form-group">
             <label class="form-label">Username <span class="required">*</span></label>
@@ -711,6 +681,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="GMT-12">GMT-12:00</option><option value="GMT-11">GMT-11:00</option><option value="GMT-10">GMT-10:00 · Hawaii</option><option value="GMT-9">GMT-9:00 · Alaska</option><option value="GMT-8">GMT-8:00 · US Pacific (PST)</option><option value="GMT-7">GMT-7:00 · US Mountain (MST)</option><option value="GMT-6">GMT-6:00 · US Central (CST)</option><option value="GMT-5">GMT-5:00 · US Eastern (EST)</option><option value="GMT-4">GMT-4:00 · Atlantic (AST)</option><option value="GMT-3:30">GMT-3:30 · Newfoundland</option><option value="GMT-3">GMT-3:00 · Brazil</option><option value="GMT-2">GMT-2:00</option><option value="GMT-1">GMT-1:00 · Azores</option><option value="GMT+0">GMT+0:00 · London / Dublin</option><option value="GMT+1">GMT+1:00 · Central Europe (CET)</option><option value="GMT+2">GMT+2:00 · Eastern Europe (EET)</option><option value="GMT+3">GMT+3:00 · Moscow / Nairobi</option><option value="GMT+3:30">GMT+3:30 · Tehran</option><option value="GMT+4">GMT+4:00 · Gulf / Dubai</option><option value="GMT+4:30">GMT+4:30 · Kabul</option><option value="GMT+5">GMT+5:00 · Pakistan (PKT)</option><option value="GMT+5:30">GMT+5:30 · India (IST)</option><option value="GMT+5:45">GMT+5:45 · Nepal (NPT)</option><option value="GMT+6">GMT+6:00 · Bangladesh</option><option value="GMT+6:30">GMT+6:30 · Myanmar</option><option value="GMT+7">GMT+7:00 · Bangkok / Jakarta (WIB)</option><option value="GMT+8">GMT+8:00 · Philippines / Singapore / HK (PHT)</option><option value="GMT+9">GMT+9:00 · Japan / Korea (JST/KST)</option><option value="GMT+9:30">GMT+9:30 · Australia Central (ACST)</option><option value="GMT+10">GMT+10:00 · Australia Eastern (AEST)</option><option value="GMT+10:30">GMT+10:30 · Lord Howe</option><option value="GMT+11">GMT+11:00 · Solomon Islands</option><option value="GMT+12">GMT+12:00 · New Zealand (NZST)</option><option value="GMT+13">GMT+13:00 · Samoa</option><option value="GMT+14">GMT+14:00 · Line Islands</option>
             </select>
           </div>
+          <!-- ★ OFFICER FIELD -->
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="apOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-primary" id="apSubmitBtn">Add Personnel</button>
             <button type="button" class="btn btn-secondary" onclick="resetAddPersonnel()">Clear Form</button>
@@ -723,11 +699,11 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <div id="logEventPage" class="page-content">
       <div class="page-title-row">
         <div class="page-title-icon">📋</div>
-        <div class="page-title-text"><h1>Log <span>Event</span></h1><p>Record inspection, training, or deployment events</p></div>
+        <div class="page-title-text"><h1>Log <span>Event</span></h1><p>Record inspection, training, recruitment, or deployment events</p></div>
       </div>
       <div class="form-container">
         <h2 class="form-title"><span class="form-title-dot"></span>Event Log Record</h2>
-        <div class="alert-box alert-warning"><span>ℹ</span><span><strong>How it works:</strong> Each log increments the correct slot in Hosted/Attended (Insp/Train/Recruit/Deploy) and adds 1 to the event-type total. Quota auto-updates to <strong>COMPLETE</strong> when hosted total ≥ 3 and attended total ≥ 3.</span></div>
+        <div class="alert-box alert-warning"><span>ℹ</span><span><strong>How it works:</strong> Each log increments the correct slot in Hosted/Attended (Insp/Train/Recruit/Deploy) and adds 1 to the event-type total. Quota auto-updates to <strong>COMPLETE</strong> when hosted total ≥ 3 and attended total ≥ 3. Members on <strong>LoA</strong> are automatically skipped.</span></div>
         <div id="logSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="logSuccessMsg"></span></div>
         <div id="logError" class="alert-box alert-danger hidden"><span>⚠</span><span id="logErrorMsg"></span></div>
         <form id="logEventForm">
@@ -766,7 +742,7 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <button type="button" class="btn btn-secondary btn-small" style="margin-top:8px;" onclick="addLogUsernameRow()">+ Add Username</button>
           </div>
           <div class="form-group">
-            <label class="form-label">Officer<span class="required">*</span></label>
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
             <input type="text" id="evReason" class="form-input" placeholder="Enter your Roblox username" required />
           </div>
           <div class="btn-group">
@@ -808,6 +784,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
           <div class="form-group">
             <label class="form-label">Reason <span class="required">*</span></label>
             <input type="text" id="strikeReason" class="form-input" placeholder="e.g., Violation of battalion regulations" required />
+          </div>
+          <!-- ★ OFFICER FIELD -->
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="strikeOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
           </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-danger" id="strikeSubmitBtn">Issue Strike</button>
@@ -901,6 +883,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
                 <option value="INACTIVE">INACTIVE</option>
               </select>
             </div>
+            <!-- ★ OFFICER FIELD -->
+            <div class="form-group">
+              <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+              <input type="text" id="updOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+              <div class="form-helper">This will be logged in the Discord audit log.</div>
+            </div>
             <div class="btn-group">
               <button type="submit" class="btn btn-primary" id="updateSubmitBtn">Save Changes</button>
               <button type="button" class="btn btn-secondary" onclick="resetUpdateForm()">Reset</button>
@@ -942,6 +930,12 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
             <label class="form-label">Reason <span class="required">*</span></label>
             <input type="text" id="removeReason" class="form-input" placeholder="e.g., Discharge from service" required />
           </div>
+          <!-- ★ OFFICER FIELD -->
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="removeOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
           <div class="btn-group">
             <button type="submit" class="btn btn-danger" id="removeSubmitBtn">Remove Personnel</button>
             <button type="button" class="btn btn-secondary" onclick="resetRemoveForm()">Clear Form</button>
@@ -978,17 +972,9 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════
-// CONFIG
-// ═══════════════════════════════════════════════════════════
 const API_URL = '/api/proxy';
 const LOGIN_PASSWORD = 'AARHC';
 
-// ─────────────────────────────────────────────────────────────────────────────
-// BATTALION + BATTERY + SECTION DATA
-// For aa_academy: isAcademy=true, battery keys ARE the section names sent to API,
-// and each dept has its own position list.
-// ─────────────────────────────────────────────────────────────────────────────
 const BATTERY_SECTIONS = {
   'tiktik_battalion': {
     batteries: {
@@ -1056,7 +1042,6 @@ const BATTERY_SECTIONS = {
       }
     }
   },
-  // Academy — battery key IS the section name sent to the API
   'aa_academy': {
     isAcademy: true,
     batteries: {
@@ -1072,9 +1057,6 @@ const BATTERY_SECTIONS = {
   }
 };
 
-// ─────────────────────────────────────────────────────────────────────────────
-// HIGH COMMAND POSITION MAPS
-// ─────────────────────────────────────────────────────────────────────────────
 const HC_POSITIONS = {
   military: [
     { value: 'Battalion Commanding Officer', label: 'Battalion Commanding Officer (BCO)' },
@@ -1094,22 +1076,12 @@ const HC_POSITIONS = {
 // ═══════════════════════════════════════════════════════════
 const SelectManager = (() => {
   const SVG_ARROW = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`;
-
-  function closeAll() {
-    document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
-  }
-
+  function closeAll() { document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open')); }
   function syncDisplay(select, text) {
     const opt = select.options[select.selectedIndex];
-    if (opt && opt.value) {
-      text.textContent = opt.text;
-      text.className = 'cs-text';
-    } else {
-      text.textContent = opt ? opt.text : '';
-      text.className = 'cs-text cs-placeholder';
-    }
+    if (opt && opt.value) { text.textContent = opt.text; text.className = 'cs-text'; }
+    else { text.textContent = opt ? opt.text : ''; text.className = 'cs-text cs-placeholder'; }
   }
-
   function buildMenu(select, menu, text) {
     menu.innerHTML = '';
     Array.from(select.options).forEach((option, idx) => {
@@ -1137,14 +1109,12 @@ const SelectManager = (() => {
     });
     syncDisplay(select, text);
   }
-
   function wrapSelect(select) {
     if (select.closest('.cs-wrapper')) return;
     const wrapper = document.createElement('div');
     wrapper.className = 'cs-wrapper';
     select.parentNode.insertBefore(wrapper, select);
     wrapper.appendChild(select);
-
     const trigger = document.createElement('div');
     trigger.className = 'cs-trigger';
     const text = document.createElement('span');
@@ -1154,23 +1124,17 @@ const SelectManager = (() => {
     arrow.innerHTML = SVG_ARROW;
     trigger.appendChild(text);
     trigger.appendChild(arrow);
-
     const menu = document.createElement('div');
     menu.className = 'cs-menu';
-
     wrapper.appendChild(trigger);
     wrapper.appendChild(menu);
-
     buildMenu(select, menu, text);
-
     trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = wrapper.classList.contains('cs-open');
-      closeAll();
-      closeDatePickers();
+      closeAll(); closeDatePickers();
       if (!isOpen) wrapper.classList.add('cs-open');
     });
-
     select.addEventListener('change', () => {
       syncDisplay(select, text);
       menu.querySelectorAll('.cs-option').forEach(o => {
@@ -1178,43 +1142,32 @@ const SelectManager = (() => {
       });
     });
   }
-
   const observer = new MutationObserver(mutations => {
     mutations.forEach(m => {
       if (m.type !== 'childList') return;
       if (m.target.tagName === 'SELECT' && m.target.classList.contains('form-select')) {
         const wrapper = m.target.closest('.cs-wrapper');
-        if (wrapper) {
-          buildMenu(m.target, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
-        }
+        if (wrapper) buildMenu(m.target, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
         return;
       }
       m.addedNodes.forEach(node => {
         if (node.nodeType !== 1) return;
-        if (node.tagName === 'SELECT' && node.classList.contains('form-select')) {
-          wrapSelect(node);
-        } else if (node.querySelectorAll) {
-          node.querySelectorAll('select.form-select').forEach(wrapSelect);
-        }
+        if (node.tagName === 'SELECT' && node.classList.contains('form-select')) wrapSelect(node);
+        else if (node.querySelectorAll) node.querySelectorAll('select.form-select').forEach(wrapSelect);
       });
     });
   });
   observer.observe(document.body, { childList: true, subtree: true });
-
   document.addEventListener('click', closeAll);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAll(); });
-
   document.addEventListener('reset', e => {
     setTimeout(() => {
       e.target.querySelectorAll('select.form-select').forEach(select => {
         const wrapper = select.closest('.cs-wrapper');
-        if (wrapper) {
-          buildMenu(select, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
-        }
+        if (wrapper) buildMenu(select, wrapper.querySelector('.cs-menu'), wrapper.querySelector('.cs-text'));
       });
     }, 20);
   });
-
   return {
     init() { document.querySelectorAll('select.form-select').forEach(wrapSelect); },
     setVal(id, val) {
@@ -1239,96 +1192,52 @@ const MONTHS_LONG  = ['January','February','March','April','May','June','July','
 const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 const WEEKDAYS     = ['Su','Mo','Tu','We','Th','Fr','Sa'];
 const CAL_ICON_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>`;
-
 const _datePickerRegistry = {};
-
-function closeDatePickers() {
-  document.querySelectorAll('.dp-container.dp-open').forEach(c => c.classList.remove('dp-open'));
-}
-
+function closeDatePickers() { document.querySelectorAll('.dp-container.dp-open').forEach(c => c.classList.remove('dp-open')); }
 class CustomDatePicker {
   constructor(nativeInput) {
-    this.input   = nativeInput;
-    this.inputId = nativeInput.id;
-    this.value   = null;
-    this.view    = 'calendar';
+    this.input = nativeInput; this.inputId = nativeInput.id; this.value = null; this.view = 'calendar';
     const today = new Date();
-    this.viewYear  = today.getFullYear();
-    this.viewMonth = today.getMonth();
-    this.yearPageStart = today.getFullYear() - 7;
+    this.viewYear = today.getFullYear(); this.viewMonth = today.getMonth(); this.yearPageStart = today.getFullYear() - 7;
     this._build();
     if (this.inputId) _datePickerRegistry[this.inputId] = this;
   }
-
   _build() {
-    this.container = document.createElement('div');
-    this.container.className = 'dp-container';
-    this.input.parentNode.insertBefore(this.container, this.input);
-    this.container.appendChild(this.input);
-
-    this.trigger = document.createElement('div');
-    this.trigger.className = 'dp-trigger';
-    this.display = document.createElement('span');
-    this.display.className = 'dp-display dp-empty';
-    this.display.textContent = 'Select a date';
-    const icon = document.createElement('span');
-    icon.className = 'dp-cal-icon';
-    icon.innerHTML = CAL_ICON_SVG;
-    this.trigger.appendChild(this.display);
-    this.trigger.appendChild(icon);
+    this.container = document.createElement('div'); this.container.className = 'dp-container';
+    this.input.parentNode.insertBefore(this.container, this.input); this.container.appendChild(this.input);
+    this.trigger = document.createElement('div'); this.trigger.className = 'dp-trigger';
+    this.display = document.createElement('span'); this.display.className = 'dp-display dp-empty'; this.display.textContent = 'Select a date';
+    const icon = document.createElement('span'); icon.className = 'dp-cal-icon'; icon.innerHTML = CAL_ICON_SVG;
+    this.trigger.appendChild(this.display); this.trigger.appendChild(icon);
     this.container.insertBefore(this.trigger, this.input);
-
-    this.popup = document.createElement('div');
-    this.popup.className = 'dp-popup';
-    this.popup.innerHTML = `
-      <div class="dp-head">
-        <button type="button" class="dp-nav-btn dp-prev-btn">&#8249;</button>
-        <div class="dp-head-center">
-          <span class="dp-head-month"></span>
-          <span class="dp-head-year"></span>
-        </div>
-        <button type="button" class="dp-nav-btn dp-next-btn">&#8250;</button>
-      </div>
-      <div class="dp-body"></div>
-      <div class="dp-footer">
-        <button type="button" class="dp-footer-btn dp-today-btn">Today</button>
-        <button type="button" class="dp-footer-btn dp-clear-btn">Clear</button>
-      </div>`;
-    this.container.appendChild(this.popup);
-    this._bindEvents();
-    this._render();
+    this.popup = document.createElement('div'); this.popup.className = 'dp-popup';
+    this.popup.innerHTML = `<div class="dp-head"><button type="button" class="dp-nav-btn dp-prev-btn">&#8249;</button><div class="dp-head-center"><span class="dp-head-month"></span><span class="dp-head-year"></span></div><button type="button" class="dp-nav-btn dp-next-btn">&#8250;</button></div><div class="dp-body"></div><div class="dp-footer"><button type="button" class="dp-footer-btn dp-today-btn">Today</button><button type="button" class="dp-footer-btn dp-clear-btn">Clear</button></div>`;
+    this.container.appendChild(this.popup); this._bindEvents(); this._render();
   }
-
   _bindEvents() {
     this.trigger.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = this.container.classList.contains('dp-open');
-      closeDatePickers();
-      document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
+      closeDatePickers(); document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
       if (!isOpen) { this.view = 'calendar'; this._render(); this.container.classList.add('dp-open'); }
     });
     this.popup.querySelector('.dp-prev-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       if (this.view === 'calendar') { this.viewMonth--; if (this.viewMonth < 0) { this.viewMonth = 11; this.viewYear--; } }
-      else if (this.view === 'year') { this.yearPageStart -= 16; }
+      else if (this.view === 'year') this.yearPageStart -= 16;
       this._render();
     });
     this.popup.querySelector('.dp-next-btn').addEventListener('click', (e) => {
       e.stopPropagation();
       if (this.view === 'calendar') { this.viewMonth++; if (this.viewMonth > 11) { this.viewMonth = 0; this.viewYear++; } }
-      else if (this.view === 'year') { this.yearPageStart += 16; }
+      else if (this.view === 'year') this.yearPageStart += 16;
       this._render();
     });
-    this.popup.querySelector('.dp-head-month').addEventListener('click', (e) => {
-      e.stopPropagation(); this.view = this.view === 'month' ? 'calendar' : 'month'; this._render();
-    });
-    this.popup.querySelector('.dp-head-year').addEventListener('click', (e) => {
-      e.stopPropagation(); this.view = this.view === 'year' ? 'calendar' : 'year'; this._render();
-    });
+    this.popup.querySelector('.dp-head-month').addEventListener('click', (e) => { e.stopPropagation(); this.view = this.view === 'month' ? 'calendar' : 'month'; this._render(); });
+    this.popup.querySelector('.dp-head-year').addEventListener('click', (e) => { e.stopPropagation(); this.view = this.view === 'year' ? 'calendar' : 'year'; this._render(); });
     this.popup.querySelector('.dp-today-btn').addEventListener('click', (e) => {
       e.stopPropagation();
-      const t = new Date();
-      this.viewYear = t.getFullYear(); this.viewMonth = t.getMonth();
+      const t = new Date(); this.viewYear = t.getFullYear(); this.viewMonth = t.getMonth();
       this._select(this._toDateStr(t.getFullYear(), t.getMonth(), t.getDate()));
     });
     this.popup.querySelector('.dp-clear-btn').addEventListener('click', (e) => {
@@ -1339,25 +1248,19 @@ class CustomDatePicker {
     });
     this.popup.addEventListener('click', e => e.stopPropagation());
   }
-
   _render() {
-    const mLabel = this.popup.querySelector('.dp-head-month');
-    const yLabel = this.popup.querySelector('.dp-head-year');
-    const body   = this.popup.querySelector('.dp-body');
-    mLabel.textContent = MONTHS_LONG[this.viewMonth];
-    yLabel.textContent = this.viewYear;
+    const mLabel = this.popup.querySelector('.dp-head-month'); const yLabel = this.popup.querySelector('.dp-head-year'); const body = this.popup.querySelector('.dp-body');
+    mLabel.textContent = MONTHS_LONG[this.viewMonth]; yLabel.textContent = this.viewYear;
     mLabel.className = 'dp-head-month' + (this.view === 'month' ? ' dp-head-active' : '');
-    yLabel.className = 'dp-head-year'  + (this.view === 'year'  ? ' dp-head-active' : '');
+    yLabel.className = 'dp-head-year' + (this.view === 'year' ? ' dp-head-active' : '');
     if (this.view === 'calendar') this._renderCalendar(body);
     else if (this.view === 'month') this._renderMonthPicker(body);
     else this._renderYearPicker(body);
   }
-
   _renderCalendar(body) {
-    const today = new Date();
-    const todayStr = this._toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
+    const today = new Date(); const todayStr = this._toDateStr(today.getFullYear(), today.getMonth(), today.getDate());
     const firstDay = new Date(this.viewYear, this.viewMonth, 1).getDay();
-    const daysInM  = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
+    const daysInM = new Date(this.viewYear, this.viewMonth + 1, 0).getDate();
     const prevDays = new Date(this.viewYear, this.viewMonth, 0).getDate();
     let html = `<div class="dp-weekrow">${WEEKDAYS.map(d => `<div class="dp-weekday">${d}</div>`).join('')}</div><div class="dp-grid">`;
     for (let i = firstDay - 1; i >= 0; i--) html += `<div class="dp-day dp-other">${prevDays - i}</div>`;
@@ -1368,19 +1271,13 @@ class CustomDatePicker {
       if (ds === this.value) cls += ' dp-selected';
       html += `<div class="${cls}" data-date="${ds}">${d}</div>`;
     }
-    const total = firstDay + daysInM;
-    const fill  = total % 7 === 0 ? 0 : 7 - (total % 7);
+    const total = firstDay + daysInM; const fill = total % 7 === 0 ? 0 : 7 - (total % 7);
     for (let d = 1; d <= fill; d++) html += `<div class="dp-day dp-other">${d}</div>`;
-    html += '</div>';
-    body.innerHTML = html;
-    body.querySelectorAll('.dp-day[data-date]').forEach(el => {
-      el.addEventListener('click', (e) => { e.stopPropagation(); this._select(el.dataset.date); });
-    });
+    html += '</div>'; body.innerHTML = html;
+    body.querySelectorAll('.dp-day[data-date]').forEach(el => { el.addEventListener('click', (e) => { e.stopPropagation(); this._select(el.dataset.date); }); });
   }
-
   _renderMonthPicker(body) {
-    const today = new Date();
-    let html = '<div class="dp-month-grid">';
+    const today = new Date(); let html = '<div class="dp-month-grid">';
     MONTHS_SHORT.forEach((m, i) => {
       let cls = 'dp-month-cell';
       if (i === today.getMonth() && this.viewYear === today.getFullYear()) cls += ' dp-mcurrent';
@@ -1388,62 +1285,38 @@ class CustomDatePicker {
       if (selDate && i === selDate.getMonth() && this.viewYear === selDate.getFullYear()) cls += ' dp-mselected';
       html += `<div class="${cls}" data-m="${i}">${m}</div>`;
     });
-    html += '</div>';
-    body.innerHTML = html;
-    body.querySelectorAll('.dp-month-cell').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.stopPropagation(); this.viewMonth = parseInt(el.dataset.m); this.view = 'calendar'; this._render();
-      });
-    });
+    html += '</div>'; body.innerHTML = html;
+    body.querySelectorAll('.dp-month-cell').forEach(el => { el.addEventListener('click', (e) => { e.stopPropagation(); this.viewMonth = parseInt(el.dataset.m); this.view = 'calendar'; this._render(); }); });
   }
-
   _renderYearPicker(body) {
-    const today = new Date();
-    let html = '<div class="dp-year-grid">';
+    const today = new Date(); let html = '<div class="dp-year-grid">';
     for (let y = this.yearPageStart; y < this.yearPageStart + 16; y++) {
       let cls = 'dp-year-cell';
       if (y === today.getFullYear()) cls += ' dp-ycurrent';
       if (y === this.viewYear) cls += ' dp-yselected';
       html += `<div class="${cls}" data-y="${y}">${y}</div>`;
     }
-    html += '</div>';
-    body.innerHTML = html;
-    body.querySelectorAll('.dp-year-cell').forEach(el => {
-      el.addEventListener('click', (e) => {
-        e.stopPropagation(); this.viewYear = parseInt(el.dataset.y); this.view = 'calendar'; this._render();
-      });
-    });
+    html += '</div>'; body.innerHTML = html;
+    body.querySelectorAll('.dp-year-cell').forEach(el => { el.addEventListener('click', (e) => { e.stopPropagation(); this.viewYear = parseInt(el.dataset.y); this.view = 'calendar'; this._render(); }); });
   }
-
   _select(dateStr) {
     this.value = dateStr; this.input.value = dateStr;
     const [y, m, d] = dateStr.split('-');
     this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
     this.display.className = 'dp-display dp-filled';
-    this.container.classList.remove('dp-open');
-    this.view = 'calendar'; this._render();
+    this.container.classList.remove('dp-open'); this.view = 'calendar'; this._render();
     this.input.dispatchEvent(new Event('change', { bubbles: true }));
   }
-
-  _toDateStr(y, m, d) {
-    return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-  }
-
+  _toDateStr(y, m, d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
   setValue(dateStr) {
-    if (!dateStr) {
-      this.value = null; this.input.value = '';
-      this.display.textContent = 'Select a date'; this.display.className = 'dp-display dp-empty';
-      return;
-    }
+    if (!dateStr) { this.value = null; this.input.value = ''; this.display.textContent = 'Select a date'; this.display.className = 'dp-display dp-empty'; return; }
     this.value = dateStr; this.input.value = dateStr;
     const [y, m, d] = dateStr.split('-');
     this.viewYear = parseInt(y); this.viewMonth = parseInt(m) - 1;
     this.display.textContent = `${MONTHS_SHORT[parseInt(m)-1]} ${parseInt(d)}, ${y}`;
-    this.display.className = 'dp-display dp-filled';
-    this._render();
+    this.display.className = 'dp-display dp-filled'; this._render();
   }
 }
-
 function initDatePickers() {
   document.querySelectorAll('input.dp-native-input').forEach(input => {
     if (!input.dataset.dpInit) { input.dataset.dpInit = '1'; new CustomDatePicker(input); }
@@ -1451,14 +1324,7 @@ function initDatePickers() {
   document.addEventListener('click', closeDatePickers);
 }
 
-// ═══════════════════════════════════════════════════════════
-// INIT
-// ═══════════════════════════════════════════════════════════
-document.addEventListener('DOMContentLoaded', () => {
-  SelectManager.init();
-  initDatePickers();
-  initUsernameContainers();
-});
+document.addEventListener('DOMContentLoaded', () => { SelectManager.init(); initDatePickers(); initUsernameContainers(); });
 
 // ═══════════════════════════════════════════════════════════
 // USERNAME ROW HELPERS
@@ -1466,45 +1332,28 @@ document.addEventListener('DOMContentLoaded', () => {
 function makeUsernameRow() {
   const row = document.createElement('div');
   row.className = 'username-row';
-  row.innerHTML = `
-    <input type="text" class="form-input username-input" placeholder="Enter username" />
-    <div class="username-row-actions">
-      <button type="button" class="btn btn-small btn-remove" onclick="removeUsernameRow(this)" title="Remove">🗑</button>
-    </div>`;
+  row.innerHTML = `<input type="text" class="form-input username-input" placeholder="Enter username" /><div class="username-row-actions"><button type="button" class="btn btn-small btn-remove" onclick="removeUsernameRow(this)" title="Remove">🗑</button></div>`;
   return row;
 }
-
-function addUsernameRowTo(containerId) {
-  document.getElementById(containerId).appendChild(makeUsernameRow());
-}
-
+function addUsernameRowTo(containerId) { document.getElementById(containerId).appendChild(makeUsernameRow()); }
 function removeUsernameRow(btn) {
-  const row = btn.closest('.username-row');
-  const container = row.parentElement;
+  const row = btn.closest('.username-row'); const container = row.parentElement;
   if (container.querySelectorAll('.username-row').length > 1) {
-    row.style.transition = 'all 0.3s ease';
-    row.style.opacity = '0';
-    row.style.transform = 'translateX(-20px)';
+    row.style.transition = 'all 0.3s ease'; row.style.opacity = '0'; row.style.transform = 'translateX(-20px)';
     setTimeout(() => row.remove(), 300);
   }
 }
-
 function collectUsernames(containerId) {
   const names = [];
-  document.getElementById(containerId).querySelectorAll('.username-input').forEach(i => {
-    const v = i.value.trim();
-    if (v) names.push({ username: v });
-  });
+  document.getElementById(containerId).querySelectorAll('.username-input').forEach(i => { const v = i.value.trim(); if (v) names.push({ username: v }); });
   return names;
 }
-
 function initUsernameContainers() {
   ['logUsernamesContainer','strikeUsernamesContainer','removeUsernamesContainer'].forEach(id => {
     const el = document.getElementById(id);
     if (el && !el.querySelector('.username-row')) el.appendChild(makeUsernameRow());
   });
 }
-
 function addLogUsernameRow()    { addUsernameRowTo('logUsernamesContainer'); }
 function addStrikeUsernameRow() { addUsernameRowTo('strikeUsernamesContainer'); }
 function addRemoveUsernameRow() { addUsernameRowTo('removeUsernamesContainer'); }
@@ -1513,11 +1362,7 @@ function addRemoveUsernameRow() { addUsernameRowTo('removeUsernamesContainer'); 
 // API CALL
 // ═══════════════════════════════════════════════════════════
 function callAPI(action, payload, onSuccess, onError) {
-  fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action, ...payload })
-  })
+  fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action, ...payload }) })
     .then(r => r.json())
     .then(d => onSuccess && onSuccess(d))
     .catch(err => onError && onError(err));
@@ -1538,14 +1383,12 @@ function showAlert(successId, errorId, type, message) {
   }
   setTimeout(() => { if (sEl) sEl.classList.add('hidden'); if (eEl) eEl.classList.add('hidden'); }, 6000);
 }
-
 function setBtn(id, loading, originalText) {
   const btn = document.getElementById(id);
   if (!btn) return;
   btn.disabled = loading;
   btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : originalText;
 }
-
 function openModal(id)  { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
@@ -1562,7 +1405,6 @@ const PAGE_META = {
   updatePersonnelPage:  { icon:'✏️', title:'Update Personnel' },
   removePersonnelPage:  { icon:'🗑️', title:'Remove Personnel' }
 };
-
 function navigateTo(pageId) {
   document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -1573,7 +1415,6 @@ function navigateTo(pageId) {
   document.getElementById('topbarTitle').textContent = meta.title || '';
   closeSidebar();
 }
-
 function openSidebar()  { document.getElementById('sidebar').classList.add('active'); document.getElementById('sidebarOverlay').classList.add('active'); }
 function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
@@ -1584,22 +1425,17 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
   e.preventDefault();
   if (document.getElementById('loginPassword').value === LOGIN_PASSWORD) {
     document.getElementById('loginPage').classList.add('hidden-out');
-    setTimeout(() => {
-      document.getElementById('loginPage').style.display = 'none';
-      document.getElementById('appShell').style.display  = 'block';
-    }, 500);
+    setTimeout(() => { document.getElementById('loginPage').style.display = 'none'; document.getElementById('appShell').style.display = 'block'; }, 500);
   } else {
     const err = document.getElementById('loginError');
     err.classList.add('visible');
     setTimeout(() => err.classList.remove('visible'), 3000);
   }
 });
-
 function togglePasswordVisibility() {
   const input = document.getElementById('loginPassword');
   input.type = input.type === 'password' ? 'text' : 'password';
 }
-
 function logout() {
   document.getElementById('appShell').style.display  = 'none';
   document.getElementById('loginPage').style.display = 'flex';
@@ -1609,32 +1445,21 @@ function logout() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD HIGH COMMAND — dynamic position dropdown
+// ADD HIGH COMMAND
 // ═══════════════════════════════════════════════════════════
 document.getElementById('hcBrigade').addEventListener('change', function() {
   const isAcademy = this.value === 'aa_academy';
-  const positions  = this.value ? (isAcademy ? HC_POSITIONS.academy : HC_POSITIONS.military) : [];
-  const posSelect  = document.getElementById('hcPosition');
-  const posLabel   = document.getElementById('hcPositionLabel');
-  const subtitle   = document.getElementById('hcPageSubtitle');
-
-  let html = positions.length
-    ? '<option value="">-- Select position --</option>'
-    : '<option value="">-- Select battalion first --</option>';
+  const positions = this.value ? (isAcademy ? HC_POSITIONS.academy : HC_POSITIONS.military) : [];
+  const posSelect = document.getElementById('hcPosition');
+  const posLabel  = document.getElementById('hcPositionLabel');
+  const subtitle  = document.getElementById('hcPageSubtitle');
+  let html = positions.length ? '<option value="">-- Select position --</option>' : '<option value="">-- Select battalion first --</option>';
   positions.forEach(p => { html += `<option value="${p.value}">${p.label}</option>`; });
   posSelect.innerHTML = html;
   SelectManager.rebuildById('hcPosition');
-
-  if (isAcademy) {
-    posLabel.textContent = 'Academy Position';
-    subtitle.textContent = 'Commandant → Row 21 | Director (Acad) → Row 22 | Director (Adm) → Row 23 | ASIM → Row 24';
-  } else if (this.value) {
-    posLabel.textContent = 'High Command Position';
-    subtitle.textContent = 'BCO → Row 21 | BXO → Row 22 | BSM → Row 23';
-  } else {
-    posLabel.textContent = 'Position';
-    subtitle.textContent = 'Select a battalion to see available positions';
-  }
+  if (isAcademy) { posLabel.textContent = 'Academy Position'; subtitle.textContent = 'Commandant → Row 21 | Director (Acad) → Row 22 | Director (Adm) → Row 23 | ASIM → Row 24'; }
+  else if (this.value) { posLabel.textContent = 'High Command Position'; subtitle.textContent = 'BCO → Row 21 | BXO → Row 22 | BSM → Row 23'; }
+  else { posLabel.textContent = 'Position'; subtitle.textContent = 'Select a battalion to see available positions'; }
 });
 
 document.getElementById('addHCForm').addEventListener('submit', function(e) {
@@ -1645,27 +1470,25 @@ document.getElementById('addHCForm').addEventListener('submit', function(e) {
   const paygrade = document.getElementById('hcPaygrade').value;
   const doe      = document.getElementById('hcDoe').value;
   const timezone = document.getElementById('hcTimezone').value;
-  if (!brigade || !position || !username || !paygrade || !doe) {
-    showAlert('addHCSuccess','addHCError','error','Please fill all required fields (including battalion and date).'); return;
+  const officer  = document.getElementById('hcOfficer').value.trim();
+  if (!brigade || !position || !username || !paygrade || !doe || !officer) {
+    showAlert('addHCSuccess','addHCError','error','Please fill all required fields including Officer.'); return;
   }
   setBtn('hcSubmitBtn', true);
-  callAPI('addHighCommand', { brigade, position, username, paygrade, doe, timezone },
+  callAPI('addHighCommand', { brigade, position, username, paygrade, doe, timezone, officer },
     r => {
       setBtn('hcSubmitBtn', false, 'Add to High Command');
-      if (r && r.status === 'success') { showAlert('addHCSuccess','addHCError','success', r.message); resetHCForm(); }
+      if (r && r.status === 'success') showAlert('addHCSuccess','addHCError','success', r.message);
       else showAlert('addHCSuccess','addHCError','error', r?.message || 'Failed.');
     },
-    () => { setBtn('hcSubmitBtn', false, 'Add to High Command'); showAlert('addHCSuccess','addHCError','error','Request failed. Check connection.'); }
+    () => { setBtn('hcSubmitBtn', false, 'Add to High Command'); showAlert('addHCSuccess','addHCError','error','Request failed.'); }
   );
 });
 
 function resetHCForm() {
   document.getElementById('addHCForm').reset();
-  // Reset dynamic position dropdown
-  const posSelect = document.getElementById('hcPosition');
-  posSelect.innerHTML = '<option value="">-- Select battalion first --</option>';
-  SelectManager.rebuildById('hcPosition');
-  SelectManager.rebuildById('hcBrigade');
+  document.getElementById('hcPosition').innerHTML = '<option value="">-- Select battalion first --</option>';
+  SelectManager.rebuildById('hcPosition'); SelectManager.rebuildById('hcBrigade');
   document.getElementById('hcPositionLabel').textContent = 'Position';
   document.getElementById('hcPageSubtitle').textContent = 'Select a battalion to see available positions';
   ['addHCSuccess','addHCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
@@ -1673,29 +1496,21 @@ function resetHCForm() {
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD BATTERY COMMAND — brigade cascade, academy notice
+// ADD BATTERY COMMAND
 // ═══════════════════════════════════════════════════════════
 document.getElementById('bcBrigadeSelect').addEventListener('change', function() {
-  const isAcademy   = this.value === 'aa_academy';
+  const isAcademy = this.value === 'aa_academy';
   const brigadeData = BATTERY_SECTIONS[this.value];
-  const notice      = document.getElementById('bcAcademyNotice');
-  const fields      = document.getElementById('bcFormFields');
+  const notice = document.getElementById('bcAcademyNotice');
+  const fields = document.getElementById('bcFormFields');
   const batterySelect = document.getElementById('bcBattery');
-
-  if (isAcademy) {
-    notice.style.display = 'flex';
-    fields.style.display = 'none';
-  } else {
-    notice.style.display = 'none';
-    fields.style.display = 'block';
-    if (!brigadeData) {
-      batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
-    } else {
+  if (isAcademy) { notice.style.display = 'flex'; fields.style.display = 'none'; }
+  else {
+    notice.style.display = 'none'; fields.style.display = 'block';
+    if (!brigadeData) { batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>'; }
+    else {
       let html = '<option value="">-- Select battery --</option>';
-      for (const key in brigadeData.batteries) {
-        const bat = brigadeData.batteries[key];
-        html += `<option value="${bat.apiKey}">${bat.label}</option>`;
-      }
+      for (const key in brigadeData.batteries) { const bat = brigadeData.batteries[key]; html += `<option value="${bat.apiKey}">${bat.label}</option>`; }
       batterySelect.innerHTML = html;
     }
     SelectManager.rebuildById('bcBattery');
@@ -1705,23 +1520,22 @@ document.getElementById('bcBrigadeSelect').addEventListener('change', function()
 document.getElementById('addBCForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade = document.getElementById('bcBrigadeSelect').value;
-  if (brigade === 'aa_academy') {
-    showAlert('addBCSuccess','addBCError','error','Academy does not use Battery Command. Use Add High Command instead.'); return;
-  }
+  if (brigade === 'aa_academy') { showAlert('addBCSuccess','addBCError','error','Academy does not use Battery Command.'); return; }
   const batterySection = document.getElementById('bcBattery').value;
   const position       = document.getElementById('bcPosition').value;
   const username       = document.getElementById('bcUsername').value.trim();
   const paygrade       = document.getElementById('bcPaygrade').value;
   const doe            = document.getElementById('bcDoe').value;
   const timezone       = document.getElementById('bcTimezone').value;
-  if (!brigade || !batterySection || !position || !username || !paygrade || !doe) {
-    showAlert('addBCSuccess','addBCError','error','Please fill all required fields (including battalion and date).'); return;
+  const officer        = document.getElementById('bcOfficer').value.trim();
+  if (!brigade || !batterySection || !position || !username || !paygrade || !doe || !officer) {
+    showAlert('addBCSuccess','addBCError','error','Please fill all required fields including Officer.'); return;
   }
   setBtn('bcSubmitBtn', true);
-  callAPI('addBatteryCommand', { brigade, batterySection, position, username, paygrade, doe, timezone },
+  callAPI('addBatteryCommand', { brigade, batterySection, position, username, paygrade, doe, timezone, officer },
     r => {
       setBtn('bcSubmitBtn', false, 'Add to Battery Command');
-      if (r && r.status === 'success') { showAlert('addBCSuccess','addBCError','success', r.message); resetBCForm(); }
+      if (r && r.status === 'success') showAlert('addBCSuccess','addBCError','success', r.message);
       else showAlert('addBCSuccess','addBCError','error', r?.message || 'Failed.');
     },
     () => { setBtn('bcSubmitBtn', false, 'Add to Battery Command'); showAlert('addBCSuccess','addBCError','error','Request failed.'); }
@@ -1733,29 +1547,20 @@ function resetBCForm() {
   document.getElementById('bcAcademyNotice').style.display = 'none';
   document.getElementById('bcFormFields').style.display    = 'block';
   document.getElementById('bcBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
-  SelectManager.rebuildById('bcBattery');
-  SelectManager.rebuildById('bcBrigadeSelect');
+  SelectManager.rebuildById('bcBattery'); SelectManager.rebuildById('bcBrigadeSelect');
   ['addBCSuccess','addBCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['bcDoe']) _datePickerRegistry['bcDoe'].setValue(null);
 }
 
 // ═══════════════════════════════════════════════════════════
-// ADD PERSONNEL — brigade → battery/dept → section/position cascade
+// ADD PERSONNEL
 // ═══════════════════════════════════════════════════════════
-
-// Helper: set military position options
 function _setMilitaryPositions() {
   const posSelect = document.getElementById('apPosition');
-  posSelect.innerHTML = `
-    <option value="">-- Select position --</option>
-    <option value="Section Chief">Section Chief</option>
-    <option value="Section Sergeant">Section Sergeant</option>
-    <option value="Section Personnel">Section Personnel</option>`;
+  posSelect.innerHTML = `<option value="">-- Select position --</option><option value="Section Chief">Section Chief</option><option value="Section Sergeant">Section Sergeant</option><option value="Section Personnel">Section Personnel</option>`;
   document.getElementById('apPositionLabel').textContent = 'Section Position';
   SelectManager.rebuildById('apPosition');
 }
-
-// Helper: clear position and wait for dept selection
 function _clearPositions(placeholder) {
   const posSelect = document.getElementById('apPosition');
   posSelect.innerHTML = `<option value="">${placeholder || '-- Select department first --'}</option>`;
@@ -1764,58 +1569,35 @@ function _clearPositions(placeholder) {
 
 document.getElementById('apBrigadeSelect').addEventListener('change', function() {
   const brigadeData = BATTERY_SECTIONS[this.value];
-  const isAcademy   = brigadeData && brigadeData.isAcademy;
+  const isAcademy = brigadeData && brigadeData.isAcademy;
   const batterySelect = document.getElementById('apBattery');
   const sectionGroup  = document.getElementById('apSectionGroup');
   const batteryLabel  = document.getElementById('apBatteryLabel');
-
-  // Reset section dropdown
   document.getElementById('apSection').innerHTML = '<option value="">-- Select battery first --</option>';
   SelectManager.rebuildById('apSection');
-
   if (!brigadeData) {
     batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>';
-    batteryLabel.textContent = 'Battery';
-    sectionGroup.style.display = 'block';
-    // Ensure `apSection` is enabled when the section row is visible
+    batteryLabel.textContent = 'Battery'; sectionGroup.style.display = 'block';
     const apSectionSelect = document.getElementById('apSection');
-    apSectionSelect.disabled = false;
-    apSectionSelect.required = true;
-    _clearPositions('-- Select battalion first --');
-    SelectManager.rebuildById('apBattery');
-    return;
+    apSectionSelect.disabled = false; apSectionSelect.required = true;
+    _clearPositions('-- Select battalion first --'); SelectManager.rebuildById('apBattery'); return;
   }
-
   if (isAcademy) {
-    // Academy mode: battery = department, no separate section row
-    batteryLabel.textContent = 'Department';
-    sectionGroup.style.display = 'none';
-    // Disable the hidden `apSection` so browser constraint validation won't block submission
+    batteryLabel.textContent = 'Department'; sectionGroup.style.display = 'none';
     const apSectionSelect = document.getElementById('apSection');
-    apSectionSelect.disabled = true;
-    apSectionSelect.required = false;
+    apSectionSelect.disabled = true; apSectionSelect.required = false;
     document.getElementById('apPositionLabel').textContent = 'Faculty Position';
     _clearPositions('-- Select department first --');
-
     let html = '<option value="">-- Select department --</option>';
-    for (const deptKey in brigadeData.batteries) {
-      html += `<option value="${deptKey}">${brigadeData.batteries[deptKey].label}</option>`;
-    }
+    for (const deptKey in brigadeData.batteries) html += `<option value="${deptKey}">${brigadeData.batteries[deptKey].label}</option>`;
     batterySelect.innerHTML = html;
   } else {
-    // Military mode
-    batteryLabel.textContent = 'Battery';
-    sectionGroup.style.display = 'block';
-    // Ensure `apSection` is enabled for military mode
+    batteryLabel.textContent = 'Battery'; sectionGroup.style.display = 'block';
     const apSectionSelect = document.getElementById('apSection');
-    apSectionSelect.disabled = false;
-    apSectionSelect.required = true;
+    apSectionSelect.disabled = false; apSectionSelect.required = true;
     _setMilitaryPositions();
-
     let html = '<option value="">-- Select battery --</option>';
-    for (const key in brigadeData.batteries) {
-      html += `<option value="${key}">${brigadeData.batteries[key].label}</option>`;
-    }
+    for (const key in brigadeData.batteries) html += `<option value="${key}">${brigadeData.batteries[key].label}</option>`;
     batterySelect.innerHTML = html;
   }
   SelectManager.rebuildById('apBattery');
@@ -1826,26 +1608,18 @@ document.getElementById('apBattery').addEventListener('change', function() {
   const brigadeData = BATTERY_SECTIONS[brigadeVal];
   const isAcademy   = brigadeData && brigadeData.isAcademy;
   const sectionSelect = document.getElementById('apSection');
-
   if (isAcademy) {
-    // Dept selected — populate department-specific positions
-    const deptKey  = this.value;
-    const deptData = brigadeData.batteries[deptKey];
+    const deptKey = this.value; const deptData = brigadeData.batteries[deptKey];
     if (deptData && deptData.positions) {
       let html = '<option value="">-- Select position --</option>';
       deptData.positions.forEach(p => { html += `<option value="${p}">${p}</option>`; });
       document.getElementById('apPosition').innerHTML = html;
       document.getElementById('apPositionLabel').textContent = 'Faculty Position';
       SelectManager.rebuildById('apPosition');
-    } else {
-      _clearPositions('-- Select department first --');
-    }
-    // Section is not shown for academy — value will be the deptKey
+    } else _clearPositions('-- Select department first --');
   } else {
-    // Military: populate sections
-    if (!brigadeData || !brigadeData.batteries[this.value]) {
-      sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>';
-    } else {
+    if (!brigadeData || !brigadeData.batteries[this.value]) { sectionSelect.innerHTML = '<option value="">-- Select battery first --</option>'; }
+    else {
       const sections = brigadeData.batteries[this.value].sections;
       let html = '<option value="">-- Select section --</option>';
       for (const key in sections) html += `<option value="${key}">${sections[key]}</option>`;
@@ -1860,26 +1634,21 @@ document.getElementById('addPForm').addEventListener('submit', function(e) {
   const brigade     = document.getElementById('apBrigadeSelect').value;
   const brigadeData = BATTERY_SECTIONS[brigade];
   const isAcademy   = brigadeData && brigadeData.isAcademy;
-
-  // Determine section: for academy, section = selected department key; for military, use apSection
-  const section = isAcademy
-    ? document.getElementById('apBattery').value
-    : document.getElementById('apSection').value;
-
+  const section = isAcademy ? document.getElementById('apBattery').value : document.getElementById('apSection').value;
   const username = document.getElementById('apUsername').value.trim();
   const paygrade = document.getElementById('apPaygrade').value;
   const position = document.getElementById('apPosition').value;
   const doe      = document.getElementById('apDoe').value;
   const timezone = document.getElementById('apTimezone').value;
-
-  if (!brigade || !section || !username || !paygrade || !position || !doe) {
-    showAlert('addPSuccess','addPError','error','Please fill all required fields (including battalion and date).'); return;
+  const officer  = document.getElementById('apOfficer').value.trim();
+  if (!brigade || !section || !username || !paygrade || !position || !doe || !officer) {
+    showAlert('addPSuccess','addPError','error','Please fill all required fields including Officer.'); return;
   }
   setBtn('apSubmitBtn', true);
-  callAPI('addPersonnel', { brigade, section, username, paygrade, position, doe, timezone },
+  callAPI('addPersonnel', { brigade, section, username, paygrade, position, doe, timezone, officer },
     r => {
       setBtn('apSubmitBtn', false, 'Add Personnel');
-      if (r && r.status === 'success') { showAlert('addPSuccess','addPError','success', r.message); resetAddPersonnel(); }
+      if (r && r.status === 'success') showAlert('addPSuccess','addPError','success', r.message);
       else showAlert('addPSuccess','addPError','error', r?.message || 'Failed.');
     },
     () => { setBtn('apSubmitBtn', false, 'Add Personnel'); showAlert('addPSuccess','addPError','error','Request failed.'); }
@@ -1893,14 +1662,10 @@ function resetAddPersonnel() {
   document.getElementById('apBatteryLabel').textContent  = 'Battery';
   document.getElementById('apPositionLabel').textContent = 'Section Position';
   document.getElementById('apSectionGroup').style.display = 'block';
-  // Re-enable `apSection` for next use (avoid hidden required control blocking form validation)
   const apSectionSelect = document.getElementById('apSection');
-  apSectionSelect.disabled = false;
-  apSectionSelect.required = true;
+  apSectionSelect.disabled = false; apSectionSelect.required = true;
   _clearPositions('-- Select battalion first --');
-  SelectManager.rebuildById('apBattery');
-  SelectManager.rebuildById('apSection');
-  SelectManager.rebuildById('apBrigadeSelect');
+  SelectManager.rebuildById('apBattery'); SelectManager.rebuildById('apSection'); SelectManager.rebuildById('apBrigadeSelect');
   ['addPSuccess','addPError'].forEach(id => document.getElementById(id).classList.add('hidden'));
   if (_datePickerRegistry['apDoe']) _datePickerRegistry['apDoe'].setValue(null);
 }
@@ -1915,15 +1680,15 @@ document.getElementById('logEventForm').addEventListener('submit', function(e) {
   const role      = document.getElementById('evRole').value;
   const reason    = document.getElementById('evReason').value.trim();
   const pd        = collectUsernames('logUsernamesContainer');
-  if (!brigade || !eventType || !role || !reason) { showAlert('logSuccess','logError','error','Please fill all required fields (including battalion).'); return; }
+  if (!brigade || !eventType || !role || !reason) { showAlert('logSuccess','logError','error','Please fill all required fields.'); return; }
   if (!pd.length) { showAlert('logSuccess','logError','error','At least one username is required.'); return; }
   setBtn('logSubmitBtn', true);
   callAPI('logEvent', { brigade, eventType, role, personnelData: pd, reason },
     r => {
       setBtn('logSubmitBtn', false, 'Log Event');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      // ★ No auto-reset — form stays filled
       showAlert('logSuccess','logError', ok ? 'success' : 'error', r?.message || (ok ? 'Event logged!' : 'Failed.'));
-      if (ok) resetLogEvent();
     },
     () => { setBtn('logSubmitBtn', false, 'Log Event'); showAlert('logSuccess','logError','error','Request failed.'); }
   );
@@ -1943,27 +1708,29 @@ document.getElementById('strikeForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade = document.getElementById('strikeBrigade').value;
   const reason  = document.getElementById('strikeReason').value.trim();
+  const officer = document.getElementById('strikeOfficer').value.trim();
   const pd      = collectUsernames('strikeUsernamesContainer');
   if (!brigade) { showAlert('strikeSuccess','strikeError','error','Please select a battalion.'); return; }
   if (!reason)  { showAlert('strikeSuccess','strikeError','error','Please provide a reason.'); return; }
+  if (!officer) { showAlert('strikeSuccess','strikeError','error','Please enter your Roblox username as Officer.'); return; }
   if (!pd.length) { showAlert('strikeSuccess','strikeError','error','At least one username is required.'); return; }
   const pt = pd.length === 1 ? `"${pd[0].username}"` : `${pd.length} personnel`;
-  window._strikePayload = { brigade, pd, reason };
+  window._strikePayload = { brigade, pd, reason, officer };
   document.getElementById('strikeModalText').textContent = `You are about to issue a strike to ${pt}. 1 strike = SEMI-ACTIVE, 2+ = INACTIVE. This cannot be undone.`;
   openModal('strikeModal');
 });
 
 function confirmStrike() {
   closeModal('strikeModal');
-  const { brigade, pd, reason } = window._strikePayload || {};
+  const { brigade, pd, reason, officer } = window._strikePayload || {};
   if (!pd) return;
   setBtn('strikeSubmitBtn', true);
-  callAPI('issueStrike', { brigade, personnelData: pd, reason },
+  callAPI('issueStrike', { brigade, personnelData: pd, reason, officer },
     r => {
       setBtn('strikeSubmitBtn', false, 'Issue Strike');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      // ★ No auto-reset — form stays filled
       showAlert('strikeSuccess','strikeError', ok ? 'success' : 'error', r?.message || (ok ? 'Strike issued!' : 'Failed.'));
-      if (ok) resetStrike();
     },
     () => { setBtn('strikeSubmitBtn', false, 'Issue Strike'); showAlert('strikeSuccess','strikeError','error','Request failed.'); }
   );
@@ -1982,14 +1749,8 @@ function resetStrike() {
 function fetchPersonnel() {
   const brigade  = document.getElementById('updateBrigade').value;
   const username = document.getElementById('updateUsername').value.trim();
-  if (!brigade) {
-    document.getElementById('fetchErrorMsg').textContent = 'Please select a battalion first.';
-    document.getElementById('fetchError').classList.remove('hidden'); return;
-  }
-  if (!username) {
-    document.getElementById('fetchErrorMsg').textContent = 'Please enter a username.';
-    document.getElementById('fetchError').classList.remove('hidden'); return;
-  }
+  if (!brigade)  { document.getElementById('fetchErrorMsg').textContent = 'Please select a battalion first.'; document.getElementById('fetchError').classList.remove('hidden'); return; }
+  if (!username) { document.getElementById('fetchErrorMsg').textContent = 'Please enter a username.'; document.getElementById('fetchError').classList.remove('hidden'); return; }
   setBtn('fetchPersonnelBtn', true);
   callAPI('getPersonnelInfo', { brigade, username },
     r => {
@@ -2038,11 +1799,12 @@ document.getElementById('updateForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade  = document.getElementById('updateBrigade').value;
   const username = document.getElementById('updateUsername').value.trim();
+  const officer  = document.getElementById('updOfficer').value.trim();
   if (!brigade || !username) { showAlert('updateSuccess','updateError','error','Battalion and username are required. Fetch personnel first.'); return; }
+  if (!officer) { showAlert('updateSuccess','updateError','error','Please enter your Roblox username as Officer.'); return; }
   setBtn('updateSubmitBtn', true);
   callAPI('updatePersonnelInfo', {
-    brigade,
-    username,
+    brigade, username, officer,
     paygrade: document.getElementById('updPaygrade').value,
     position: document.getElementById('updPosition').value.trim(),
     doe:      document.getElementById('updDoe').value,
@@ -2052,6 +1814,7 @@ document.getElementById('updateForm').addEventListener('submit', function(e) {
     r => {
       setBtn('updateSubmitBtn', false, 'Save Changes');
       const ok = r && r.status === 'success';
+      // ★ No auto-reset — form stays filled
       showAlert('updateSuccess','updateError', ok ? 'success' : 'error', r?.message || (ok ? 'Updated!' : 'Failed.'));
     },
     () => { setBtn('updateSubmitBtn', false, 'Save Changes'); showAlert('updateSuccess','updateError','error','Request failed.'); }
@@ -2074,27 +1837,29 @@ document.getElementById('removeForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade = document.getElementById('removeBrigade').value;
   const reason  = document.getElementById('removeReason').value.trim();
+  const officer = document.getElementById('removeOfficer').value.trim();
   const pd      = collectUsernames('removeUsernamesContainer');
   if (!brigade) { showAlert('removeSuccess','removeError','error','Please select a battalion.'); return; }
   if (!reason)  { showAlert('removeSuccess','removeError','error','Please provide a reason.'); return; }
+  if (!officer) { showAlert('removeSuccess','removeError','error','Please enter your Roblox username as Officer.'); return; }
   if (!pd.length) { showAlert('removeSuccess','removeError','error','At least one username is required.'); return; }
   const pt = pd.length === 1 ? `"${pd[0].username}"` : `${pd.length} personnel`;
-  window._removePayload = { brigade, pd, reason };
+  window._removePayload = { brigade, pd, reason, officer };
   document.getElementById('removeModalText').textContent = `You are about to permanently remove ${pt}. Their row will be cleared and status set to INACTIVE.`;
   openModal('removeModal');
 });
 
 function confirmRemove() {
   closeModal('removeModal');
-  const { brigade, pd, reason } = window._removePayload || {};
+  const { brigade, pd, reason, officer } = window._removePayload || {};
   if (!pd) return;
   setBtn('removeSubmitBtn', true);
-  callAPI('removePersonnel', { brigade, personnelData: pd, reason },
+  callAPI('removePersonnel', { brigade, personnelData: pd, reason, officer },
     r => {
       setBtn('removeSubmitBtn', false, 'Remove Personnel');
       const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      // ★ No auto-reset — form stays filled
       showAlert('removeSuccess','removeError', ok ? 'success' : 'error', r?.message || (ok ? 'Removed!' : 'Failed.'));
-      if (ok) resetRemoveForm();
     },
     () => { setBtn('removeSubmitBtn', false, 'Remove Personnel'); showAlert('removeSuccess','removeError','error','Request failed.'); }
   );
@@ -2107,15 +1872,10 @@ function resetRemoveForm() {
   ['removeSuccess','removeError'].forEach(id => document.getElementById(id).classList.add('hidden'));
 }
 
-// ═══════════════════════════════════════════════════════════
-// KEYBOARD SHORTCUTS
-// ═══════════════════════════════════════════════════════════
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal('strikeModal');
-    closeModal('removeModal');
-    closeSidebar();
-    closeDatePickers();
+    closeModal('strikeModal'); closeModal('removeModal');
+    closeSidebar(); closeDatePickers();
     document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
   }
 });
