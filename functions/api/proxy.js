@@ -19,7 +19,7 @@ const ALLOWED_WEBHOOK_HOSTS = ['discord.com','discordapp.com'];
 const MAX_BODY_SIZE = 65536;
 
 // Level-based action permissions
-const LV1 = new Set(['logEvent','getPersonnelInfo','getAllPersonnel','getStaffInfo']);
+const LV1 = new Set(['logEvent','getPersonnelInfo','getAllPersonnel','getStaffInfo','sendLog']);
 const LV2 = new Set([...LV1,'addPersonnel','removePersonnel']);
 const LV3 = new Set([...LV2,'addBatteryCommand','issueStrike','removeStrike','updatePersonnelInfo','setLoA','resetLoA','weeklyReset','reassignPersonnel']);
 const LV4 = new Set([...LV3,'addHighCommand']);
