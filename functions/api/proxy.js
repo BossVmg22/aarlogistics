@@ -6,10 +6,11 @@
 
 // ── CONFIGURE THESE ──────────────────────────────────────────────────────────
 const SUPABASE_URL     = 'https://etohixhdxyxwlbeypsll.supabase.co';
-const SUPABASE_SERVICE_KEY = 'PASTE_YOUR_SERVICE_ROLE_KEY_HERE'; // ← paste your service_role key
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0b2hpeGhkeHl4d2xiZXlwc2xsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDMwNjIwNCwiZXhwIjoyMDk1ODgyMjA0fQ.6sSZuBTer_j6hIwRcftwFHWNJMbaFiuhwYcDgwMsPfk
+'; 
 const GAS_URL          = 'https://script.google.com/macros/s/AKfycbxXpcDus7WSGZdzO9j3YgshTXouEkgMLFRgMLdePHS9rL_8eSnmJcmrJ77auoOoeeMxmA/exec';
 const ALLOWED_ORIGINS  = [
-  'https://aar-logistics.pages.dev', // ← update to your real domain
+  'https://aarlogistics.pages.dev/', // ← update to your real domain
 ];
 // ─────────────────────────────────────────────────────────────────────────────
 
