@@ -6,7 +6,6 @@
 const SUPABASE_URL         = 'https://etohixhdxyxwlbeypsll.supabase.co';
 const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0b2hpeGhkeHl4d2xiZXlwc2xsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDMwNjIwNCwiZXhwIjoyMDk1ODgyMjA0fQ.6sSZuBTer_j6hIwRcftwFHWNJMbaFiuhwYcDgwMsPfk'; // ← paste service_role key
 const GAS_URL              = 'https://script.google.com/macros/s/AKfycbxXpcDus7WSGZdzO9j3YgshTXouEkgMLFRgMLdePHS9rL_8eSnmJcmrJ77auoOoeeMxmA/exec';
-const BOT_API_KEY          = context.env.BOT_API_KEY || 'aar-bot-secret-key-2024';
 const ALLOWED_ORIGINS      = ['https://aarlogistics.pages.dev'];
 
 const ALLOWED_ACTIONS = new Set([
@@ -65,6 +64,7 @@ export async function onRequest(context) {
   const { request } = context;
   const origin = request.headers.get('Origin') || '';
   const ip     = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const BOT_API_KEY = context.env.BOT_API_KEY || 'aar-bot-secret-key-2024';
 
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: corsHeaders(origin) });
   if (request.method !== 'POST')   return json({ status: 'error', message: 'Method not allowed.' }, 405, origin);
