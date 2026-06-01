@@ -4,7 +4,8 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SUPABASE_URL         = 'https://etohixhdxyxwlbeypsll.supabase.co';
-const SUPABASE_SERVICE_KEY = 'PASTE_YOUR_SERVICE_ROLE_KEY_HERE'; // ← paste service_role key
+const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0b2hpeGhkeHl4d2xiZXlwc2xsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDMwNjIwNCwiZXhwIjoyMDk1ODgyMjA0fQ.6sSZuBTer_j6hIwRcftwFHWNJMbaFiuhwYcDgwMsPfk
+'; // ← paste service_role key
 const ALLOWED_ORIGINS      = ['https://aarlogistics.pages.dev'];
 const SESSION_TTL_MS       = 8 * 60 * 60 * 1000; // 8 hours
 
