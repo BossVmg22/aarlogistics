@@ -6,6 +6,7 @@
 const SUPABASE_URL         = 'https://etohixhdxyxwlbeypsll.supabase.co';
 const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV0b2hpeGhkeHl4d2xiZXlwc2xsIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MDMwNjIwNCwiZXhwIjoyMDk1ODgyMjA0fQ.6sSZuBTer_j6hIwRcftwFHWNJMbaFiuhwYcDgwMsPfk'; // ← paste service_role key
 const GAS_URL              = 'https://script.google.com/macros/s/AKfycbxXpcDus7WSGZdzO9j3YgshTXouEkgMLFRgMLdePHS9rL_8eSnmJcmrJ77auoOoeeMxmA/exec';
+const BOT_API_KEY          = context.env.BOT_API_KEY || 'aar-bot-secret-key-2024';
 const ALLOWED_ORIGINS      = ['https://aarlogistics.pages.dev'];
 
 const ALLOWED_ACTIONS = new Set([
@@ -80,13 +81,20 @@ export async function onRequest(context) {
   } catch { return json({ status: 'error', message: 'Invalid request body.' }, 400, origin); }
 
   // ── Auth check ─────────────────────────────────────────────────────────────
-  const sessionToken = request.headers.get('X-Session-Token') || parsed._token || null;
-  const session = await getSession(sessionToken);
-  if (!session) return json({ status: 'error', message: 'Not authenticated. Please log in.' }, 401, origin);
+  const isBot = parsed._apiKey && parsed._apiKey === BOT_API_KEY;
+  let level = 0;
+
+  if (isBot) {
+    level = 4; // Bot requests have full access
+  } else {
+    const sessionToken = request.headers.get('X-Session-Token') || parsed._token || null;
+    const session = await getSession(sessionToken);
+    if (!session) return json({ status: 'error', message: 'Not authenticated. Please log in.' }, 401, origin);
+    level = session.level;
+  }
 
   // ── Permission check ───────────────────────────────────────────────────────
   const action  = parsed.action;
-  const level   = session.level;
   if (!ALLOWED_ACTIONS.has(action)) return json({ status: 'error', message: 'Unknown action.' }, 400, origin);
   const allowed = level >= 4 ? LV4 : level >= 3 ? LV3 : level >= 2 ? LV2 : LV1;
   if (!allowed.has(action)) return json({ status: 'error', message: 'Your account does not have permission for this action.' }, 403, origin);
@@ -94,7 +102,7 @@ export async function onRequest(context) {
   // ── Sanitize payload ───────────────────────────────────────────────────────
   const safePayload = {};
   for (const [k, v] of Object.entries(parsed)) {
-    if (k === '_token') continue;
+    if (k === '_token' || k === '_apiKey') continue;
     if (Array.isArray(v)) safePayload[k] = v.map(i => typeof i === 'object' ? Object.fromEntries(Object.entries(i).map(([ik,iv])=>[ik,sanitize(iv)])) : sanitize(i));
     else safePayload[k] = sanitize(v);
   }
