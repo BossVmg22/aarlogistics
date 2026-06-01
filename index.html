@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -397,67 +396,70 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
       </div>
       <div class="section-header"><h2>Quick Actions</h2><div class="section-divider"></div></div>
       <div class="dashboard-grid">
-        <div class="dashboard-card" onclick="navigateTo('addHighCommandPage')">
+        <div class="dashboard-card" data-minlevel="4" onclick="navigateTo('addHighCommandPage')">
           <div class="card-top"><div class="card-icon-wrap">⭐</div><span class="card-arrow">↗</span></div>
           <h3>Add High Command</h3><p>Assign Battalion CO, XO, Sergeant Major — or Academy Commandant, Directors, and ASIM.</p>
           <span class="card-tag card-tag-ops">Command</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('addBatteryCommandPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('addBatteryCommandPage')">
           <div class="card-top"><div class="card-icon-wrap">🔋</div><span class="card-arrow">↗</span></div>
           <h3>Add Battery Command</h3><p>Assign Battery CO, XO, or SGM to a battalion's battery command positions.</p>
           <span class="card-tag card-tag-ops">Command</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('addPersonnelPage')">
+        <div class="dashboard-card" data-minlevel="2" onclick="navigateTo('addPersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">➕</div><span class="card-arrow">↗</span></div>
           <h3>Add Personnel</h3><p>Enlist new members into any battery section or academy department.</p>
           <span class="card-tag card-tag-ops">Personnel</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('logEventPage')">
+        <div class="dashboard-card" data-minlevel="1" onclick="navigateTo('logEventPage')">
           <div class="card-top"><div class="card-icon-wrap">📋</div><span class="card-arrow">↗</span></div>
           <h3>Log Event</h3><p>Record inspection, training, recruitment, or deployment events.</p>
           <span class="card-tag card-tag-ops">Activity</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('updatePersonnelPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('updatePersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">✏️</div><span class="card-arrow">↗</span></div>
           <h3>Update Personnel</h3><p>Search any member by username and edit their paygrade, position, DOE, timezone, or status.</p>
           <span class="card-tag card-tag-ops">Personnel</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('strikePage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('strikePage')">
           <div class="card-top"><div class="card-icon-wrap">⚡</div><span class="card-arrow">↗</span></div>
           <h3>Issue Strike</h3><p>Issue disciplinary strikes — automatically updates status based on strike count.</p>
           <span class="card-tag card-tag-danger">Disciplinary</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('removePersonnelPage')">
+        <div class="dashboard-card" data-minlevel="2" onclick="navigateTo('removePersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">🗑️</div><span class="card-arrow">↗</span></div>
           <h3>Remove Personnel</h3><p>Remove members from the battalion and clear their records from the system.</p>
           <span class="card-tag card-tag-danger">Personnel</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('reassignPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('reassignPage')">
           <div class="card-top"><div class="card-icon-wrap">🔀</div><span class="card-arrow">↗</span></div>
           <h3>Reassign Personnel</h3><p>Move a member to a new position or section within the battalion.</p>
           <span class="card-tag card-tag-ops">Personnel</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('removeStrikePage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('removeStrikePage')">
           <div class="card-top"><div class="card-icon-wrap">🔓</div><span class="card-arrow">↗</span></div>
           <h3>Remove Strike</h3><p>Remove a disciplinary strike — automatically restores status based on remaining strikes.</p>
           <span class="card-tag card-tag-ops">Disciplinary</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('setLoaPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('setLoaPage')">
           <div class="card-top"><div class="card-icon-wrap">🏖️</div><span class="card-arrow">↗</span></div>
           <h3>Set Leave of Absence</h3><p>Place members on LoA — they will be skipped during event logging until returned.</p>
           <span class="card-tag card-tag-ops">Leave</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('resetLoaPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('resetLoaPage')">
           <div class="card-top"><div class="card-icon-wrap">↩️</div><span class="card-arrow">↗</span></div>
           <h3>Reset LoA</h3><p>Return members from Leave of Absence back to active duty.</p>
           <span class="card-tag card-tag-ops">Leave</span>
         </div>
-        <div class="dashboard-card" onclick="navigateTo('weeklyResetPage')">
+        <div class="dashboard-card" data-minlevel="3" onclick="navigateTo('weeklyResetPage')">
           <div class="card-top"><div class="card-icon-wrap">🔄</div><span class="card-arrow">↗</span></div>
           <h3>Weekly Reset</h3><p>Reset all hosted/attended tallies and quota statuses for the new week across selected battalions.</p>
           <span class="card-tag card-tag-danger">Admin</span>
         </div>
-          <span class="card-tag card-tag-danger">Personnel</span>
+        <div class="dashboard-card" data-minlevel="4" onclick="navigateTo('accountManagerPage')">
+          <div class="card-top"><div class="card-icon-wrap">🔑</div><span class="card-arrow">↗</span></div>
+          <h3>Account Manager</h3><p>Create, update, or delete staff accounts and manage access levels.</p>
+          <span class="card-tag card-tag-danger">Admin</span>
         </div>
       </div>
     </div>
@@ -1931,15 +1933,36 @@ function applyLevelUI(level) {
     item.style.display = allowed.has(page) ? '' : 'none';
   });
 
+  // Hide nav section labels if all items in that section are hidden
+  document.querySelectorAll('.nav-section-label').forEach(label => {
+    let next = label.nextElementSibling;
+    let hasVisible = false;
+    while (next && !next.classList.contains('nav-section-label')) {
+      if (next.classList.contains('nav-item') && next.style.display !== 'none') {
+        hasVisible = true; break;
+      }
+      next = next.nextElementSibling;
+    }
+    label.style.display = hasVisible ? '' : 'none';
+  });
+
   // Show/hide dashboard cards
   document.querySelectorAll('.dashboard-card[data-minlevel]').forEach(card => {
     const min = parseInt(card.getAttribute('data-minlevel') || '1');
     card.style.display = level >= min ? '' : 'none';
   });
 
+  // Block direct navigation to unauthorized pages
+  const _baseNav = window._baseNavigateTo || window.navigateTo;
+  if (!window._baseNavigateTo) window._baseNavigateTo = window.navigateTo;
+  window.navigateTo = function(pageId) {
+    if (pageId !== 'dashboardPage' && !allowed.has(pageId)) return;
+    _baseNav(pageId);
+  };
+
   // If current page not allowed, redirect to dashboard
   const activePage = document.querySelector('.page-content.active');
-  if (activePage && !allowed.has(activePage.id)) navigateTo('dashboardPage');
+  if (activePage && !allowed.has(activePage.id)) window._baseNavigateTo('dashboardPage');
 }
 
 // ═══════════════════════════════════════════════════════════
