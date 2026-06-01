@@ -1,7 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://res.cloudinary.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' https://res.cloudinary.com data:; connect-src 'self' https://etohixhdxyxwlbeypsll.supabase.co; frame-ancestors 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex, nofollow">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AAR Logistics Management System</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,6 +101,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 .topbar-title{font-size:16px;font-weight:600;color:var(--text-primary);}
 .topbar-right{display:flex;align-items:center;gap:14px;}
 .topbar-ver{font-size:10px;font-family:'Share Tech Mono',monospace;color:var(--text-muted);letter-spacing:1px;}
+.topbar-user-badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;border:1px solid var(--border-accent);color:var(--gold);font-family:'Share Tech Mono',monospace;letter-spacing:1px;margin-right:8px;}
 .topbar-badge{font-size:9px;font-weight:700;letter-spacing:1.5px;background:var(--gold-dim);color:var(--gold);padding:5px 10px;border-radius:5px;border:1px solid rgba(201,162,39,0.2);}
 .page-content{display:none;padding:32px 28px;max-width:1400px;animation:pageIn 0.6s var(--ease) both;}
 .page-content.active{display:block;}
@@ -241,8 +248,9 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 .btn-group{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:2000;align-items:center;justify-content:center;padding:20px;opacity:0;transition:opacity 0.3s;cursor:pointer;}
 .modal.active{display:flex;opacity:1;}
+.modal-content{cursor:default;}
 .modal-content{background:var(--bg-surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;max-width:480px;width:100%;box-shadow:var(--shadow-lg);animation:modalIn 0.5s var(--ease) both;}
 @keyframes modalIn{from{opacity:0;transform:scale(0.92) translateY(24px);}to{opacity:1;transform:scale(1) translateY(0);}}
 .modal-header{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
@@ -281,6 +289,18 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
   .btn-group{flex-direction:column;}
   .dp-popup{width:calc(100vw - 48px);left:0;}
 }
+
+.acc-table{width:100%;border-collapse:collapse;font-size:13px;}
+.acc-table th{text-align:left;padding:8px 12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-secondary);border-bottom:1px solid var(--border);font-weight:600;}
+.acc-table td{padding:10px 12px;border-bottom:1px solid rgba(52,88,44,0.15);color:var(--text-primary);}
+.acc-table tr:last-child td{border-bottom:none;}
+.acc-table tr:hover td{background:var(--bg-card-hover);}
+.level-badge{display:inline-block;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:1px;font-family:'Share Tech Mono',monospace;}
+.level-1{background:rgba(74,120,64,0.15);color:#7ab870;border:1px solid rgba(74,120,64,0.3);}
+.level-2{background:rgba(42,120,64,0.15);color:#5aab82;border:1px solid rgba(42,120,64,0.3);}
+.level-3{background:rgba(201,162,39,0.12);color:#c9a227;border:1px solid rgba(201,162,39,0.3);}
+.level-4{background:rgba(176,50,50,0.12);color:#d05a5a;border:1px solid rgba(176,50,50,0.3);}
+
 </style>
 </head>
 <body>
@@ -297,13 +317,17 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
     <p class="login-subtitle">Battalion Management System</p>
     <div class="login-divider"></div>
     <form id="loginForm">
-      <label class="login-label">Access Code</label>
+      <label class="login-label">Username</label>
       <div class="login-input-wrap">
-        <input type="password" id="loginPassword" class="login-input" placeholder="Enter access code" required autocomplete="off" />
+        <input type="text" id="loginUsername" class="login-input" placeholder="Enter username" required autocomplete="username" spellcheck="false" />
+      </div>
+      <label class="login-label" style="margin-top:16px;">Password</label>
+      <div class="login-input-wrap">
+        <input type="password" id="loginPassword" class="login-input" placeholder="Enter password" required autocomplete="current-password" spellcheck="false" />
         <button type="button" class="login-eye" onclick="togglePasswordVisibility()">👁</button>
       </div>
-      <div class="login-error" id="loginError">Incorrect access code. Please try again.</div>
-      <button type="submit" class="login-btn">Enter System</button>
+      <div class="login-error" id="loginError">Invalid username or password.</div>
+      <button type="submit" class="login-btn" id="loginSubmitBtn">Enter System</button>
     </form>
   </div>
 </div>
@@ -333,9 +357,16 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
       <div class="nav-item" data-page="addPersonnelPage" onclick="navigateTo('addPersonnelPage')"><span class="nav-icon">➕</span> Add Personnel<span class="nav-badge">OPS</span></div>
       <div class="nav-item" data-page="updatePersonnelPage" onclick="navigateTo('updatePersonnelPage')"><span class="nav-icon">✏️</span> Update Personnel</div>
       <div class="nav-item nav-item-danger" data-page="removePersonnelPage" onclick="navigateTo('removePersonnelPage')"><span class="nav-icon">🗑️</span> Remove Personnel</div>
+      <div class="nav-item" data-page="reassignPage" onclick="navigateTo('reassignPage')"><span class="nav-icon">🔀</span> Reassign Personnel</div>
       <div class="nav-section-label">Activity</div>
       <div class="nav-item" data-page="logEventPage" onclick="navigateTo('logEventPage')"><span class="nav-icon">📋</span> Log Event</div>
       <div class="nav-item nav-item-danger" data-page="strikePage" onclick="navigateTo('strikePage')"><span class="nav-icon">⚡</span> Issue Strike</div>
+      <div class="nav-item" data-page="removeStrikePage" onclick="navigateTo('removeStrikePage')"><span class="nav-icon">🔓</span> Remove Strike</div>
+      <div class="nav-section-label">Leave & Admin</div>
+      <div class="nav-item" data-page="setLoaPage" onclick="navigateTo('setLoaPage')"><span class="nav-icon">🏖️</span> Set LoA</div>
+      <div class="nav-item" data-page="resetLoaPage" onclick="navigateTo('resetLoaPage')"><span class="nav-icon">↩️</span> Reset LoA</div>
+      <div class="nav-item" data-page="weeklyResetPage" onclick="navigateTo('weeklyResetPage')"><span class="nav-icon">🔄</span> Weekly Reset</div>
+      <div class="nav-item nav-lv4-only" data-page="accountManagerPage" onclick="navigateTo('accountManagerPage')" style="display:none;"><span class="nav-icon">🔑</span> Account Manager</div>
     </nav>
     <div class="sidebar-footer">
       <div class="sidebar-status"><div class="status-dot"></div>System Online</div>
@@ -351,7 +382,8 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div class="topbar-title" id="topbarTitle">Dashboard</div>
       </div>
       <div class="topbar-right">
-        <span class="topbar-ver">v3.5</span>
+        <span class="topbar-ver">v4.0</span>
+        <span id="topbarUserBadge" class="topbar-user-badge"></span>
         <span class="topbar-badge">AAR SYSTEM</span>
       </div>
     </div>
@@ -398,6 +430,33 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <div class="dashboard-card" onclick="navigateTo('removePersonnelPage')">
           <div class="card-top"><div class="card-icon-wrap">🗑️</div><span class="card-arrow">↗</span></div>
           <h3>Remove Personnel</h3><p>Remove members from the battalion and clear their records from the system.</p>
+          <span class="card-tag card-tag-danger">Personnel</span>
+        </div>
+        <div class="dashboard-card" onclick="navigateTo('reassignPage')">
+          <div class="card-top"><div class="card-icon-wrap">🔀</div><span class="card-arrow">↗</span></div>
+          <h3>Reassign Personnel</h3><p>Move a member to a new position or section within the battalion.</p>
+          <span class="card-tag card-tag-ops">Personnel</span>
+        </div>
+        <div class="dashboard-card" onclick="navigateTo('removeStrikePage')">
+          <div class="card-top"><div class="card-icon-wrap">🔓</div><span class="card-arrow">↗</span></div>
+          <h3>Remove Strike</h3><p>Remove a disciplinary strike — automatically restores status based on remaining strikes.</p>
+          <span class="card-tag card-tag-ops">Disciplinary</span>
+        </div>
+        <div class="dashboard-card" onclick="navigateTo('setLoaPage')">
+          <div class="card-top"><div class="card-icon-wrap">🏖️</div><span class="card-arrow">↗</span></div>
+          <h3>Set Leave of Absence</h3><p>Place members on LoA — they will be skipped during event logging until returned.</p>
+          <span class="card-tag card-tag-ops">Leave</span>
+        </div>
+        <div class="dashboard-card" onclick="navigateTo('resetLoaPage')">
+          <div class="card-top"><div class="card-icon-wrap">↩️</div><span class="card-arrow">↗</span></div>
+          <h3>Reset LoA</h3><p>Return members from Leave of Absence back to active duty.</p>
+          <span class="card-tag card-tag-ops">Leave</span>
+        </div>
+        <div class="dashboard-card" onclick="navigateTo('weeklyResetPage')">
+          <div class="card-top"><div class="card-icon-wrap">🔄</div><span class="card-arrow">↗</span></div>
+          <h3>Weekly Reset</h3><p>Reset all hosted/attended tallies and quota statuses for the new week across selected battalions.</p>
+          <span class="card-tag card-tag-danger">Admin</span>
+        </div>
           <span class="card-tag card-tag-danger">Personnel</span>
         </div>
       </div>
@@ -883,6 +942,11 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
                 <option value="INACTIVE">INACTIVE</option>
               </select>
             </div>
+            <div class="form-group">
+              <label class="form-label">Strike Count <span class="form-helper" style="display:inline;">(leave blank = no change)</span></label>
+              <input type="number" id="updStrike" class="form-input" placeholder="e.g., 0" min="0" max="99" />
+              <div class="form-helper">Directly set the member's strike count. Status will auto-update: 0→ACTIVE, 1→SEMI-ACTIVE, 2+→INACTIVE.</div>
+            </div>
             <!-- ★ OFFICER FIELD -->
             <div class="form-group">
               <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
@@ -959,6 +1023,359 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
   </div>
 </div>
 
+
+    <!-- ════ REASSIGN PERSONNEL ════ -->
+    <div id="reassignPage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">🔀</div>
+        <div class="page-title-text"><h1>Reassign <span>Personnel</span></h1><p>Move a member to a new position or section</p></div>
+      </div>
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Personnel Reassignment</h2>
+        <div class="alert-box alert-warning"><span>ℹ</span><span>Reassigning a member updates their position and section. Their quota history is preserved.</span></div>
+        <div id="reassignSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="reassignSuccessMsg"></span></div>
+        <div id="reassignError" class="alert-box alert-danger hidden"><span>⚠</span><span id="reassignErrorMsg"></span></div>
+        <form id="reassignForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="reassignBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Username <span class="required">*</span></label>
+            <input type="text" id="reassignUsername" class="form-input" placeholder="e.g., SoldierBeta" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Position <span class="required">*</span></label>
+            <select id="reassignPosition" class="form-select" required>
+              <option value="">-- Select new position --</option>
+              <optgroup label="── Section Positions ──">
+              <option value="Section Chief">Section Chief</option>
+              <option value="Section Sergeant">Section Sergeant</option>
+              <option value="Section Personnel">Section Personnel</option>
+              </optgroup>
+              <optgroup label="── Battery Command ──">
+              <option value="Battery Commanding Officer">Battery Commanding Officer</option>
+              <option value="Battery Executive Officer">Battery Executive Officer</option>
+              <option value="Battery Sergeant Major">Battery Sergeant Major</option>
+              </optgroup>
+              <optgroup label="── High Command ──">
+              <option value="Battalion Commanding Officer">Battalion Commanding Officer</option>
+              <option value="Battalion Executive Officer">Battalion Executive Officer</option>
+              <option value="Battalion Sergeant Major">Battalion Sergeant Major</option>
+              </optgroup>
+              <optgroup label="── Academy ──">
+              <option value="Academy Commandant">Academy Commandant</option>
+              <option value="Director - Academics and Discipline">Director — Academics &amp; Discipline</option>
+              <option value="Director - Admission and Logistics">Director — Admission &amp; Logistics</option>
+              <option value="ASIM">ASIM</option>
+              <option value="Academic Confidant">Academic Confidant</option>
+              <option value="Academic Staff">Academic Staff</option>
+              <option value="Disciplinary Staff">Disciplinary Staff</option>
+              <option value="Guidance Staff">Guidance Staff</option>
+              <option value="Admission Faculty Staff">Admission Faculty Staff</option>
+              <option value="Logistics Faculty Staff">Logistics Faculty Staff</option>
+              </optgroup>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Section <span class="form-helper" style="display:inline;">(leave blank if High Command or Academy Admin)</span></label>
+            <input type="text" id="reassignSection" class="form-input" placeholder="e.g., Galaw Section" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">New Battery Section <span class="form-helper" style="display:inline;">(for Battery Command only)</span></label>
+            <input type="text" id="reassignBatterySection" class="form-input" placeholder="e.g., Anino Battery Command" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="reassignOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the audit log.</div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="reassignSubmitBtn">Reassign Personnel</button>
+            <button type="button" class="btn btn-secondary" onclick="resetReassign()">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ════ REMOVE STRIKE ════ -->
+    <div id="removeStrikePage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">🔓</div>
+        <div class="page-title-text"><h1>Remove <span>Strike</span></h1><p>Reverse a disciplinary strike and restore status</p></div>
+      </div>
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Strike Reversal</h2>
+        <div class="alert-box alert-warning"><span>ℹ</span><span><strong>Status logic after removal:</strong> 0 strikes → ACTIVE &nbsp;|&nbsp; 1 strike → SEMI-ACTIVE</span></div>
+        <div id="removeStrikeSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="removeStrikeSuccessMsg"></span></div>
+        <div id="removeStrikeError" class="alert-box alert-danger hidden"><span>⚠</span><span id="removeStrikeErrorMsg"></span></div>
+        <form id="removeStrikeForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="removeStrikeBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Personnel Usernames <span class="required">*</span></label>
+            <div class="form-helper" style="margin-bottom:10px;">Enter each username — section is auto-detected.</div>
+            <div id="removeStrikeUsernamesContainer"></div>
+            <button type="button" class="btn btn-secondary btn-small" style="margin-top:8px;" onclick="addRemoveStrikeUsernameRow()">+ Add Username</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Reason <span class="required">*</span></label>
+            <input type="text" id="removeStrikeReason" class="form-input" placeholder="e.g., Strike issued in error" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="removeStrikeOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="removeStrikeSubmitBtn">Remove Strike</button>
+            <button type="button" class="btn btn-secondary" onclick="resetRemoveStrike()">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ════ SET LOA ════ -->
+    <div id="setLoaPage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">🏖️</div>
+        <div class="page-title-text"><h1>Set <span>Leave of Absence</span></h1><p>Place members on LoA — skipped during event logging</p></div>
+      </div>
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Leave of Absence — Set</h2>
+        <div class="alert-box alert-warning"><span>ℹ</span><span>Members on LoA will be automatically skipped when logging events. They will not receive hosted/attended increments until their LoA is reset.</span></div>
+        <div id="setLoaSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="setLoaSuccessMsg"></span></div>
+        <div id="setLoaError" class="alert-box alert-danger hidden"><span>⚠</span><span id="setLoaErrorMsg"></span></div>
+        <form id="setLoaForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="loaBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Personnel Usernames <span class="required">*</span></label>
+            <div class="form-helper" style="margin-bottom:10px;">Enter each username — section is auto-detected.</div>
+            <div id="loaUsernamesContainer"></div>
+            <button type="button" class="btn btn-secondary btn-small" style="margin-top:8px;" onclick="addLoaUsernameRow()">+ Add Username</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">End Date <span class="form-helper" style="display:inline;">(optional — leave blank for manual reset)</span></label>
+            <input type="text" id="loaEndDate" class="form-input" placeholder="YYYY-MM-DD (optional)" />
+            <div class="form-helper">If set, LoA auto-expires on this date. Format: 2025-12-31</div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="loaOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="setLoaSubmitBtn">Set LoA</button>
+            <button type="button" class="btn btn-secondary" onclick="resetSetLoa()">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ════ RESET LOA ════ -->
+    <div id="resetLoaPage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">↩️</div>
+        <div class="page-title-text"><h1>Reset <span>Leave of Absence</span></h1><p>Return members from LoA to active duty</p></div>
+      </div>
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Leave of Absence — Reset</h2>
+        <div class="alert-box alert-warning"><span>ℹ</span><span>Resetting LoA returns the member's quota status to INCOMPLETE and resumes event tracking.</span></div>
+        <div id="resetLoaSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="resetLoaSuccessMsg"></span></div>
+        <div id="resetLoaError" class="alert-box alert-danger hidden"><span>⚠</span><span id="resetLoaErrorMsg"></span></div>
+        <form id="resetLoaForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="resetLoaBrigade" class="form-select" required>
+              <option value="">-- Select battalion --</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              <option value="aa_academy">AA - Academy</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Personnel Usernames <span class="required">*</span></label>
+            <div class="form-helper" style="margin-bottom:10px;">Enter each username — section is auto-detected.</div>
+            <div id="resetLoaUsernamesContainer"></div>
+            <button type="button" class="btn btn-secondary btn-small" style="margin-top:8px;" onclick="addResetLoaUsernameRow()">+ Add Username</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Officer (Your Roblox Username) <span class="required">*</span></label>
+            <input type="text" id="resetLoaOfficer" class="form-input" placeholder="Enter your Roblox username" required />
+            <div class="form-helper">This will be logged in the Discord audit log.</div>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-primary" id="resetLoaSubmitBtn">Reset LoA</button>
+            <button type="button" class="btn btn-secondary" onclick="resetResetLoa()">Clear Form</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ════ ACCOUNT MANAGER (Level 4 only) ════ -->
+    <div id="accountManagerPage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">🔑</div>
+        <div class="page-title-text"><h1>Account <span>Manager</span></h1><p>Manage staff website accounts — Regiment HC only</p></div>
+      </div>
+
+      <!-- Current Accounts -->
+      <div class="form-container" style="margin-bottom:24px;">
+        <h2 class="form-title"><span class="form-title-dot"></span>Current Accounts</h2>
+        <div id="accountListMsg" class="alert-box alert-warning hidden"><span>⚠</span><span id="accountListMsgText"></span></div>
+        <div id="accountListContainer" style="margin-top:12px;">
+          <div style="color:var(--text-secondary);font-size:13px;">Loading accounts...</div>
+        </div>
+        <button class="btn btn-secondary" style="margin-top:14px;" onclick="loadAccounts()">↺ Refresh</button>
+      </div>
+
+      <!-- Create Account -->
+      <div class="form-container" style="margin-bottom:24px;">
+        <h2 class="form-title"><span class="form-title-dot"></span>Create New Account</h2>
+        <div id="createAccSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="createAccSuccessMsg"></span></div>
+        <div id="createAccError" class="alert-box alert-danger hidden"><span>⚠</span><span id="createAccErrorMsg"></span></div>
+        <div class="form-group">
+          <label class="form-label">Username <span class="required">*</span></label>
+          <input type="text" id="newAccUsername" class="form-input" placeholder="e.g., battalionhc" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password <span class="required">*</span></label>
+          <input type="password" id="newAccPassword" class="form-input" placeholder="Min. 8 characters" />
+          <div class="form-helper">Use a strong password — mix of letters, numbers, and symbols.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Access Level <span class="required">*</span></label>
+          <select id="newAccLevel" class="form-select">
+            <option value="1">Level 1 — Log Event only</option>
+            <option value="2">Level 2 — Battery HC (Add/Remove Personnel)</option>
+            <option value="3" selected>Level 3 — Battalion HC (Strikes, LoA, Updates, Resets)</option>
+            <option value="4">Level 4 — Regiment HC (Everything + Account Manager)</option>
+          </select>
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="createAccBtn" onclick="createAccount()">Create Account</button>
+        </div>
+      </div>
+
+      <!-- Change Username -->
+      <div class="form-container" style="margin-bottom:24px;">
+        <h2 class="form-title"><span class="form-title-dot"></span>Change Username</h2>
+        <div id="changeUnSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="changeUnSuccessMsg"></span></div>
+        <div id="changeUnError" class="alert-box alert-danger hidden"><span>⚠</span><span id="changeUnErrorMsg"></span></div>
+        <div class="form-group">
+          <label class="form-label">Current Username <span class="required">*</span></label>
+          <input type="text" id="changeUnTarget" class="form-input" placeholder="Exact current username" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Username <span class="required">*</span></label>
+          <input type="text" id="changeUnNew" class="form-input" placeholder="New username" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="changeUnBtn" onclick="changeUsername()">Update Username</button>
+        </div>
+      </div>
+
+      <!-- Change Password -->
+      <div class="form-container" style="margin-bottom:24px;">
+        <h2 class="form-title"><span class="form-title-dot"></span>Change Password</h2>
+        <div id="changePwSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="changePwSuccessMsg"></span></div>
+        <div id="changePwError" class="alert-box alert-danger hidden"><span>⚠</span><span id="changePwErrorMsg"></span></div>
+        <div class="form-group">
+          <label class="form-label">Username <span class="required">*</span></label>
+          <input type="text" id="changePwTarget" class="form-input" placeholder="Username to update" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">New Password <span class="required">*</span></label>
+          <input type="password" id="changePwNew" class="form-input" placeholder="Min. 8 characters" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-primary" id="changePwBtn" onclick="changePassword()">Update Password</button>
+        </div>
+      </div>
+
+      <!-- Delete Account -->
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Delete Account</h2>
+        <div class="alert-box alert-warning"><span>⚠</span><span>This permanently deletes the account. You cannot delete your own account.</span></div>
+        <div id="deleteAccSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="deleteAccSuccessMsg"></span></div>
+        <div id="deleteAccError" class="alert-box alert-danger hidden"><span>⚠</span><span id="deleteAccErrorMsg"></span></div>
+        <div class="form-group" style="margin-top:16px;">
+          <label class="form-label">Username to Delete <span class="required">*</span></label>
+          <input type="text" id="deleteAccTarget" class="form-input" placeholder="Exact username" />
+        </div>
+        <div class="btn-group">
+          <button class="btn btn-danger" id="deleteAccBtn" onclick="confirmDeleteAccount()">Delete Account</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ════ WEEKLY RESET ════ -->
+    <div id="weeklyResetPage" class="page-content">
+      <div class="page-title-row">
+        <div class="page-title-icon">🔄</div>
+        <div class="page-title-text"><h1>Weekly <span>Reset</span></h1><p>Reset all quota tallies for the new week</p></div>
+      </div>
+      <div class="form-container">
+        <h2 class="form-title"><span class="form-title-dot"></span>Weekly Quota Reset</h2>
+        <div class="alert-box alert-warning"><span>⚠</span><span><strong>Warning:</strong> This resets Hosted/Attended slashes, all event-type totals (Inspection/Training/Recruitment/Deployment), and quota statuses back to INCOMPLETE for the selected battalion(s). This cannot be undone.</span></div>
+        <div id="weeklyResetSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="weeklyResetSuccessMsg"></span></div>
+        <div id="weeklyResetError" class="alert-box alert-danger hidden"><span>⚠</span><span id="weeklyResetErrorMsg"></span></div>
+        <form id="weeklyResetForm" novalidate>
+          <div class="form-group">
+            <label class="form-label">Battalion <span class="required">*</span></label>
+            <select id="weeklyResetBrigade" class="form-select" required>
+              <option value="all">🌐 All Battalions</option>
+              <option value="tiktik_battalion">"TIKTIK" Battalion only</option>
+              <option value="dagundong_battalion">"DAGUNDONG" Battalion only</option>
+              <option value="salimbay_battalion">"SALIMBAY" Battalion only</option>
+              <option value="aa_academy">AA - Academy only</option>
+            </select>
+          </div>
+          <div class="btn-group">
+            <button type="submit" class="btn btn-danger" id="weeklyResetSubmitBtn">🔄 Execute Weekly Reset</button>
+            <button type="button" class="btn btn-secondary" onclick="navigateTo('dashboardPage')">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Weekly Reset Confirm Modal -->
+<div id="weeklyResetModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header"><span class="modal-icon">🔄</span><h3 class="modal-title">Confirm Weekly Reset</h3></div>
+    <p class="modal-text" id="weeklyResetModalText"></p>
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="confirmWeeklyReset()">Yes, Reset Now</button>
+      <button class="btn btn-secondary" onclick="closeModal('weeklyResetModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
 <!-- Remove Confirm Modal -->
 <div id="removeModal" class="modal">
   <div class="modal-content">
@@ -973,7 +1390,6 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
 
 <script>
 const API_URL = '/api/proxy';
-const LOGIN_PASSWORD = 'AARHC';
 
 const BATTERY_SECTIONS = {
   'tiktik_battalion': {
@@ -1349,7 +1765,8 @@ function collectUsernames(containerId) {
   return names;
 }
 function initUsernameContainers() {
-  ['logUsernamesContainer','strikeUsernamesContainer','removeUsernamesContainer'].forEach(id => {
+  ['logUsernamesContainer','strikeUsernamesContainer','removeUsernamesContainer',
+   'removeStrikeUsernamesContainer','loaUsernamesContainer','resetLoaUsernamesContainer'].forEach(id => {
     const el = document.getElementById(id);
     if (el && !el.querySelector('.username-row')) el.appendChild(makeUsernameRow());
   });
@@ -1359,13 +1776,57 @@ function addStrikeUsernameRow() { addUsernameRowTo('strikeUsernamesContainer'); 
 function addRemoveUsernameRow() { addUsernameRowTo('removeUsernamesContainer'); }
 
 // ═══════════════════════════════════════════════════════════
+// SECURITY HELPERS
+// ═══════════════════════════════════════════════════════════
+function escapeHTML(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+function sanitizeInput(val) {
+  if (typeof val !== 'string') return val;
+  // Trim and limit length to prevent oversized payloads
+  return val.trim().substring(0, 500);
+}
+
+// ═══════════════════════════════════════════════════════════
 // API CALL
 // ═══════════════════════════════════════════════════════════
 function callAPI(action, payload, onSuccess, onError) {
-  fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ action, ...payload }) })
-    .then(r => r.json())
+  // Sanitize all string values in payload
+  const safePayload = {};
+  for (const [k, v] of Object.entries(payload)) {
+    if (Array.isArray(v)) {
+      safePayload[k] = v.map(item => typeof item === 'object'
+        ? Object.fromEntries(Object.entries(item).map(([ik,iv]) => [ik, sanitizeInput(iv)]))
+        : sanitizeInput(item));
+    } else {
+      safePayload[k] = sanitizeInput(v);
+    }
+  }
+  // Timeout: abort requests that take more than 20 seconds
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, ...safePayload }),
+    signal: controller.signal
+  })
+    .then(r => {
+      clearTimeout(timeout);
+      if (!r.ok) throw new Error(`Server error: ${r.status}`);
+      return r.json();
+    })
     .then(d => onSuccess && onSuccess(d))
-    .catch(err => onError && onError(err));
+    .catch(err => {
+      clearTimeout(timeout);
+      onError && onError(err);
+    });
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1386,8 +1847,13 @@ function showAlert(successId, errorId, type, message) {
 function setBtn(id, loading, originalText) {
   const btn = document.getElementById(id);
   if (!btn) return;
+  if (!loading && !originalText) {
+    // Restore from data attribute if no text provided
+    originalText = btn.dataset.originalText || btn.textContent;
+  }
+  if (!btn.dataset.originalText && originalText) btn.dataset.originalText = originalText;
   btn.disabled = loading;
-  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : originalText;
+  btn.innerHTML = loading ? '<span class="spinner"></span> Please wait...' : (originalText || btn.dataset.originalText || 'Submit');
 }
 function openModal(id)  { document.getElementById(id).classList.add('active'); }
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
@@ -1402,8 +1868,13 @@ const PAGE_META = {
   addPersonnelPage:     { icon:'➕', title:'Add Personnel' },
   logEventPage:         { icon:'📋', title:'Log Event' },
   strikePage:           { icon:'⚡', title:'Issue Strike' },
+  removeStrikePage:     { icon:'🔓', title:'Remove Strike' },
   updatePersonnelPage:  { icon:'✏️', title:'Update Personnel' },
-  removePersonnelPage:  { icon:'🗑️', title:'Remove Personnel' }
+  removePersonnelPage:  { icon:'🗑️', title:'Remove Personnel' },
+  reassignPage:         { icon:'🔀', title:'Reassign Personnel' },
+  setLoaPage:           { icon:'🏖️', title:'Set Leave of Absence' },
+  resetLoaPage:         { icon:'↩️', title:'Reset Leave of Absence' },
+  weeklyResetPage:      { icon:'🔄', title:'Weekly Reset' }
 };
 function navigateTo(pageId) {
   document.querySelectorAll('.page-content').forEach(p => p.classList.remove('active'));
@@ -1419,29 +1890,305 @@ function openSidebar()  { document.getElementById('sidebar').classList.add('acti
 function closeSidebar() { document.getElementById('sidebar').classList.remove('active'); document.getElementById('sidebarOverlay').classList.remove('active'); }
 
 // ═══════════════════════════════════════════════════════════
+// SESSION STATE
+// ═══════════════════════════════════════════════════════════
+let _session = { token: null, username: null, level: 0 };
+let _loginAttempts = 0;
+let _loginLockedUntil = 0;
+
+const AUTH_URL  = '/api/auth';
+const ADMIN_URL = '/api/admin';
+
+const LEVEL_LABELS = {
+  1: 'LV1 — LOG EVENT',
+  2: 'LV2 — BATTERY HC',
+  3: 'LV3 — BATTALION HC',
+  4: 'LV4 — REGIMENT HC'
+};
+
+// Pages accessible per level (cumulative)
+const LEVEL_PAGES = {
+  1: ['dashboardPage','logEventPage'],
+  2: ['dashboardPage','logEventPage','addPersonnelPage','removePersonnelPage'],
+  3: ['dashboardPage','logEventPage','addPersonnelPage','removePersonnelPage',
+      'addBatteryCommandPage','strikePage','removeStrikePage','updatePersonnelPage',
+      'reassignPage','setLoaPage','resetLoaPage','weeklyResetPage'],
+  4: ['dashboardPage','logEventPage','addPersonnelPage','removePersonnelPage',
+      'addBatteryCommandPage','addHighCommandPage','strikePage','removeStrikePage',
+      'updatePersonnelPage','reassignPage','setLoaPage','resetLoaPage',
+      'weeklyResetPage','accountManagerPage']
+};
+
+function applyLevelUI(level) {
+  // Update topbar badge
+  const badge = document.getElementById('topbarUserBadge');
+  if (badge) badge.textContent = `${_session.username} · ${LEVEL_LABELS[level] || 'MEMBER'}`;
+
+  // Show/hide nav items based on allowed pages
+  const allowed = new Set(LEVEL_PAGES[level] || []);
+  document.querySelectorAll('.nav-item[data-page]').forEach(item => {
+    const page = item.getAttribute('data-page');
+    item.style.display = allowed.has(page) ? '' : 'none';
+  });
+
+  // Show/hide dashboard cards
+  document.querySelectorAll('.dashboard-card[data-minlevel]').forEach(card => {
+    const min = parseInt(card.getAttribute('data-minlevel') || '1');
+    card.style.display = level >= min ? '' : 'none';
+  });
+
+  // If current page not allowed, redirect to dashboard
+  const activePage = document.querySelector('.page-content.active');
+  if (activePage && !allowed.has(activePage.id)) navigateTo('dashboardPage');
+}
+
+// ═══════════════════════════════════════════════════════════
 // LOGIN
 // ═══════════════════════════════════════════════════════════
-document.getElementById('loginForm').addEventListener('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
-  if (document.getElementById('loginPassword').value === LOGIN_PASSWORD) {
-    document.getElementById('loginPage').classList.add('hidden-out');
-    setTimeout(() => { document.getElementById('loginPage').style.display = 'none'; document.getElementById('appShell').style.display = 'block'; }, 500);
-  } else {
+  const now = Date.now();
+  if (_loginLockedUntil > now) {
+    const remaining = Math.ceil((_loginLockedUntil - now) / 1000);
     const err = document.getElementById('loginError');
+    err.textContent = `Too many attempts. Try again in ${remaining}s.`;
     err.classList.add('visible');
-    setTimeout(() => err.classList.remove('visible'), 3000);
+    return;
+  }
+
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const btn      = document.getElementById('loginSubmitBtn');
+
+  if (!username || !password) {
+    const err = document.getElementById('loginError');
+    err.textContent = 'Please enter both username and password.';
+    err.classList.add('visible');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.textContent = 'Authenticating...';
+
+  try {
+    const res = await fetch(AUTH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'login', username, password }),
+      signal: AbortSignal.timeout(15000)
+    });
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      _loginAttempts = 0;
+      _session = { token: data.token, username: data.username, level: data.level };
+      document.getElementById('loginPassword').value = '';
+      document.getElementById('loginUsername').value = '';
+      applyLevelUI(data.level);
+      document.getElementById('loginPage').classList.add('hidden-out');
+      setTimeout(() => {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('appShell').style.display = 'block';
+        if (data.level === 4) loadAccounts();
+      }, 500);
+    } else {
+      _loginAttempts++;
+      if (_loginAttempts >= 5) {
+        _loginLockedUntil = now + 30000;
+        _loginAttempts = 0;
+      }
+      const err = document.getElementById('loginError');
+      err.textContent = _loginAttempts >= 4
+        ? 'Incorrect credentials. One more attempt before lockout.'
+        : (data.message || 'Invalid username or password.');
+      err.classList.add('visible');
+      setTimeout(() => err.classList.remove('visible'), 3500);
+    }
+  } catch {
+    const err = document.getElementById('loginError');
+    err.textContent = 'Connection error. Please try again.';
+    err.classList.add('visible');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Enter System';
   }
 });
+
 function togglePasswordVisibility() {
   const input = document.getElementById('loginPassword');
   input.type = input.type === 'password' ? 'text' : 'password';
 }
-function logout() {
+
+async function logout() {
+  if (_session.token) {
+    fetch(AUTH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'logout', token: _session.token })
+    }).catch(() => {});
+  }
+  _session = { token: null, username: null, level: 0 };
   document.getElementById('appShell').style.display  = 'none';
   document.getElementById('loginPage').style.display = 'flex';
   document.getElementById('loginPage').classList.remove('hidden-out');
   document.getElementById('loginPassword').value = '';
+  document.getElementById('loginUsername').value = '';
   navigateTo('dashboardPage');
+}
+
+// ═══════════════════════════════════════════════════════════
+// AUTHENTICATED API CALLS — inject session token
+// ═══════════════════════════════════════════════════════════
+// Override callAPI to include session token in every request
+const _origCallAPI = callAPI;
+function callAPI(action, payload, onSuccess, onError) {
+  const safePayload = {};
+  for (const [k, v] of Object.entries(payload || {})) {
+    if (Array.isArray(v)) {
+      safePayload[k] = v.map(item => typeof item === 'object'
+        ? Object.fromEntries(Object.entries(item).map(([ik,iv]) => [ik, sanitizeInput(iv)]))
+        : sanitizeInput(item));
+    } else {
+      safePayload[k] = sanitizeInput(v);
+    }
+  }
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 20000);
+  fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Session-Token': _session.token || ''
+    },
+    body: JSON.stringify({ action, ...safePayload }),
+    signal: controller.signal
+  })
+    .then(r => { clearTimeout(timeout); if (!r.ok) throw new Error(`Server error: ${r.status}`); return r.json(); })
+    .then(d => {
+      if (d && d.status === 'error' && d.message && d.message.includes('Not authenticated')) {
+        logout(); return;
+      }
+      onSuccess && onSuccess(d);
+    })
+    .catch(err => { clearTimeout(timeout); onError && onError(err); });
+}
+
+// ═══════════════════════════════════════════════════════════
+// ACCOUNT MANAGER — Admin calls
+// ═══════════════════════════════════════════════════════════
+async function adminCall(payload) {
+  const res = await fetch(ADMIN_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ ...payload, token: _session.token }),
+    signal: AbortSignal.timeout(15000)
+  });
+  return res.json();
+}
+
+async function loadAccounts() {
+  const container = document.getElementById('accountListContainer');
+  if (!container) return;
+  container.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;">Loading...</div>';
+  try {
+    const r = await adminCall({ action: 'listAccounts' });
+    if (r.status !== 'success' || !r.data?.length) {
+      container.innerHTML = '<div style="color:var(--text-secondary);font-size:13px;">No accounts found.</div>';
+      return;
+    }
+    const levelNames = { 1:'Log Event', 2:'Battery HC', 3:'Battalion HC', 4:'Regiment HC' };
+    let html = '<table class="acc-table"><thead><tr><th>Username</th><th>Level</th><th>Role</th><th>Created</th></tr></thead><tbody>';
+    r.data.forEach(acc => {
+      const d = acc.created_at ? new Date(acc.created_at).toLocaleDateString() : '—';
+      html += `<tr>
+        <td><strong>${escapeHTML(acc.username)}</strong>${acc.username === _session.username ? ' <span style="color:var(--gold);font-size:10px;">(you)</span>' : ''}</td>
+        <td><span class="level-badge level-${acc.level}">LV${acc.level}</span></td>
+        <td style="color:var(--text-secondary);font-size:12px;">${levelNames[acc.level] || '—'}</td>
+        <td style="color:var(--text-secondary);font-size:12px;">${d}</td>
+      </tr>`;
+    });
+    html += '</tbody></table>';
+    container.innerHTML = html;
+  } catch {
+    container.innerHTML = '<div style="color:var(--danger);font-size:13px;">Failed to load accounts.</div>';
+  }
+}
+
+async function createAccount() {
+  const username = document.getElementById('newAccUsername').value.trim();
+  const password = document.getElementById('newAccPassword').value;
+  const level    = parseInt(document.getElementById('newAccLevel').value);
+  if (!username || !password) { showAlert('createAccSuccess','createAccError','error','Username and password are required.'); return; }
+  if (password.length < 8)   { showAlert('createAccSuccess','createAccError','error','Password must be at least 8 characters.'); return; }
+  setBtn('createAccBtn', true, 'Create Account');
+  try {
+    const r = await adminCall({ action: 'createAccount', newUsername: username, newPassword: password, level });
+    setBtn('createAccBtn', false, 'Create Account');
+    if (r.status === 'success') {
+      showAlert('createAccSuccess','createAccError','success', r.message);
+      document.getElementById('newAccUsername').value = '';
+      document.getElementById('newAccPassword').value = '';
+      loadAccounts();
+    } else {
+      showAlert('createAccSuccess','createAccError','error', r.message || 'Failed to create account.');
+    }
+  } catch { setBtn('createAccBtn', false, 'Create Account'); showAlert('createAccSuccess','createAccError','error','Connection error.'); }
+}
+
+async function changeUsername() {
+  const target = document.getElementById('changeUnTarget').value.trim();
+  const newUN  = document.getElementById('changeUnNew').value.trim();
+  if (!target || !newUN) { showAlert('changeUnSuccess','changeUnError','error','Both fields are required.'); return; }
+  setBtn('changeUnBtn', true, 'Update Username');
+  try {
+    const r = await adminCall({ action: 'updateUsername', targetUsername: target, newUsername: newUN });
+    setBtn('changeUnBtn', false, 'Update Username');
+    if (r.status === 'success') {
+      showAlert('changeUnSuccess','changeUnError','success', r.message);
+      document.getElementById('changeUnTarget').value = '';
+      document.getElementById('changeUnNew').value = '';
+      loadAccounts();
+    } else {
+      showAlert('changeUnSuccess','changeUnError','error', r.message || 'Failed.');
+    }
+  } catch { setBtn('changeUnBtn', false, 'Update Username'); showAlert('changeUnSuccess','changeUnError','error','Connection error.'); }
+}
+
+async function changePassword() {
+  const target = document.getElementById('changePwTarget').value.trim();
+  const newPW  = document.getElementById('changePwNew').value;
+  if (!target || !newPW) { showAlert('changePwSuccess','changePwError','error','Both fields are required.'); return; }
+  if (newPW.length < 8)  { showAlert('changePwSuccess','changePwError','error','Password must be at least 8 characters.'); return; }
+  setBtn('changePwBtn', true, 'Update Password');
+  try {
+    const r = await adminCall({ action: 'updatePassword', targetUsername: target, newPassword: newPW });
+    setBtn('changePwBtn', false, 'Update Password');
+    if (r.status === 'success') {
+      showAlert('changePwSuccess','changePwError','success', r.message);
+      document.getElementById('changePwTarget').value = '';
+      document.getElementById('changePwNew').value = '';
+    } else {
+      showAlert('changePwSuccess','changePwError','error', r.message || 'Failed.');
+    }
+  } catch { setBtn('changePwBtn', false, 'Update Password'); showAlert('changePwSuccess','changePwError','error','Connection error.'); }
+}
+
+async function confirmDeleteAccount() {
+  const target = document.getElementById('deleteAccTarget').value.trim();
+  if (!target) { showAlert('deleteAccSuccess','deleteAccError','error','Please enter a username.'); return; }
+  if (!confirm(`Are you sure you want to delete account "${target}"? This cannot be undone.`)) return;
+  setBtn('deleteAccBtn', true, 'Delete Account');
+  try {
+    const r = await adminCall({ action: 'deleteAccount', targetUsername: target });
+    setBtn('deleteAccBtn', false, 'Delete Account');
+    if (r.status === 'success') {
+      showAlert('deleteAccSuccess','deleteAccError','success', r.message);
+      document.getElementById('deleteAccTarget').value = '';
+      loadAccounts();
+    } else {
+      showAlert('deleteAccSuccess','deleteAccError','error', r.message || 'Failed.');
+    }
+  } catch { setBtn('deleteAccBtn', false, 'Delete Account'); showAlert('deleteAccSuccess','deleteAccError','error','Connection error.'); }
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1759,22 +2506,23 @@ function fetchPersonnel() {
         const d = r.data;
         document.getElementById('fetchError').classList.add('hidden');
         const quotaClass = d.quotaStatus === 'COMPLETE' ? 'quota-complete' : 'quota-incomplete';
+        const e_ = escapeHTML;
         document.getElementById('personnelInfoDisplay').innerHTML = `
-          <div class="info-cell"><div class="info-cell-label">Username</div><div class="info-cell-value">${d.username}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Paygrade</div><div class="info-cell-value">${d.paygrade||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Position</div><div class="info-cell-value">${d.position||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Status</div><div class="info-cell-value">${d.status||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Hosted</div><div class="info-cell-value">${d.hosted}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Attended</div><div class="info-cell-value">${d.attended}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Inspection</div><div class="info-cell-value">${d.inspection}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Training</div><div class="info-cell-value">${d.training}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Recruitment</div><div class="info-cell-value">${d.recruitment||0}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Deployment</div><div class="info-cell-value">${d.deployment}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Quota</div><div class="info-cell-value"><span class="quota-badge ${quotaClass}">${d.quotaStatus}</span></div></div>
-          <div class="info-cell"><div class="info-cell-label">Strikes</div><div class="info-cell-value">${d.strike}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Enlistment Date</div><div class="info-cell-value">${d.doe||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Timezone</div><div class="info-cell-value">${d.timezone||'—'}</div></div>
-          <div class="info-cell"><div class="info-cell-label">Row</div><div class="info-cell-value">${d.row}</div></div>`;
+          <div class="info-cell"><div class="info-cell-label">Username</div><div class="info-cell-value">${e_(d.username)}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Paygrade</div><div class="info-cell-value">${e_(d.paygrade||'—')}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Position</div><div class="info-cell-value">${e_(d.position||'—')}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Status</div><div class="info-cell-value">${e_(d.status||'—')}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Hosted</div><div class="info-cell-value">${e_(String(d.hosted))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Attended</div><div class="info-cell-value">${e_(String(d.attended))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Inspection</div><div class="info-cell-value">${e_(String(d.inspection))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Training</div><div class="info-cell-value">${e_(String(d.training))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Recruitment</div><div class="info-cell-value">${e_(String(d.recruitment||0))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Deployment</div><div class="info-cell-value">${e_(String(d.deployment))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Quota</div><div class="info-cell-value"><span class="quota-badge ${quotaClass}">${e_(d.quotaStatus)}</span></div></div>
+          <div class="info-cell"><div class="info-cell-label">Strikes</div><div class="info-cell-value">${e_(String(d.strike))}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Enlistment Date</div><div class="info-cell-value">${e_(d.doe||'—')}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Timezone</div><div class="info-cell-value">${e_(d.timezone||'—')}</div></div>
+          <div class="info-cell"><div class="info-cell-label">Row</div><div class="info-cell-value">${e_(String(d.row))}</div></div>`;
         SelectManager.setVal('updPaygrade', d.paygrade || '');
         document.getElementById('updPosition').value = d.position || '';
         SelectManager.setVal('updTimezone', d.timezone || '');
@@ -1803,13 +2551,16 @@ document.getElementById('updateForm').addEventListener('submit', function(e) {
   if (!brigade || !username) { showAlert('updateSuccess','updateError','error','Battalion and username are required. Fetch personnel first.'); return; }
   if (!officer) { showAlert('updateSuccess','updateError','error','Please enter your Roblox username as Officer.'); return; }
   setBtn('updateSubmitBtn', true);
+  const strikeVal = document.getElementById('updStrike').value.trim();
+  const strikePayload = strikeVal !== '' ? { strike: parseInt(strikeVal, 10) } : {};
   callAPI('updatePersonnelInfo', {
     brigade, username, officer,
     paygrade: document.getElementById('updPaygrade').value,
     position: document.getElementById('updPosition').value.trim(),
     doe:      document.getElementById('updDoe').value,
     timezone: document.getElementById('updTimezone').value,
-    status:   document.getElementById('updStatus').value
+    status:   document.getElementById('updStatus').value,
+    ...strikePayload
   },
     r => {
       setBtn('updateSubmitBtn', false, 'Save Changes');
@@ -1825,6 +2576,7 @@ function resetUpdateForm() {
   document.getElementById('updateUsername').value = '';
   document.getElementById('updateFormContainer').style.display = 'none';
   document.getElementById('personnelInfoDisplay').innerHTML = '';
+  document.getElementById('updStrike').value = '';
   SelectManager.rebuildById('updateBrigade');
   if (_datePickerRegistry['updDoe']) _datePickerRegistry['updDoe'].setValue(null);
   ['fetchError','updateSuccess','updateError'].forEach(id => document.getElementById(id).classList.add('hidden'));
@@ -1874,11 +2626,199 @@ function resetRemoveForm() {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    closeModal('strikeModal'); closeModal('removeModal');
+    closeModal('strikeModal'); closeModal('removeModal'); closeModal('weeklyResetModal');
     closeSidebar(); closeDatePickers();
     document.querySelectorAll('.cs-wrapper.cs-open').forEach(w => w.classList.remove('cs-open'));
   }
 });
+
+// Close modal on backdrop click
+document.querySelectorAll('.modal').forEach(modal => {
+  modal.addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal(this.id);
+      // If backdrop-closing the strike/remove modal, reset the pending payload
+      if (this.id === 'strikeModal') window._strikePayload = null;
+      if (this.id === 'removeModal') window._removePayload = null;
+    }
+  });
+});
+
+// Prevent modals from having stale payloads on page blur
+window.addEventListener('blur', () => {
+  window._strikePayload = null;
+  window._removePayload = null;
+});
+
+// ═══════════════════════════════════════════════════════════
+// REASSIGN PERSONNEL
+// ═══════════════════════════════════════════════════════════
+document.getElementById('reassignForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const brigade       = document.getElementById('reassignBrigade').value;
+  const username      = document.getElementById('reassignUsername').value.trim();
+  const newPosition   = document.getElementById('reassignPosition').value;
+  const newSection    = document.getElementById('reassignSection').value.trim();
+  const newBatterySec = document.getElementById('reassignBatterySection').value.trim();
+  const officer       = document.getElementById('reassignOfficer').value.trim();
+  if (!brigade || !username || !newPosition || !officer) {
+    showAlert('reassignSuccess','reassignError','error','Please fill all required fields.'); return;
+  }
+  setBtn('reassignSubmitBtn', true);
+  callAPI('reassignPersonnel', { brigade, username, newPosition, newSection, newBatterySection: newBatterySec, officer },
+    r => {
+      setBtn('reassignSubmitBtn', false, 'Reassign Personnel');
+      if (r && r.status === 'success') showAlert('reassignSuccess','reassignError','success', r.message);
+      else showAlert('reassignSuccess','reassignError','error', r?.message || 'Failed.');
+    },
+    () => { setBtn('reassignSubmitBtn', false, 'Reassign Personnel'); showAlert('reassignSuccess','reassignError','error','Request failed.'); }
+  );
+});
+function resetReassign() {
+  document.getElementById('reassignForm').reset();
+  SelectManager.rebuildById('reassignBrigade');
+  SelectManager.rebuildById('reassignPosition');
+  ['reassignSuccess','reassignError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+}
+
+// ═══════════════════════════════════════════════════════════
+// REMOVE STRIKE
+// ═══════════════════════════════════════════════════════════
+document.getElementById('removeStrikeForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const brigade = document.getElementById('removeStrikeBrigade').value;
+  const reason  = document.getElementById('removeStrikeReason').value.trim();
+  const officer = document.getElementById('removeStrikeOfficer').value.trim();
+  const pd      = collectUsernames('removeStrikeUsernamesContainer');
+  if (!brigade) { showAlert('removeStrikeSuccess','removeStrikeError','error','Please select a battalion.'); return; }
+  if (!reason)  { showAlert('removeStrikeSuccess','removeStrikeError','error','Please provide a reason.'); return; }
+  if (!officer) { showAlert('removeStrikeSuccess','removeStrikeError','error','Please enter your Roblox username as Officer.'); return; }
+  if (!pd.length) { showAlert('removeStrikeSuccess','removeStrikeError','error','At least one username is required.'); return; }
+  setBtn('removeStrikeSubmitBtn', true);
+  callAPI('removeStrike', { brigade, personnelData: pd, reason, officer },
+    r => {
+      setBtn('removeStrikeSubmitBtn', false, 'Remove Strike');
+      const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      showAlert('removeStrikeSuccess','removeStrikeError', ok ? 'success' : 'error', r?.message || (ok ? 'Strike removed!' : 'Failed.'));
+    },
+    () => { setBtn('removeStrikeSubmitBtn', false, 'Remove Strike'); showAlert('removeStrikeSuccess','removeStrikeError','error','Request failed.'); }
+  );
+});
+function resetRemoveStrike() {
+  document.getElementById('removeStrikeForm').reset();
+  const c = document.getElementById('removeStrikeUsernamesContainer');
+  c.innerHTML = ''; c.appendChild(makeUsernameRow());
+  ['removeStrikeSuccess','removeStrikeError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+}
+function addRemoveStrikeUsernameRow() { addUsernameRowTo('removeStrikeUsernamesContainer'); }
+
+// ═══════════════════════════════════════════════════════════
+// SET LOA
+// ═══════════════════════════════════════════════════════════
+document.getElementById('setLoaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const brigade    = document.getElementById('loaBrigade').value;
+  const officer    = document.getElementById('loaOfficer').value.trim();
+  const endDateRaw = document.getElementById('loaEndDate').value.trim();
+  const pd         = collectUsernames('loaUsernamesContainer');
+  if (!brigade) { showAlert('setLoaSuccess','setLoaError','error','Please select a battalion.'); return; }
+  if (!officer) { showAlert('setLoaSuccess','setLoaError','error','Please enter your Roblox username as Officer.'); return; }
+  if (!pd.length) { showAlert('setLoaSuccess','setLoaError','error','At least one username is required.'); return; }
+  // Validate date format if provided
+  if (endDateRaw && !/^\d{4}-\d{2}-\d{2}$/.test(endDateRaw)) {
+    showAlert('setLoaSuccess','setLoaError','error','End date must be in YYYY-MM-DD format (e.g. 2025-12-31).'); return;
+  }
+  setBtn('setLoaSubmitBtn', true);
+  callAPI('setLoA', { brigade, personnelData: pd, reason: officer, endDate: endDateRaw || null },
+    r => {
+      setBtn('setLoaSubmitBtn', false, 'Set LoA');
+      const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      showAlert('setLoaSuccess','setLoaError', ok ? 'success' : 'error', r?.message || (ok ? 'LoA set!' : 'Failed.'));
+    },
+    () => { setBtn('setLoaSubmitBtn', false, 'Set LoA'); showAlert('setLoaSuccess','setLoaError','error','Request failed.'); }
+  );
+});
+function resetSetLoa() {
+  document.getElementById('setLoaForm').reset();
+  const c = document.getElementById('loaUsernamesContainer');
+  c.innerHTML = ''; c.appendChild(makeUsernameRow());
+  ['setLoaSuccess','setLoaError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+}
+function addLoaUsernameRow() { addUsernameRowTo('loaUsernamesContainer'); }
+
+// ═══════════════════════════════════════════════════════════
+// RESET LOA
+// ═══════════════════════════════════════════════════════════
+document.getElementById('resetLoaForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const brigade = document.getElementById('resetLoaBrigade').value;
+  const officer = document.getElementById('resetLoaOfficer').value.trim();
+  const pd      = collectUsernames('resetLoaUsernamesContainer');
+  if (!brigade) { showAlert('resetLoaSuccess','resetLoaError','error','Please select a battalion.'); return; }
+  if (!officer) { showAlert('resetLoaSuccess','resetLoaError','error','Please enter your Roblox username as Officer.'); return; }
+  if (!pd.length) { showAlert('resetLoaSuccess','resetLoaError','error','At least one username is required.'); return; }
+  setBtn('resetLoaSubmitBtn', true);
+  callAPI('resetLoA', { brigade, personnelData: pd, reason: officer },
+    r => {
+      setBtn('resetLoaSubmitBtn', false, 'Reset LoA');
+      const ok = r && (r.status === 'success' || r.status === 'partial_success');
+      showAlert('resetLoaSuccess','resetLoaError', ok ? 'success' : 'error', r?.message || (ok ? 'LoA reset!' : 'Failed.'));
+    },
+    () => { setBtn('resetLoaSubmitBtn', false, 'Reset LoA'); showAlert('resetLoaSuccess','resetLoaError','error','Request failed.'); }
+  );
+});
+function resetResetLoa() {
+  document.getElementById('resetLoaForm').reset();
+  const c = document.getElementById('resetLoaUsernamesContainer');
+  c.innerHTML = ''; c.appendChild(makeUsernameRow());
+  ['resetLoaSuccess','resetLoaError'].forEach(id => document.getElementById(id).classList.add('hidden'));
+}
+function addResetLoaUsernameRow() { addUsernameRowTo('resetLoaUsernamesContainer'); }
+
+// ═══════════════════════════════════════════════════════════
+// WEEKLY RESET
+// ═══════════════════════════════════════════════════════════
+document.getElementById('weeklyResetForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const brigade = document.getElementById('weeklyResetBrigade').value;
+  window._weeklyResetBrigade = brigade;
+  const label = brigade === 'all' ? 'ALL battalions' : document.getElementById('weeklyResetBrigade').options[document.getElementById('weeklyResetBrigade').selectedIndex].text;
+  document.getElementById('weeklyResetModalText').textContent = `You are about to reset all quotas and event tallies for ${label}. This cannot be undone.`;
+  openModal('weeklyResetModal');
+});
+
+function confirmWeeklyReset() {
+  closeModal('weeklyResetModal');
+  const brigade = window._weeklyResetBrigade;
+  if (!brigade) return;
+  setBtn('weeklyResetSubmitBtn', true);
+  const targets = brigade === 'all'
+    ? ['tiktik_battalion','dagundong_battalion','salimbay_battalion','aa_academy']
+    : [brigade];
+  const BRIGADE_NAMES = { tiktik_battalion: '"TIKTIK"', dagundong_battalion: '"DAGUNDONG"', salimbay_battalion: '"SALIMBAY"', aa_academy: 'AA - Academy' };
+  let completed = 0;
+  const results = [];
+  targets.forEach(b => {
+    callAPI('weeklyReset', { brigade: b },
+      r => {
+        results.push(`${BRIGADE_NAMES[b]}: ${r && r.status === 'success' ? '✅ ' + (r.message || 'Done') : '❌ ' + (r?.message || 'Failed')}`);
+        completed++;
+        if (completed === targets.length) {
+          setBtn('weeklyResetSubmitBtn', false, '🔄 Execute Weekly Reset');
+          showAlert('weeklyResetSuccess','weeklyResetError','success', results.join(' | '));
+        }
+      },
+      () => {
+        results.push(`${BRIGADE_NAMES[b]}: ❌ Request failed`);
+        completed++;
+        if (completed === targets.length) {
+          setBtn('weeklyResetSubmitBtn', false, '🔄 Execute Weekly Reset');
+          showAlert('weeklyResetSuccess','weeklyResetError','error', results.join(' | '));
+        }
+      }
+    );
+  });
+}
 </script>
 </body>
 </html>
