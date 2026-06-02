@@ -119,6 +119,7 @@ export async function onRequest(context) {
   }
 
   // ── Forward to Google Apps Script ──────────────────────────────────────────
+  safePayload._ua = request.headers.get('User-Agent') || '';
   try {
     const gasRes = await fetch(GAS_URL, {
       method: 'POST',
