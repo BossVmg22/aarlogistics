@@ -2064,8 +2064,29 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         document.getElementById('appShell').style.display = 'block';
         if (data.level === 4) loadAccounts();
       }, 500);
-      // Log login to Discord
-      callAPI('logLogin', { username: data.username, level: data.level });
+      // Log login to Discord with device info
+      var osInfo = 'PC | Unknown';
+      var ua = navigator.userAgent;
+      if (/Android/i.test(ua)) {
+        var av = ua.match(/Android ([\d.]+)/);
+        osInfo = 'Mobile | Android' + (av ? ' ' + av[1] : '');
+      } else if (/iPhone|iPad|iPod/i.test(ua)) {
+        var iv = ua.match(/iPhone OS ([\d_]+)/);
+        osInfo = 'Mobile | iOS' + (iv ? ' ' + iv[1].replace(/_/g, '.') : '');
+      } else if (/Windows NT 10.0/.test(ua)) {
+        var isWin11 = false;
+        try { isWin11 = navigator.userAgentData && navigator.userAgentData.getHighEntropyValues && await navigator.userAgentData.getHighEntropyValues(['platformVersion']).then(function(d) { var p = parseInt((d.platformVersion||'').split('.')[2]); return p >= 22000; }).catch(function(){ return false; }); } catch(e){}
+        osInfo = 'PC | Windows ' + (isWin11 ? '11' : '10');
+      } else if (/Windows NT 6\.3/.test(ua)) osInfo = 'PC | Windows 8.1';
+      else if (/Windows NT 6\.2/.test(ua)) osInfo = 'PC | Windows 8';
+      else if (/Windows NT 6\.1/.test(ua)) osInfo = 'PC | Windows 7';
+      else if (/Mac OS X/.test(ua)) { var mv = ua.match(/Mac OS X ([\d_]+)/); osInfo = 'PC | macOS' + (mv ? ' ' + mv[1].replace(/_/g, '.') : ''); }
+      else if (/Linux/i.test(ua)) osInfo = 'PC | Linux';
+      if (/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) osInfo += ' | Chrome';
+      else if (/Firefox\//i.test(ua)) osInfo += ' | Firefox';
+      else if (/Edg\//i.test(ua)) osInfo += ' | Edge';
+      else if (/Safari\//i.test(ua)) osInfo += ' | Safari';
+      callAPI('logLogin', { username: data.username, level: data.level, _ua: osInfo });
     } else {
       _loginAttempts++;
       if (_loginAttempts >= 5) {
