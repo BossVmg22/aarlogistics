@@ -2064,6 +2064,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         document.getElementById('appShell').style.display = 'block';
         if (data.level === 4) loadAccounts();
       }, 500);
+      // Log login to Discord
+      callAPI('logLogin', { username: data.username, level: data.level });
     } else {
       _loginAttempts++;
       if (_loginAttempts >= 5) {
