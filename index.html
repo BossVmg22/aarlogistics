@@ -614,20 +614,15 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
         <h2 class="form-title"><span class="form-title-dot"></span>Battery Command Assignment</h2>
         <div id="addBCSuccess" class="alert-box alert-success hidden"><span>✓</span><span id="addBCSuccessMsg"></span></div>
         <div id="addBCError" class="alert-box alert-danger hidden"><span>⚠</span><span id="addBCErrorMsg"></span></div>
-        <div id="bcAcademyNotice" class="alert-box alert-warning" style="display:none;">
-          <span>ℹ</span>
-          <span>The <strong>AA - Academy</strong> does not have Battery Command positions. Use <strong>Add High Command</strong> for Academy Administration, or <strong>Add Personnel</strong> for department faculty staff.</span>
-        </div>
         <form id="addBCForm">
           <div class="form-group">
             <label class="form-label">Battalion <span class="required">*</span></label>
-            <select id="bcBrigadeSelect" class="form-select" required>
-              <option value="">-- Select battalion --</option>
-              <option value="tiktik_battalion">"TIKTIK" Battalion</option>
-              <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
-              <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
-              <option value="aa_academy">AA - Academy</option>
-            </select>
+              <select id="bcBrigadeSelect" class="form-select" required>
+                <option value="">-- Select battalion --</option>
+                <option value="tiktik_battalion">"TIKTIK" Battalion</option>
+                <option value="dagundong_battalion">"DAGUNDONG" Battalion</option>
+                <option value="salimbay_battalion">"SALIMBAY" Battalion</option>
+              </select>
           </div>
           <div id="bcFormFields">
             <div class="form-group">
@@ -1123,12 +1118,18 @@ input.dp-native-input{position:absolute;opacity:0;pointer-events:none;width:1px;
               <option value="Director - Academics and Discipline">Director — Academics &amp; Discipline</option>
               <option value="Director - Admission and Logistics">Director — Admission &amp; Logistics</option>
               <option value="ASIM">ASIM</option>
-              <option value="Academic Confidant">Academic Confidant</option>
+              <option value="Academic Registrar">Academic Registrar</option>
               <option value="Academic Staff">Academic Staff</option>
               <option value="Disciplinary Staff">Disciplinary Staff</option>
-              <option value="Guidance Staff">Guidance Staff</option>
-              <option value="Admission Faculty Staff">Admission Faculty Staff</option>
-              <option value="Logistics Faculty Staff">Logistics Faculty Staff</option>
+              <option value="Welfare Staff">Welfare Staff</option>
+              <option value="Academic Staff / Welfare Staff">Academic Staff / Welfare Staff</option>
+              <option value="Academic Staff / Disciplinary Staff">Academic Staff / Disciplinary Staff</option>
+              <option value="Academic Confidant / Welfare Staff">Academic Confidant / Welfare Staff</option>
+              <option value="Academic Confidant / Disciplinary Staff">Academic Confidant / Disciplinary Staff</option>
+              <option value="Academic Staff / Logistics Personnel">Academic Staff / Logistics Personnel</option>
+              <option value="Academic Staff / Admissions Personnel">Academic Staff / Admissions Personnel</option>
+              <option value="Academic Confidant / Logistics Personnel">Academic Confidant / Logistics Personnel</option>
+              <option value="Academic Confidant / Admissions Personnel">Academic Confidant / Admissions Personnel</option>
               </optgroup>
             </select>
           </div>
@@ -1515,11 +1516,11 @@ const BATTERY_SECTIONS = {
     batteries: {
       'Department of Academics and Discipline': {
         label:     'Department of Academics and Discipline',
-        positions: ['Academic Confidant', 'Academic Staff', 'Disciplinary Staff', 'Guidance Staff', 'Academic Staff / Guidance Staff', 'Academic Staff / Disciplinary Staff', 'Academic Confidant / Guidance Staff', 'Academic Confidant / Disciplinary Staff']
+        positions: ['Academic Registrar', 'Academic Staff', 'Disciplinary Staff', 'Welfare Staff', 'Academic Staff / Welfare Staff', 'Academic Staff / Disciplinary Staff', 'Academic Confidant / Welfare Staff', 'Academic Confidant / Disciplinary Staff']
       },
       'Department of Admission and Logistics': {
         label:     'Department of Admission and Logistics',
-        positions: ['Admission Faculty Staff', 'Logistics Faculty Staff']
+        positions: ['Academic Staff / Logistics Personnel', 'Academic Staff / Admissions Personnel', 'Academic Confidant / Logistics Personnel', 'Academic Confidant / Admissions Personnel']
       }
     }
   }
@@ -2342,28 +2343,21 @@ function resetHCForm() {
 // ADD BATTERY COMMAND
 // ═══════════════════════════════════════════════════════════
 document.getElementById('bcBrigadeSelect').addEventListener('change', function() {
-  const isAcademy = this.value === 'aa_academy';
   const brigadeData = BATTERY_SECTIONS[this.value];
-  const notice = document.getElementById('bcAcademyNotice');
-  const fields = document.getElementById('bcFormFields');
   const batterySelect = document.getElementById('bcBattery');
-  if (isAcademy) { notice.style.display = 'flex'; fields.style.display = 'none'; }
+  document.getElementById('bcFormFields').style.display = 'block';
+  if (!brigadeData) { batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>'; }
   else {
-    notice.style.display = 'none'; fields.style.display = 'block';
-    if (!brigadeData) { batterySelect.innerHTML = '<option value="">-- Select battalion first --</option>'; }
-    else {
-      let html = '<option value="">-- Select battery --</option>';
-      for (const key in brigadeData.batteries) { const bat = brigadeData.batteries[key]; html += `<option value="${bat.apiKey}">${bat.label}</option>`; }
-      batterySelect.innerHTML = html;
-    }
-    SelectManager.rebuildById('bcBattery');
+    let html = '<option value="">-- Select battery --</option>';
+    for (const key in brigadeData.batteries) { const bat = brigadeData.batteries[key]; html += `<option value="${bat.apiKey}">${bat.label}</option>`; }
+    batterySelect.innerHTML = html;
   }
+  SelectManager.rebuildById('bcBattery');
 });
 
 document.getElementById('addBCForm').addEventListener('submit', function(e) {
   e.preventDefault();
   const brigade = document.getElementById('bcBrigadeSelect').value;
-  if (brigade === 'aa_academy') { showAlert('addBCSuccess','addBCError','error','Academy does not use Battery Command.'); return; }
   const batterySection = document.getElementById('bcBattery').value;
   const position       = document.getElementById('bcPosition').value;
   const username       = document.getElementById('bcUsername').value.trim();
@@ -2387,8 +2381,7 @@ document.getElementById('addBCForm').addEventListener('submit', function(e) {
 
 function resetBCForm() {
   document.getElementById('addBCForm').reset();
-  document.getElementById('bcAcademyNotice').style.display = 'none';
-  document.getElementById('bcFormFields').style.display    = 'block';
+  document.getElementById('bcFormFields').style.display = 'block';
   document.getElementById('bcBattery').innerHTML = '<option value="">-- Select battalion first --</option>';
   SelectManager.rebuildById('bcBattery'); SelectManager.rebuildById('bcBrigadeSelect');
   ['addBCSuccess','addBCError'].forEach(id => document.getElementById(id).classList.add('hidden'));
